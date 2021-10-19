@@ -15,7 +15,7 @@ namespace DTO
         public int Wor_ID_workLocation { get; set; }
         public string NameDelivery { get; set; }
         public string FirstNameDelivery { get; set; }
-        public string AdressDelivery { get; set; }
+        public string AddressDelivery { get; set; }
         public DateTime BirthDateDelivery { get; set; }
         public string PhoneNumberDelivery { get; set; }
         public string UsernameLoginDelivery { get; set; }

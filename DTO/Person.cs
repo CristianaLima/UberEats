@@ -11,10 +11,10 @@ namespace DTO
         public int ID_person { get; set; }
 
         public int ID_location { get; set; }
-        public string Adress { get; set; }
+        public string Address { get; set; }
         public string Name { get; set; }
         public string FirstName { get; set; }
-        public string MailAdress { get; set; }
+        public string MailAddress { get; set; }
         public DateTime BirthDate { get; set; }
         public string PhoneNumber { get; set; }
         public bool isRestaurant { get; set; }
