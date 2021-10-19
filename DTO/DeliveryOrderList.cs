@@ -4,13 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DAL
+namespace DTO
 {
-    public class Order
+    public class DeliveryOrderList
     {
         public int ID_Order { get; set; }
-        public int ID_person { get; set; }
-        public string OrderName { get; set; }
-        public DateTime OrderDate { get; set; }
+
+        public int Id_Delivery { get; set; }
+
+        public string Statut { get; set; }
     }
 }

@@ -5,7 +5,11 @@ VisualStudioVersion = 16.0.31702.278
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UberEats", "UberEats\UberEats.csproj", "{C9856E9A-DBB7-4084-8B52-9DDB73737972}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAL", "DAL\DAL.csproj", "{DC29D643-272F-42A9-A5DA-E1AC369A0201}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DAL", "DAL\DAL.csproj", "{DC29D643-272F-42A9-A5DA-E1AC369A0201}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DTO", "DTO\DTO.csproj", "{747D6F4C-EC4C-4FF1-9E86-90008FA54443}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BLL", "BLL\BLL.csproj", "{B4A421BC-987D-47DD-9E0F-369E8156DB6D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +25,14 @@ Global
 		{DC29D643-272F-42A9-A5DA-E1AC369A0201}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DC29D643-272F-42A9-A5DA-E1AC369A0201}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DC29D643-272F-42A9-A5DA-E1AC369A0201}.Release|Any CPU.Build.0 = Release|Any CPU
+		{747D6F4C-EC4C-4FF1-9E86-90008FA54443}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{747D6F4C-EC4C-4FF1-9E86-90008FA54443}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{747D6F4C-EC4C-4FF1-9E86-90008FA54443}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{747D6F4C-EC4C-4FF1-9E86-90008FA54443}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B4A421BC-987D-47DD-9E0F-369E8156DB6D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B4A421BC-987D-47DD-9E0F-369E8156DB6D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B4A421BC-987D-47DD-9E0F-369E8156DB6D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B4A421BC-987D-47DD-9E0F-369E8156DB6D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -4,12 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DAL
+namespace DTO
 {
-    public class OrderDishes
+    public class RestaurantDishes
     {
-        public int ID_Order { get; set; }
         public int ID_Dishes { get; set; }
-        public int Quantity { get; set; }
+        public int ID_restaurant { get; set; }
     }
 }
