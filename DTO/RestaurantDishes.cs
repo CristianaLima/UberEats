@@ -10,5 +10,11 @@ namespace DTO
     {
         public int ID_Dishes { get; set; }
         public int ID_restaurant { get; set; }
+
+        public override string ToString()
+        {
+            return  " ID_Dishes " + ID_Dishes +
+                    " ID_Restaurant " + ID_restaurant;
+        }
     }
 }

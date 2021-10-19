@@ -21,5 +21,20 @@ namespace DTO
         public string UsernameLogin { get; set; }
         public string PasswordLogin { get; set; }
         public string PersonImage { get; set; }
+
+        public override string ToString()
+        {
+            return  " ID_person " + ID_person +
+                    " ID_location " + ID_location +
+                    " Person Address " + Address +
+                    " Person LastName " + Name +
+                    " Person FirstName " + FirstName +
+                    " Person MailAddress " + MailAddress + 
+                    " Person BirthDate " + BirthDate +
+                    " Person PhoneNumber " + PhoneNumber +
+                    " is this a Restaurant ? " + isRestaurant +
+                    " Username Login " + UsernameLogin +
+                    " Person Image " + PersonImage;
+        }
     }
 }

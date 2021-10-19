@@ -12,5 +12,14 @@ namespace DTO
         public int NPA_Work { get; set; }
         public string CityWork { get; set; }
 
+
+        public override string ToString()
+        {
+            return " ID_workLocation " + ID_workLocation +
+                    " NPA_Work " + NPA_Work +
+                    " City of work " + CityWork;
+        }
     }
+
+    
 }
