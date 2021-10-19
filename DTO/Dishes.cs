@@ -13,5 +13,14 @@ namespace DTO
         public string DishesDescription { get; set; }
         public double DishesPrice { get; set; }
         public string DishImage { get; set; }
+
+        public override string ToString()
+        {
+            return " ID_Dishes: " + ID_Dishes +
+                    " Name: " + DishesName +
+                    " Description: " + DishesDescription +
+                    " Price: " + DishesPrice +
+                    " Image: " + DishImage;
+        }
     }
 }

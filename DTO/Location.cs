@@ -11,5 +11,12 @@ namespace DTO
         public int ID_location { get; set; }
         public int NPA { get; set; }
         public string City { get; set; }
+
+        public override string ToString()
+        {
+            return " ID_location: " + ID_location +
+                    " NPA: " + NPA +
+                    " City: " + City;
+        }
     }
 }
