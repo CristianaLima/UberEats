@@ -17,7 +17,7 @@ namespace DTO
         public string MailAddress { get; set; }
         public DateTime BirthDate { get; set; }
         public string PhoneNumber { get; set; }
-        public bool isRestaurant { get; set; }
+        public int isRestaurant { get; set; }
         public string UsernameLogin { get; set; }
         public string PasswordLogin { get; set; }
         public string PersonImage { get; set; }

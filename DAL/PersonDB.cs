@@ -65,7 +65,7 @@ namespace DAL
                                 person.PhoneNumber = (string)dr["PhoneNumber"];
 
                             if (dr["isRestaurant"] != null)
-                                person.isRestaurant = (bool)dr["isRestaurant"];
+                                person.isRestaurant = (int)dr["isRestaurant"];
 
                             person.UsernameLogin = (string)dr["Login"];
 
@@ -132,7 +132,7 @@ namespace DAL
                                 person.PhoneNumber = (string)dr["PhoneNumber"];
 
                             if (dr["isRestaurant"] != null)
-                                person.isRestaurant = (bool)dr["isRestaurant"];
+                                person.isRestaurant = (int)dr["isRestaurant"];
 
                             if (dr["UsernameLogin"] != null)
                                 person.UsernameLogin = (string)dr["UsernameLogin"];
