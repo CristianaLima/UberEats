@@ -22,7 +22,7 @@ namespace DAL
         public List<Person> GetPeople()
         {
             List<Person> results = null;
-            string connectionString = Configuration.GetConnectionString("DefaultConnection");
+            string connectionString = "Data Source = 153.109.124.35; Initial Catalog = UberEat_Theo_Cristiana; Integrated Security = False; User Id = 6231db; Password = Pwd46231.; MultipleActiveResultSets = True";
 
             try
             {
@@ -42,15 +42,15 @@ namespace DAL
 
                             Person person = new Person();
 
-                            person.ID_person = (int)dr["idPerson"];
+                            person.ID_person = (int)dr["ID_person"];
 
-                            person.ID_location = (int)dr["idLocation"];
+                            person.ID_location = (int)dr["ID_location"];
 
                             if (dr["Address"] != null)
                                 person.Address = (string)dr["Address"];
 
-                            if (dr["Lastname"] != null)
-                                person.Name = (string)dr["Lastname"];
+                            if (dr["Name"] != null)
+                                person.Name = (string)dr["Name"];
 
                             if (dr["Firstname"] != null)
                                 person.FirstName = (string)dr["Firstname"];
@@ -67,9 +67,9 @@ namespace DAL
                             if (dr["isRestaurant"] != null)
                                 person.isRestaurant = (int)dr["isRestaurant"];
 
-                            person.UsernameLogin = (string)dr["Login"];
+                            person.UsernameLogin = (string)dr["UsernameLogin"];
 
-                            person.PasswordLogin = (string)dr["Password"];
+                            person.PasswordLogin = (string)dr["PasswordLogin"];
 
                             results.Add(person);
                         }

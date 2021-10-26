@@ -17,7 +17,7 @@ namespace UberEats
 
         static void Main(string[] args)
         {
-            Console.WriteLine("Exercise List of all persons");
+           /* Console.WriteLine("Exercise List of all persons");
 
             var PersonManager = new PersonManager(Configuration);
 
@@ -26,7 +26,9 @@ namespace UberEats
             foreach (var m in people)
             {
                 Console.WriteLine(m.ToString());
-            }
+            }*/
+
+
         }
     }
 }
