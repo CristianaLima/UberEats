@@ -11,8 +11,9 @@ namespace DTO
         public int ID_Dishes { get; set; }
         public string DishesName { get; set; }
         public string DishesDescription { get; set; }
-        public double DishesPrice { get; set; }
+        public int DishesPrice { get; set; }
         public string DishImage { get; set; }
+        public int isDishAvailable { get; set; }
 
         public override string ToString()
         {
@@ -20,7 +21,8 @@ namespace DTO
                     " Name: " + DishesName +
                     " Description: " + DishesDescription +
                     " Price: " + DishesPrice +
-                    " Image: " + DishImage;
+                    " Image: " + DishImage +
+                    " Available: " + isDishAvailable;
         }
     }
 }

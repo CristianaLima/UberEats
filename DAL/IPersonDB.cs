@@ -12,5 +12,7 @@ namespace DAL
 
         List<Person> GetPeople();
         Person GetPerson(string UsernameLogin, string UsernamePassword);
+        Person GetPersonID(int ID_person);
+        Person AddPerson(Person person);
     }
 }

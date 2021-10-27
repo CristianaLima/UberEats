@@ -23,6 +23,15 @@ namespace BLL
         {
             return PersonDB.GetPerson(UsernameLogin, UsernamePassword);
         }
+        public Person GetPersonID(int ID_person)
+        {
+            return PersonDB.GetPersonID(ID_person);
+        }
+
+        public Person AddPerson(Person person)
+        {
+            return PersonDB.AddPerson(person);
+        }
 
         public List<Person> GetPeople()
         {
