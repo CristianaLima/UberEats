@@ -12,7 +12,7 @@ namespace DAL
     {
 
         List<WorkLocation> GetWorkLocations();
-        WorkLocation GetWorkLocationID(int ID_workLocation);
+        int GetWorkLocationID(int NPA_Work, string CityWork);
 
     }
 }

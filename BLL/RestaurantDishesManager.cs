@@ -27,5 +27,10 @@ namespace BLL
         {
             return RestaurantDishesDB.GetRestaurant(ID_dish);
         }
+
+        public RestaurantDishes AddRestaurantDishes(RestaurantDishes restaurantDishes)
+        {
+            return RestaurantDishesDB.AddRestaurantDishes(restaurantDishes);
+        }
     }
 }

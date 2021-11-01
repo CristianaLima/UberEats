@@ -64,7 +64,7 @@ namespace DAL
         }
 
 
-        public WorkLocation GetWorkLocationID(int ID_workLocation)
+        public int GetWorkLocationID(int NPA_Work, string CityWork)
         {
             WorkLocation workLocation = null;
 
@@ -75,9 +75,10 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "Select * from WorkLocation where ID_workLocation = @ID_workLocation";
+                    string query = "Select * from WorkLocation where NPA_Work = @NPA_Work AND CityWork = @CityWork";
                     SqlCommand cmd = new SqlCommand(query, cn);
-                    cmd.Parameters.AddWithValue("@ID_workLocation", ID_workLocation);
+                    cmd.Parameters.AddWithValue("@NPA_Work", NPA_Work);
+                    cmd.Parameters.AddWithValue("@CityWork", CityWork);
 
                     cn.Open();
 
@@ -88,12 +89,6 @@ namespace DAL
                             workLocation = new WorkLocation();
 
                             workLocation.ID_workLocation = (int)dr["ID_workLocation"];
-
-                            workLocation.NPA_Work = (int)dr["NPA_Work"];
-
-                            workLocation.CityWork = (string)dr["CityWork"];
-                            
-                            workLocation.Canton = (string)dr["Canton"];
                         }
                     }
                 }
@@ -103,7 +98,7 @@ namespace DAL
                 throw e;
             }
 
-            return workLocation;
+            return workLocation.ID_workLocation;
         }
 
         

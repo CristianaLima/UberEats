@@ -13,6 +13,6 @@ namespace DAL
 
         RestaurantDishes GetRestaurant(int ID_Dish);
         RestaurantDishes GetDishes(int ID_restaurant);
-   
+        RestaurantDishes AddRestaurantDishes(RestaurantDishes restaurantDishes);
     }
 }

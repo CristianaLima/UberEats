@@ -23,9 +23,9 @@ namespace BLL
             return WorkLocationDB.GetWorkLocations();
         }
 
-        public WorkLocation GetWorkLocationID(int ID_workLocation)
+        public int GetWorkLocationID(int NPA_Work, string CityWork)
         {
-            return WorkLocationDB.GetWorkLocationID(ID_workLocation);
+            return WorkLocationDB.GetWorkLocationID(NPA_Work, CityWork);
         }
     }
 }

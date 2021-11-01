@@ -95,5 +95,33 @@ namespace DAL
             return restaurantdishes;
         }
 
+        public RestaurantDishes AddRestaurantDishes(RestaurantDishes restaurantDishes)
+        {
+            string connectionString = "Data Source = 153.109.124.35; Initial Catalog = UberEat_Theo_Cristiana; Integrated Security = False; User Id = 6231db; Password = Pwd46231.; MultipleActiveResultSets = True";
+
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(connectionString))
+                {
+                    string query = "Insert into RestaurantDishes(ID_Dishes, ID_restaurant) values(@ID_Dishes, @ID_restaurant); SELECT SCOPE_IDENTITY()";
+                    SqlCommand cmd = new SqlCommand(query, cn);
+                    cmd.Parameters.AddWithValue("@ID_Dishes", restaurantDishes.ID_Dishes);
+                    cmd.Parameters.AddWithValue("@ID_restaurant", restaurantDishes.ID_restaurant);
+
+                    cn.Open();
+
+                    restaurantDishes.ID_Dishes = Convert.ToInt32(cmd.ExecuteScalar());
+                    restaurantDishes.ID_restaurant = Convert.ToInt32(cmd.ExecuteScalar());
+
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            return restaurantDishes;
+
+
+        }
     }
 }
