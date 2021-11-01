@@ -37,5 +37,10 @@ namespace BLL
             return LocationDb.GetLocations();
         }
 
+        public int GetLocationNPACity(string NPA, string City)
+        {
+            return LocationDb.GetLocationNPACity(NPA,City);
+        }
+
     }
 }

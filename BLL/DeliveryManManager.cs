@@ -36,5 +36,10 @@ namespace BLL
         {
             return DeliveryManDB.GetDeliveryMen();
         }
+
+        public DeliveryMan ChangeIsWorking(int IdDelivery, int IsWorking)
+        {
+            return DeliveryManDB.ChangeIsWorking(IdDelivery, IsWorking);
+        }
     }
 }

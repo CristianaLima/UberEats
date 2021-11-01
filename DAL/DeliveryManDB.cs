@@ -54,6 +54,7 @@ namespace DAL
                             deliveryMan.PasswordDelivery = (string)dr["PasswordDelivery"];
                             if (dr["ImageDelivery"] != null)
                                 deliveryMan.ImageDelivery = (string)dr["ImageDelivery"];
+                            deliveryMan.IsWorking = (int)dr["IsWorking"];
 
                             results.Add(deliveryMan);
                         }
@@ -106,7 +107,7 @@ namespace DAL
                             deliveryMan.PasswordDelivery = (string)dr["PasswordDelivery"];
                             if (dr["ImageDelivery"] != null)
                                 deliveryMan.ImageDelivery = (string)dr["ImageDelivery"];
-
+                            deliveryMan.IsWorking = (int)dr["IsWorking"];
 
                         }
                     }
@@ -155,7 +156,7 @@ namespace DAL
                             deliveryMan.PasswordDelivery = (string)dr["PasswordDelivery"];
                             if (dr["ImageDelivery"] != null)
                                 deliveryMan.ImageDelivery = (string)dr["ImageDelivery"];
-
+                            deliveryMan.IsWorking = (int)dr["IsWorking"];
 
                         }
                     }
@@ -177,8 +178,8 @@ namespace DAL
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
                     string query = "Insert into DeliveryMan(Id_Delivery, ID_Location, ID_workLocation, NameDelivery,FirstNameDelivery, AddressDelivery, " +
-                        "BirthDateDelivery,PhoneNumberDelivery,EmailDelivery, UsernameLoginDelivery, PasswordDelivery, ImageDelivery) values(@id, @locationId," +
-                        " @workLocationId, @lastName, @firstName, @address, @birthDate, @phoneNumber, @email, @login, @password, @image); SELECT SCOPE_IDENTITY()";
+                        "BirthDateDelivery,PhoneNumberDelivery,EmailDelivery, UsernameLoginDelivery, PasswordDelivery, ImageDelivery, IsWorking) values(@id, @locationId," +
+                        " @workLocationId, @lastName, @firstName, @address, @birthDate, @phoneNumber, @email, @login, @password, @image, @isWorking); SELECT SCOPE_IDENTITY()";
                     
                     SqlCommand cmd = new SqlCommand(query, cn);
                     cmd.Parameters.AddWithValue("@id", delivery.Id_Delivery);
@@ -193,6 +194,7 @@ namespace DAL
                     cmd.Parameters.AddWithValue("@login", delivery.UsernameLoginDelivery);
                     cmd.Parameters.AddWithValue("@password", delivery.PasswordDelivery);
                     cmd.Parameters.AddWithValue("@image", delivery.ImageDelivery);
+                    cmd.Parameters.AddWithValue("@isWorking", delivery.IsWorking);  
 
                     cn.Open();
 
@@ -208,6 +210,37 @@ namespace DAL
             return delivery;
 
 
+        }
+
+        public DeliveryMan ChangeIsWorking(int IdDelivery, int IsWorking)
+        {
+            DeliveryMan deliveryMan = null;
+
+            string connectionString = "Data Source = 153.109.124.35; Initial Catalog = UberEat_Theo_Cristiana; Integrated Security = False; User Id = 6231db; Password = Pwd46231.; MultipleActiveResultSets = True";
+
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(connectionString))
+                {
+                    deliveryMan = new DeliveryMan();
+                    string query = "UPDATE DeliveryMan SET IsWorking = @IsWorking Where Id_Delivery = @Id_Delivery; ";
+                    SqlCommand cmd = new SqlCommand(query, cn);
+                    cmd.Parameters.AddWithValue("@Id_Delivery", IdDelivery);
+                    cmd.Parameters.AddWithValue("@IsWorking", IsWorking);
+
+                    cn.Open();
+
+                    deliveryMan.Id_Delivery = Convert.ToInt32(cmd.ExecuteScalar());
+                    deliveryMan.ID_Location = Convert.ToInt32(cmd.ExecuteScalar());
+                    deliveryMan.IsWorking = Convert.ToInt32(cmd.ExecuteScalar());
+
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            return deliveryMan;
         }
     }
 }

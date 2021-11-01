@@ -9,5 +9,6 @@ namespace DAL
         Location GetLocationID(int IdLocation);
         Location GetLocationNPA(string NPA);
         List<Location> GetLocations();
+        int GetLocationNPACity(string NPA, string City);
     }
 }

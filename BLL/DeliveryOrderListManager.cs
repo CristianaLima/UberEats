@@ -21,7 +21,7 @@ namespace BLL
         {
             return DeliveryOrderListBd.AddDeliveryOrderList(deliveryOrderList);
         }
-        public DeliveryOrderList GetDeliveryOrderList(int IdDeliveryMan)
+        public List<DeliveryOrderList> GetDeliveryOrderList(int IdDeliveryMan)
         {
             return DeliveryOrderListBd.GetDeliveryOrderList(IdDeliveryMan);
         }

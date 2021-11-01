@@ -186,5 +186,48 @@ namespace DAL
 
         }
 
+        public int GetLocationNPACity(string NPA, string City)
+        {
+            Location location = null;
+            string connectionString = "Data Source = 153.109.124.35; Initial Catalog = UberEat_Theo_Cristiana; Integrated Security = False; User Id = 6231db; Password = Pwd46231.; MultipleActiveResultSets = True";
+
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(connectionString))
+                {
+                    string query = "Select * from Location where NPA=@NPA and City=@city";
+                    SqlCommand cmd = new SqlCommand(query, cn);
+                    cmd.Parameters.AddWithValue("@NPA", NPA);
+                    cmd.Parameters.AddWithValue("@city", City);
+
+                    cn.Open();
+
+                    using (SqlDataReader dr = cmd.ExecuteReader())
+                    {
+                        while (dr.Read())
+                        {
+                            location = new Location();
+
+                            location.ID_location = (int)dr["ID_location"];
+                            location.NPA = (int)dr["NPA"];
+                            location.City = (string)dr["City"];
+
+                        }
+
+                    }
+
+                }
+
+
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            return location.ID_location;
+
+        }
+
+
     }
 }

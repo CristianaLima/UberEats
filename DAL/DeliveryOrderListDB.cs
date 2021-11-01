@@ -58,9 +58,9 @@ namespace DAL
             return results;
         }
 
-        public DeliveryOrderList GetDeliveryOrderList(int IdDeliveryMan)
+        public List<DeliveryOrderList> GetDeliveryOrderList(int IdDeliveryMan)
         {
-            DeliveryOrderList deliveryOrderList = null;
+            List<DeliveryOrderList> results = null;
             string connectionString = "Data Source = 153.109.124.35; Initial Catalog = UberEat_Theo_Cristiana; Integrated Security = False; User Id = 6231db; Password = Pwd46231.; MultipleActiveResultSets = True";
 
             try
@@ -77,11 +77,16 @@ namespace DAL
                     {
                         while (dr.Read())
                         {
-                            deliveryOrderList = new DeliveryOrderList();
+                            if (results == null)
+                                results = new List<DeliveryOrderList>();
+
+                            DeliveryOrderList deliveryOrderList = new DeliveryOrderList();
 
                             deliveryOrderList.Id_Delivery = (int)dr["Id_Delivery"];
                             deliveryOrderList.ID_Order = (int)dr["ID_Order"];
                             deliveryOrderList.Statut = (string)dr["Statut"];
+
+                            results.Add(deliveryOrderList);
                         }
                     }
                 }
@@ -90,7 +95,7 @@ namespace DAL
             {
                 throw e;
             }
-            return deliveryOrderList;
+            return results;
         }
 
         public DeliveryOrderList AddDeliveryOrderList(DeliveryOrderList deliveryOrderList)

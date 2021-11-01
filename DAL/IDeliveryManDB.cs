@@ -9,5 +9,6 @@ namespace DAL
         DeliveryMan GetDeliveryMan(string username, string password);
         DeliveryMan GetDeliveryManID(int deliveryMamId);
         List<DeliveryMan> GetDeliveryMen();
+        DeliveryMan ChangeIsWorking(int IdDelivery, int IsWorking);
     }
 }

@@ -23,6 +23,8 @@ namespace DTO
         public string ImageDelivery { get; set; }
         public string EmailDelivery { get; set; }
 
+        public int IsWorking { get; set; }
+
         public override string ToString()
         {
             return " IdUser: " + Id_Delivery +
@@ -31,11 +33,13 @@ namespace DTO
                    " IdLocation: " + ID_Location +
                    " Address: " + AddressDelivery +
                    " IdWorkLocation: " + ID_workLocation +
-                   " Birthday: " + BirthDateDelivery + 
-                   " PhoneNumber: " + PhoneNumberDelivery + 
-                   " Email: " + EmailDelivery + 
-                   " Username: " + UsernameLoginDelivery + 
-                   " Image: " + ImageDelivery;
+                   " Birthday: " + BirthDateDelivery +
+                   " PhoneNumber: " + PhoneNumberDelivery +
+                   " Email: " + EmailDelivery +
+                   " Username: " + UsernameLoginDelivery +
+                   " Image: " + ImageDelivery +
+                   " Is working ?: " + IsWorking;
+                
         }
     }
 }
