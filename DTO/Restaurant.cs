@@ -13,6 +13,7 @@ namespace DTO
         public string RestaurantName { get; set; }
         public string RestaurantAddress { get; set; }
         public string RestaurantImage { get; set; }
+        public int IsRestaurantAvailable { get; set; }
 
         public override string ToString()
         {
@@ -20,7 +21,8 @@ namespace DTO
                     " ID_Location " + ID_location +
                     " Restaurant Name " + RestaurantName +
                     " Restaurant Address " + RestaurantAddress +
-                    " Restaurant Image " + RestaurantImage;
+                    " Restaurant Image " + RestaurantImage + 
+                    " Restaurant Availability " + IsRestaurantAvailable;
         }
     }
 }
