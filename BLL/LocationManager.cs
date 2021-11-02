@@ -42,5 +42,9 @@ namespace BLL
             return LocationDb.GetLocationNPACity(NPA,City);
         }
 
+        public List<Location> GetLocationCanton(string Canton)
+        {
+            return LocationDb.GetLocationCanton(Canton);
+        }
     }
 }

@@ -44,6 +44,7 @@ namespace DAL
                             location.ID_location = (int)dr["ID_location"];
                             location.NPA = (int)dr["NPA"];
                             location.City = (string)dr["City"];
+                            location.Canton = (string)dr["Canton"];
 
                             results.Add(location);
                         }
@@ -87,6 +88,7 @@ namespace DAL
                             location.ID_location = (int)dr["ID_location"];
                             location.NPA = (int)dr["NPA"];
                             location.City = (string)dr["City"];
+                            location.Canton = (string)dr["Canton"];
 
                         }
 
@@ -128,6 +130,7 @@ namespace DAL
                             location.ID_location = (int)dr["ID_location"];
                             location.NPA = (int)dr["NPA"];
                             location.City = (string)dr["City"];
+                            location.Canton = (string)dr["Canton"];
 
                         }
 
@@ -169,6 +172,7 @@ namespace DAL
                             location.ID_location = (int)dr["ID_location"];
                             location.NPA = (int)dr["NPA"];
                             location.City = (string)dr["City"];
+                            location.Canton = (string)dr["Canton"];
 
                         }
 
@@ -211,6 +215,7 @@ namespace DAL
                             location.ID_location = (int)dr["ID_location"];
                             location.NPA = (int)dr["NPA"];
                             location.City = (string)dr["City"];
+                            location.Canton = (string)dr["Canton"];
 
                         }
 
@@ -225,6 +230,51 @@ namespace DAL
                 throw e;
             }
             return location.ID_location;
+
+        }
+        public List<Location> GetLocationCanton(string Canton)
+        {
+            List<Location> results = null;
+            string connectionString = "Data Source = 153.109.124.35; Initial Catalog = UberEat_Theo_Cristiana; Integrated Security = False; User Id = 6231db; Password = Pwd46231.; MultipleActiveResultSets = True";
+
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(connectionString))
+                {
+                    string query = "Select * from Location where Canton=@canton";
+                    SqlCommand cmd = new SqlCommand(query, cn);
+                    cmd.Parameters.AddWithValue("@canton", Canton);
+
+                    cn.Open();
+
+                    using (SqlDataReader dr = cmd.ExecuteReader())
+                    {
+                        while (dr.Read())
+                        {
+                            if (results == null)
+                                results = new List<Location>();
+
+                            Location location = new Location();
+
+                            location.ID_location = (int)dr["ID_location"];
+                            location.NPA = (int)dr["NPA"];
+                            location.City = (string)dr["City"];
+                            location.Canton = (string)dr["Canton"];
+
+                            results.Add(location);
+                        }
+
+                    }
+
+                }
+
+
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            return results;
 
         }
 

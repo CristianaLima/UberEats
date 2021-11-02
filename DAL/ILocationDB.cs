@@ -10,5 +10,7 @@ namespace DAL
         Location GetLocationNPA(string NPA);
         List<Location> GetLocations();
         int GetLocationNPACity(string NPA, string City);
+
+        List<Location> GetLocationCanton(string Canton);
     }
 }
