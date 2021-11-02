@@ -153,9 +153,9 @@ namespace DAL
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
 
-                    string query = "Insert into Order(ID_Order, ID_person, OrderName, OrderDate) values(@ID_Order, @ID_person, @OrderName, @OrderDate); SELECT SCOPE_IDENTITY()";
+                    string query = "Insert into Order( ID_person, OrderName, OrderDate) values( @ID_person, @OrderName, @OrderDate); SELECT SCOPE_IDENTITY()";
                     SqlCommand cmd = new SqlCommand(query, cn);
-                    cmd.Parameters.AddWithValue("@ID_Order", order.ID_Order);
+                    
                     cmd.Parameters.AddWithValue("@ID_person", order.ID_person);
                     cmd.Parameters.AddWithValue("@OrderName", order.OrderName);
                     cmd.Parameters.AddWithValue("@OrderDate", order.OrderDate);
@@ -164,7 +164,7 @@ namespace DAL
 
                     cn.Open();
 
-                   
+                   order.ID_Order= Convert.ToInt32(cmd.ExecuteScalar());
 
                 }
             }

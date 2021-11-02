@@ -227,9 +227,9 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "Insert into Person(ID_person, ID_location, Address, Name, FirstName, MailAddress, BirthDate, PhoneNumber, isRestaurant, UsernameLogin, PasswordLogin, PersonImage) values(@ID_person, @ID_location, @Address, @Name, @FirstName, @MailAddress, @BirthDate, @PhoneNumber, @isRestaurant, @UsernameLogin, @PasswordLogin, @PersonImage); SELECT SCOPE_IDENTITY()";
+                    string query = "Insert into Person( ID_location, Address, Name, FirstName, MailAddress, BirthDate, PhoneNumber, isRestaurant, UsernameLogin, PasswordLogin, PersonImage) values( @ID_location, @Address, @Name, @FirstName, @MailAddress, @BirthDate, @PhoneNumber, @isRestaurant, @UsernameLogin, @PasswordLogin, @PersonImage); SELECT SCOPE_IDENTITY()";
                     SqlCommand cmd = new SqlCommand(query, cn);
-                    cmd.Parameters.AddWithValue("@ID_person", person.ID_person);
+                    
                     cmd.Parameters.AddWithValue("@ID_location", person.ID_location);
                     cmd.Parameters.AddWithValue("@Address", person.Address);
                     cmd.Parameters.AddWithValue("@Name", person.Name);
@@ -244,7 +244,7 @@ namespace DAL
 
                     cn.Open();
 
-                    
+                    person.ID_person = Convert.ToInt32(cmd.ExecuteScalar());
                 }
             }
             catch (Exception e)

@@ -177,12 +177,12 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "Insert into DeliveryMan(Id_Delivery, ID_Location, ID_workLocation, NameDelivery,FirstNameDelivery, AddressDelivery, " +
-                        "BirthDateDelivery,PhoneNumberDelivery,EmailDelivery, UsernameLoginDelivery, PasswordDelivery, ImageDelivery, IsWorking) values(@id, @locationId," +
+                    string query = "Insert into DeliveryMan( ID_Location, ID_workLocation, NameDelivery,FirstNameDelivery, AddressDelivery, " +
+                        "BirthDateDelivery,PhoneNumberDelivery,EmailDelivery, UsernameLoginDelivery, PasswordDelivery, ImageDelivery, IsWorking) values( @locationId," +
                         " @workLocationId, @lastName, @firstName, @address, @birthDate, @phoneNumber, @email, @login, @password, @image, @isWorking); SELECT SCOPE_IDENTITY()";
                     
                     SqlCommand cmd = new SqlCommand(query, cn);
-                    cmd.Parameters.AddWithValue("@id", delivery.Id_Delivery);
+                    
                     cmd.Parameters.AddWithValue("@locationId", delivery.ID_Location);
                     cmd.Parameters.AddWithValue("@workLocationId", delivery.ID_workLocation);
                     cmd.Parameters.AddWithValue("@lastName", delivery.NameDelivery);
@@ -198,7 +198,7 @@ namespace DAL
 
                     cn.Open();
 
-                    
+                    delivery.Id_Delivery = Convert.ToInt32(cmd.ExecuteScalar());
                 }
             }
             catch (Exception e)

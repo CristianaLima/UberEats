@@ -170,9 +170,9 @@ namespace DAL
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
 
-                    string query = "Insert into Restaurant(ID_restaurant, ID_location, RestaurantName, RestaurantAddress, RestaurantImage, IsRestaurantAvailable) values(@ID_restaurant, @ID_location, @RestaurantName, @RestaurantAddress, @RestaurantImage, @IsRestaurantAvailable); SELECT SCOPE_IDENTITY()";
+                    string query = "Insert into Restaurant( ID_location, RestaurantName, RestaurantAddress, RestaurantImage, IsRestaurantAvailable) values( @ID_location, @RestaurantName, @RestaurantAddress, @RestaurantImage, @IsRestaurantAvailable); SELECT SCOPE_IDENTITY()";
                     SqlCommand cmd = new SqlCommand(query, cn);
-                    cmd.Parameters.AddWithValue("@ID_restaurant", restaurant.ID_restaurant);
+                    
                     cmd.Parameters.AddWithValue("@ID_location", restaurant.ID_location);
                     cmd.Parameters.AddWithValue("@RestaurantName", restaurant.RestaurantName);
                     cmd.Parameters.AddWithValue("@RestaurantAddress", restaurant.RestaurantAddress);
@@ -184,7 +184,7 @@ namespace DAL
                     cn.Open();
 
                     
-
+                    restaurant.ID_restaurant= Convert.ToInt32(cmd.ExecuteScalar());
                 }
             }
             catch (Exception e)
