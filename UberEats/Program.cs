@@ -43,9 +43,13 @@ namespace UberEats
             {
                 Console.WriteLine(m.ToString());
             }*/
-            var newOrderDishes = DishesManager.AddDish(new Dishes { DishesDescription = "La pizza classique", DishesName = "Margarita", DishesPrice = 15, DishImage = "image", isDishAvailable = 1 }) ;
+            //var newOrderDishes = DishesManager.AddDish(new Dishes { DishesDescription = "La pizza classique", DishesName = "Margarita", DishesPrice = 15, DishImage = "image", isDishAvailable = 1 }) ;
 
-
+            var newList = DishesManager.GetRestaurantFromDish("Coca Cola");
+            foreach (var m in newList)
+            {
+                Console.WriteLine(m.ToString());
+            }
 
 
         }

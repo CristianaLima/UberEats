@@ -23,7 +23,7 @@ namespace BLL
             return RestaurantDishesDB.GetDishes(ID_restaurant);
         }
 
-        public RestaurantDishes GetRestaurant(int ID_dish)
+        public List<RestaurantDishes> GetRestaurant(int ID_dish)
         {
             return RestaurantDishesDB.GetRestaurant(ID_dish);
         }
