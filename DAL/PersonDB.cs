@@ -254,5 +254,29 @@ namespace DAL
 
             return person;
         }
+
+        public void ModifyIdLocation(int IdLocation, int IdPerson)
+        {
+            string connectionString = "Data Source = 153.109.124.35; Initial Catalog = UberEat_Theo_Cristiana; Integrated Security = False; User Id = 6231db; Password = Pwd46231.; MultipleActiveResultSets = True";
+
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(connectionString))
+                {
+                    string query = "Update Person set ID_location = @ID_location where ID_person=@ID_person ";
+                    SqlCommand cmd = new SqlCommand(query, cn);
+                    cmd.Parameters.AddWithValue("@ID_location", IdLocation);
+                    cmd.Parameters.AddWithValue("@ID_person", IdPerson);
+
+                    cn.Open();
+
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            
+        }
     }
 }

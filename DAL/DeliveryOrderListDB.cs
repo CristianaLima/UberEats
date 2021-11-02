@@ -144,8 +144,7 @@ namespace DAL
 
                     cn.Open();
 
-                    deliveryOrderList.Id_Delivery = Convert.ToInt32(cmd.ExecuteScalar());
-                    deliveryOrderList.ID_Order = Convert.ToInt32(cmd.ExecuteScalar());
+                    
 
                 }
             }

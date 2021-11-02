@@ -176,6 +176,51 @@ namespace DAL
             return order;
         }
 
-        
+        public List<Order> GetOrderIDPerson(int idPerson)
+        {
+            List<Order> results = null;
+
+            string connectionString = "Data Source = 153.109.124.35; Initial Catalog = UberEat_Theo_Cristiana; Integrated Security = False; User Id = 6231db; Password = Pwd46231.; MultipleActiveResultSets = True";
+
+
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(connectionString))
+                {
+                    string query = "Select * from Order where ID_person = @ID_person";
+                    SqlCommand cmd = new SqlCommand(query, cn);
+                    cmd.Parameters.AddWithValue("@ID_person", idPerson);
+
+                    cn.Open();
+
+                    using (SqlDataReader dr = cmd.ExecuteReader())
+                    {
+                        if (dr.Read())
+                        {
+                            if (results == null)
+                                results = new List<Order>();
+
+                            Order order = new Order();
+
+                            order.ID_Order = (int)dr["ID_Order"];
+
+                            order.ID_person = (int)dr["ID_person"];
+
+                            order.OrderName = (string)dr["OrderName"];
+
+                            order.OrderDate = (DateTime)dr["OrderDate"];
+
+                            results.Add(order);
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return results;
+        }
     }
 }

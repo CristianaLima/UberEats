@@ -13,10 +13,12 @@ namespace BLL
     {
 
         private IPersonDB PersonDB { get; }
+        private IOrderDB OrderDb { get; }
 
         public PersonManager(IConfiguration conf)
         {
             PersonDB = new PersonDB(conf);
+            OrderDb = new OrderDB(conf);
         }
 
         public Person GetPerson(string UsernameLogin, string UsernamePassword)
@@ -36,6 +38,19 @@ namespace BLL
         public List<Person> GetPeople()
         {
             return PersonDB.GetPeople();
+        }
+
+        public void ModifyIdLocation(int IdLocation, int IdPerson)
+        {
+            PersonDB.ModifyIdLocation(IdLocation, IdPerson);
+        }
+
+        public List<Order> GetListOrder(string login, string password)
+        {
+            Person person = PersonDB.GetPerson(login, password);
+            List<Order> orders = OrderDb.GetOrderIDPerson(person.ID_person);
+
+            return orders;
         }
     }
 }
