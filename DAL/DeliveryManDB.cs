@@ -198,9 +198,7 @@ namespace DAL
 
                     cn.Open();
 
-                    delivery.Id_Delivery = Convert.ToInt32(cmd.ExecuteScalar());
-                    delivery.ID_Location = Convert.ToInt32(cmd.ExecuteScalar());
-                    delivery.ID_workLocation = Convert.ToInt32(cmd.ExecuteScalar());
+                    
                 }
             }
             catch (Exception e)

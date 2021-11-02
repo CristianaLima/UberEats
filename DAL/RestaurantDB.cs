@@ -183,9 +183,7 @@ namespace DAL
 
                     cn.Open();
 
-                    restaurant.ID_restaurant = Convert.ToInt32(cmd.ExecuteScalar());
-                    restaurant.ID_location = Convert.ToInt32(cmd.ExecuteScalar());
-                    restaurant.IsRestaurantAvailable = Convert.ToInt32(cmd.ExecuteScalar());
+                    
 
                 }
             }
@@ -216,9 +214,7 @@ namespace DAL
 
                     cn.Open();
 
-                    restaurant.ID_restaurant = Convert.ToInt32(cmd.ExecuteScalar());
-                    restaurant.ID_location = Convert.ToInt32(cmd.ExecuteScalar());
-                    restaurant.IsRestaurantAvailable = Convert.ToInt32(cmd.ExecuteScalar());
+                   
                 }
             }
             catch (Exception e)

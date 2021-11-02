@@ -36,14 +36,14 @@ namespace UberEats
              // Test modifier une ligne
              //DishesManager.ChangeAvailabilityDish(5, 0);*/
 
-           // var orderDishesManager = new OrderDishesManager(Configuration);
+            var DishesManager = new DishesManager(Configuration);
             /*var ordersDishes = orderDishesManager.GetOrderDishes(2);
 
             foreach(var m in ordersDishes)
             {
                 Console.WriteLine(m.ToString());
             }*/
-           // var newOrderDishes = orderDishesManager.AddOrderDishes(new OrderDishes { ID_Dishes = 2, ID_Order = 1, Quantity = 5 });
+            var newOrderDishes = DishesManager.AddDish(new Dishes { DishesDescription = "La pizza classique", DishesName = "Margarita", DishesPrice = 15, DishImage = "image", isDishAvailable = 1 }) ;
 
 
 

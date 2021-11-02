@@ -116,9 +116,7 @@ namespace DAL
 
                     cn.Open();
 
-                    orderDishes.ID_Dishes = Convert.ToInt32(cmd.ExecuteScalar());
-                    orderDishes.ID_Order = Convert.ToInt32(cmd.ExecuteScalar());
-                    orderDishes.Quantity = Convert.ToInt32(cmd.ExecuteScalar());
+                   
                 }
             }
             catch (Exception e)

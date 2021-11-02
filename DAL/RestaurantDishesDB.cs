@@ -110,8 +110,7 @@ namespace DAL
 
                     cn.Open();
 
-                    restaurantDishes.ID_Dishes = Convert.ToInt32(cmd.ExecuteScalar());
-                    restaurantDishes.ID_restaurant = Convert.ToInt32(cmd.ExecuteScalar());
+                   
 
                 }
             }

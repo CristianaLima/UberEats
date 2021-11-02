@@ -158,14 +158,12 @@ namespace DAL
                     cmd.Parameters.AddWithValue("@ID_Order", order.ID_Order);
                     cmd.Parameters.AddWithValue("@ID_person", order.ID_person);
                     cmd.Parameters.AddWithValue("@OrderName", order.OrderName);
-                    cmd.Parameters.AddWithValue("@OrderDate", order.OrderDate);o
+                    cmd.Parameters.AddWithValue("@OrderDate", order.OrderDate);
 
 
 
                     cn.Open();
 
-                    order.ID_Order = Convert.ToInt32(cmd.ExecuteScalar());
-                    order.ID_person = Convert.ToInt32(cmd.ExecuteScalar());
                    
 
                 }

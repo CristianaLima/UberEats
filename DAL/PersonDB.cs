@@ -244,9 +244,7 @@ namespace DAL
 
                     cn.Open();
 
-                    person.ID_person = Convert.ToInt32(cmd.ExecuteScalar());
-                    person.ID_location = Convert.ToInt32(cmd.ExecuteScalar());
-
+                    
                 }
             }
             catch (Exception e)

@@ -173,9 +173,9 @@ namespace DAL
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
 
-                    string query = "Insert into Dishes(ID_Dishes, DishesName, DishesDescription, DishesPrice, DishImage, isDishAvailable) values(@ID_Dishes, @DishesName, @DishesDescription, @DishesPrice, @DishImage, @isDishAvailable); SELECT SCOPE_IDENTITY()";
+                    string query = "Insert into Dishes( DishesName, DishesDescription, DishesPrice, DishImage, isDishAvailable) values( @DishesName, @DishesDescription, @DishesPrice, @DishImage, @isDishAvailable); SELECT SCOPE_IDENTITY()";
                     SqlCommand cmd = new SqlCommand(query, cn);
-                    cmd.Parameters.AddWithValue("@ID_Dishes", dish.ID_Dishes);
+                    
                     cmd.Parameters.AddWithValue("@DishesName", dish.DishesName);
                     cmd.Parameters.AddWithValue("@DishesDescription", dish.DishesDescription);
                     cmd.Parameters.AddWithValue("@DishesPrice", dish.DishesPrice);
@@ -186,9 +186,7 @@ namespace DAL
                     cn.Open();
 
                     dish.ID_Dishes = Convert.ToInt32(cmd.ExecuteScalar());
-                    dish.isDishAvailable = Convert.ToInt32(cmd.ExecuteScalar());
-                    dish.DishesPrice = Convert.ToInt32(cmd.ExecuteScalar());
-                    
+
                 }
             }
             catch (Exception e)
@@ -218,9 +216,7 @@ namespace DAL
                     
                     cn.Open();
 
-                    dish.ID_Dishes = Convert.ToInt32(cmd.ExecuteScalar());
-                    dish.isDishAvailable = Convert.ToInt32(cmd.ExecuteScalar());
-                    dish.DishesPrice = Convert.ToInt32(cmd.ExecuteScalar());
+                    
                 }
             }
             catch (Exception e)
