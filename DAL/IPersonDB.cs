@@ -15,5 +15,6 @@ namespace DAL
         Person GetPersonID(int ID_person);
         Person AddPerson(Person person);
         void ModifyIdLocation(int IdLocation, int IdPerson);
+        List<Person> GetPersonIDLocation(int IdLocation);
     }
 }

@@ -222,5 +222,47 @@ namespace DAL
 
             return results;
         }
+
+        public Order GetOrderIDOrder(int IdOrder)
+        {
+            Order order = null;
+
+            string connectionString = "Data Source = 153.109.124.35; Initial Catalog = UberEat_Theo_Cristiana; Integrated Security = False; User Id = 6231db; Password = Pwd46231.; MultipleActiveResultSets = True";
+
+
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(connectionString))
+                {
+                    string query = "Select * from Order where ID_Order = @IdOrder";
+                    SqlCommand cmd = new SqlCommand(query, cn);
+                    cmd.Parameters.AddWithValue("@IdOrder", IdOrder);
+
+                    cn.Open();
+
+                    using (SqlDataReader dr = cmd.ExecuteReader())
+                    {
+                        if (dr.Read())
+                        {
+                            order = new Order();
+
+                            order.ID_Order = (int)dr["ID_Order"];
+
+                            order.ID_person = (int)dr["ID_person"];
+
+                            order.OrderName = (string)dr["OrderName"];
+
+                            order.OrderDate = (DateTime)dr["OrderDate"];
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return order;
+        }
     }
 }

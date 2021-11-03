@@ -42,5 +42,10 @@ namespace BLL
         {
             return OrderDB.GetOrderIDPerson(idPerson);
         }
+
+        public Order GetOrderIDOrder(int IdOrder)
+        {
+            return OrderDB.GetOrderIDOrder(IdOrder);
+        }
     }
 }

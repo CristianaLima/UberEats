@@ -12,10 +12,26 @@ namespace BLL
     public class DeliveryManManager
     {
         private IDeliveryManDB DeliveryManDB { get; }
+        private IDeliveryOrderListDB deliveryOrderListDb { get; }
+        private IOrderDB orderDb { get; }
+        private IWorkLocationDB WorkLocationDb { get; }
+        private IRestaurantDB RestaurantDb { get; }
+        private ILocationDB LocationDb { get; }
+        private IPersonDB PersonDb { get; }
+        private IOrderDishesDB OrderDishesDb { get; }
+        private IDishesDB DishesDb { get; }
 
         public DeliveryManManager(IConfiguration conf)
         {
             DeliveryManDB = new DeliveryManDB(conf);
+            deliveryOrderListDb = new DeliveryOrderListDB(conf);
+            orderDb = new OrderDB(conf);
+            WorkLocationDb = new WorkLocationDB(conf);
+            RestaurantDb = new RestaurantDB(conf);
+            LocationDb = new LocationDB(conf);
+            PersonDb = new PersonDB(conf);
+            OrderDishesDb = new OrderDishesDB(conf);
+            DishesDb = new DishesDB(conf);
         }
 
         public DeliveryMan AddDeliveryMan(DeliveryMan delivery)
@@ -40,6 +56,91 @@ namespace BLL
         public DeliveryMan ChangeIsWorking(int IdDelivery, int IsWorking)
         {
             return DeliveryManDB.ChangeIsWorking(IdDelivery, IsWorking);
+        }
+
+        public List<Order> GetOrders(string login, string password)
+        {
+            DeliveryMan deliveryMan = DeliveryManDB.GetDeliveryMan(login, password);
+            List<DeliveryOrderList> deliveryOrderLists = deliveryOrderListDb.GetDeliveryOrderList(deliveryMan.Id_Delivery);
+            List<Order> orders = new List<Order>();
+
+            foreach(var m in deliveryOrderLists)
+            {
+                Order order = orderDb.GetOrderIDOrder(m.ID_Order);
+                orders.Add(order);
+            }
+            return orders;
+
+        }
+
+        public List<Restaurant> GetRestaurantsWorkCanton(string Canton)
+        {
+            List<WorkLocation> locations = WorkLocationDb.GetWorkLocationCanton(Canton);
+            List<Restaurant> restaurantsEnd = new List<Restaurant>();
+            foreach(var m in locations)
+            {
+                List<Restaurant> restaurants = RestaurantDb.GetRestaurantIDLocation(m.ID_workLocation);
+                foreach(var n in restaurants)
+                {
+                    Restaurant restaurant = RestaurantDb.GetRestaurantID(n.ID_restaurant);
+                    restaurantsEnd.Add(restaurant);
+                }
+            }
+            return restaurantsEnd;
+        }
+
+        public List<Restaurant> GetRestaurantsWorkCity(string City)
+        {
+            WorkLocation workLocation = WorkLocationDb.GetWorkLocationCity(City);
+            List<Restaurant> restaurants = RestaurantDb.GetRestaurantIDLocation(workLocation.ID_workLocation);
+            return restaurants;
+        }
+
+        public Location GetLocation(string login, string password)
+        {
+            DeliveryMan deliveryMan = DeliveryManDB.GetDeliveryMan(login, password);
+            Location location = LocationDb.GetLocationID(deliveryMan.ID_Location);
+            return location;
+        }
+        public WorkLocation GetWorkLocation(string login, string password)
+        {
+            DeliveryMan deliveryMan = DeliveryManDB.GetDeliveryMan(login, password);
+            WorkLocation workLocation = WorkLocationDb.GetWorkLocationID(deliveryMan.ID_Location);
+            return workLocation;
+        }
+        public List<Person> GetPersonWorkCity(string City)
+        {
+            WorkLocation workLocation = WorkLocationDb.GetWorkLocationCity(City);
+            List<Person> persons = PersonDb.GetPersonIDLocation(workLocation.ID_workLocation);
+            return persons;
+        }
+
+        public List<Dishes> GetAllDishes(string login, string password)
+        {
+            List<Order> orders = GetOrders(login, password);
+            List<Dishes> dishes = new List<Dishes>();
+            foreach(var m in orders)
+            {
+                List<OrderDishes> orderDishes = OrderDishesDb.GetOrderDishes(m.ID_Order);
+                foreach(var n in orderDishes)
+                {
+                    Dishes dish = DishesDb.GetDishIP(n.ID_Dishes);
+                    dishes.Add(dish);
+                }
+            }
+            return dishes;
+
+        }
+        public List<Dishes> GetDishes(int IdOrder)
+        {
+            List<OrderDishes> orderDishes = OrderDishesDb.GetOrderDishes(IdOrder);
+            List<Dishes> dishes = new List<Dishes>();
+            foreach (var n in orderDishes)
+            {
+                Dishes dish = DishesDb.GetDishIP(n.ID_Dishes);
+                dishes.Add(dish);
+            }
+            return dishes;
         }
     }
 }

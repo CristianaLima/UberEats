@@ -14,5 +14,6 @@ namespace DAL
         int GetOrderID(int ID_person, DateTime OrderDate);
         Order AddOrder(Order order);
         List<Order> GetOrderIDPerson(int idPerson);
+        Order GetOrderIDOrder(int IdOrder);
     }
 }

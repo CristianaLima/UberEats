@@ -42,5 +42,10 @@ namespace BLL
         {
             return RestaurantDB.ChangeAvailabilityRestaurant(ID_Restaurant, IsRestaurantAvailable);
         }
+
+        public List<Restaurant> GetRestaurantIDLocation(int IdLocation)
+        {
+            return RestaurantDB.GetRestaurantIDLocation(IdLocation);
+        }
     }
 }

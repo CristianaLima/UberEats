@@ -224,5 +224,54 @@ namespace DAL
 
             return restaurant;
         }
+
+        public List<Restaurant> GetRestaurantIDLocation( int IdLocation)
+        {
+            List<Restaurant> results = null;
+            string connectionString = "Data Source = 153.109.124.35; Initial Catalog = UberEat_Theo_Cristiana; Integrated Security = False; User Id = 6231db; Password = Pwd46231.; MultipleActiveResultSets = True";
+
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(connectionString))
+                {
+                    string query = "Select * from Restaurant where ID_location = @IdLocation";
+                    SqlCommand cmd = new SqlCommand(query, cn);
+                    cmd.Parameters.AddWithValue("@IdLocation", IdLocation);
+                    cn.Open();
+
+                    using (SqlDataReader dr = cmd.ExecuteReader())
+                    {
+                        while (dr.Read())
+                        {
+                            if (results == null)
+                                results = new List<Restaurant>();
+
+                            Restaurant restaurant = new Restaurant();
+
+                            restaurant.ID_restaurant = (int)dr["ID_Restaurant"];
+
+                            restaurant.ID_location = (int)dr["ID_location"];
+
+                            restaurant.RestaurantName = (string)dr["RestaurantName"];
+
+                            restaurant.RestaurantAddress = (string)dr["RestaurantAddress"];
+
+                            restaurant.RestaurantImage = (string)dr["RestaurantImage"];
+
+                            restaurant.IsRestaurantAvailable = (int)dr["IsRestaurantAvailable"];
+
+                            results.Add(restaurant);
+                        }
+                    }
+
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return results;
+        }
     }
 }

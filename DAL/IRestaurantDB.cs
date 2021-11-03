@@ -14,5 +14,6 @@ namespace DAL
         Restaurant GetRestaurantID(int ID_Restaurant);
         Restaurant AddRestaurant(Restaurant restaurant);
         Restaurant ChangeAvailabilityRestaurant(int ID_Restaurant, int isRestaurantAvailable);
+        List<Restaurant> GetRestaurantIDLocation(int IdLocation);
     }
 }

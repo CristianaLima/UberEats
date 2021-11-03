@@ -278,5 +278,75 @@ namespace DAL
             }
             
         }
+        public List<Person> GetPersonIDLocation(int IdLocation)
+        {
+            List<Person> results = null;
+
+            string connectionString = "Data Source = 153.109.124.35; Initial Catalog = UberEat_Theo_Cristiana; Integrated Security = False; User Id = 6231db; Password = Pwd46231.; MultipleActiveResultSets = True";
+
+
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(connectionString))
+                {
+                    string query = "Select * from Person where ID_location = @IdLocation";
+                    SqlCommand cmd = new SqlCommand(query, cn);
+                    cmd.Parameters.AddWithValue("@IdLocation", IdLocation);
+
+
+                    cn.Open();
+
+                    using (SqlDataReader dr = cmd.ExecuteReader())
+                    {
+                        if (dr.Read())
+                        {
+                            if (results == null)
+                                results = new List<Person>();
+
+                            Person person = new Person();
+
+                            person.ID_person = (int)dr["ID_person"];
+
+                            person.ID_location = (int)dr["ID_location"];
+
+                            if (dr["Address"] != null)
+                                person.Address = (string)dr["Address"];
+
+                            if (dr["Name"] != null)
+                                person.Name = (string)dr["Name"];
+
+                            if (dr["Firstname"] != null)
+                                person.FirstName = (string)dr["Firstname"];
+
+                            if (dr["MailAddress"] != null)
+                                person.MailAddress = (string)dr["MailAddress"];
+
+                            if (dr["BirthDate"] != DBNull.Value)
+                                person.BirthDate = (DateTime)dr["BirthDate"];
+
+                            if (dr["PhoneNumber"] != null)
+                                person.PhoneNumber = (string)dr["PhoneNumber"];
+
+                            if (dr["isRestaurant"] != null)
+                                person.isRestaurant = (int)dr["isRestaurant"];
+
+
+                            person.UsernameLogin = (string)dr["UsernameLogin"];
+
+
+                            person.PasswordLogin = (string)dr["PasswordLogin"];
+
+                            results.Add(person);
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return results;
+        }
     }
 }

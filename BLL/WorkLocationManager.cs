@@ -23,9 +23,24 @@ namespace BLL
             return WorkLocationDB.GetWorkLocations();
         }
 
-        public int GetWorkLocationID(int NPA_Work, string CityWork)
+        public int GetWorkLocationNPACity(int NPA_Work, string CityWork)
         {
-            return WorkLocationDB.GetWorkLocationID(NPA_Work, CityWork);
+            return WorkLocationDB.GetWorkLocationNPACity(NPA_Work, CityWork);
+        }
+
+        public List<WorkLocation> GetWorkLocationCanton(string Canton)
+        {
+            return WorkLocationDB.GetWorkLocationCanton(Canton);
+        }
+
+        public WorkLocation GetWorkLocationCity(string City)
+        {
+            return WorkLocationDB.GetWorkLocationCity(City);
+        }
+
+        public WorkLocation GetWorkLocationID(int IdWorkLocation)
+        {
+            return WorkLocationDB.GetWorkLocationID(IdWorkLocation);
         }
     }
 }
