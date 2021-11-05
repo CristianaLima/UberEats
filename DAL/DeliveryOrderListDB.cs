@@ -43,7 +43,7 @@ namespace DAL
 
                             deliveryOrderList.Id_Delivery = (int)dr["Id_Delivery"];
                             deliveryOrderList.ID_Order = (int)dr["ID_Order"];
-                            deliveryOrderList.Statut = (string)dr["Statut"];
+                            deliveryOrderList.NumStatut = (int)dr["NumStatut"];
 
                             results.Add(deliveryOrderList);
                         }
@@ -84,7 +84,7 @@ namespace DAL
 
                             deliveryOrderList.Id_Delivery = (int)dr["Id_Delivery"];
                             deliveryOrderList.ID_Order = (int)dr["ID_Order"];
-                            deliveryOrderList.Statut = (string)dr["Statut"];
+                            deliveryOrderList.NumStatut = (int)dr["NumStatut"];
 
                             results.Add(deliveryOrderList);
                         }
@@ -106,17 +106,13 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "Insert into DeliveryOrderList(Id_Delivery, ID_Order, Statut) values(@IdDelivery, @IdOrder, @Satut); SELECT SCOPE_IDENTITY()";
+                    string query = "Insert into DeliveryOrderList(Id_Delivery, ID_Order, NumStatut) values(@IdDelivery, @IdOrder, @NumSatut); SELECT SCOPE_IDENTITY()";
                     SqlCommand cmd = new SqlCommand(query, cn);
                     cmd.Parameters.AddWithValue("@IdDelivery", deliveryOrderList.Id_Delivery);
                     cmd.Parameters.AddWithValue("@IdOrder", deliveryOrderList.ID_Order);
-                    cmd.Parameters.AddWithValue("@Satut", deliveryOrderList.Statut);
+                    cmd.Parameters.AddWithValue("@NumSatut", deliveryOrderList.NumStatut);
 
                     cn.Open();
-
-                    deliveryOrderList.Id_Delivery = Convert.ToInt32(cmd.ExecuteScalar());
-                    deliveryOrderList.ID_Order = Convert.ToInt32(cmd.ExecuteScalar());
-
                 }
             }
             catch (Exception e)
@@ -136,11 +132,11 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "Update DeliveryOrderList set Statut = @newStatut where Id_Delivery=@IdDelivery and ID_Order=@IdOrder ";
+                    string query = "Update DeliveryOrderList set NumStatut = @newStatut where Id_Delivery=@IdDelivery and ID_Order=@IdOrder ";
                     SqlCommand cmd = new SqlCommand(query, cn);
                     cmd.Parameters.AddWithValue("@IdDelivery", deliveryOrderList.Id_Delivery);
                     cmd.Parameters.AddWithValue("@IdOrder", deliveryOrderList.ID_Order);
-                    cmd.Parameters.AddWithValue("@newStatut", deliveryOrderList.Statut);
+                    cmd.Parameters.AddWithValue("@newStatut", deliveryOrderList.NumStatut);
 
                     cn.Open();
 
@@ -178,7 +174,7 @@ namespace DAL
                             deliveryOrderList = new DeliveryOrderList();
                             deliveryOrderList.Id_Delivery = (int)dr["Id_Delivery"];
                             deliveryOrderList.ID_Order = (int)dr["ID_Order"];
-                            deliveryOrderList.Statut = (string)dr["Statut"];  
+                            deliveryOrderList.NumStatut = (int)dr["NumStatut"];  
                         }
                     }
                 }

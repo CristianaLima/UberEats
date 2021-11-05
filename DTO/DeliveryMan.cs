@@ -25,6 +25,8 @@ namespace DTO
 
         public int IsWorking { get; set; }
 
+        public int nbDeliveries { get; set; }
+
         public override string ToString()
         {
             return " IdUser: " + Id_Delivery +
@@ -38,7 +40,8 @@ namespace DTO
                    " Email: " + EmailDelivery +
                    " Username: " + UsernameLoginDelivery +
                    " Image: " + ImageDelivery +
-                   " Is working ?: " + IsWorking;
+                   " Is working ?: " + IsWorking +
+                   " nb Deliveries : " + nbDeliveries;
                 
         }
     }

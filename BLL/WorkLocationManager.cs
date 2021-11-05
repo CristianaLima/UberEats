@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BLL
 {
-    public class WorkLocationManager
+    public class WorkLocationManager : IWorkLocationManager
     {
         private IWorkLocationDB WorkLocationDB { get; }
 

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BLL
 {
-    public class DishesManager
+    public class DishesManager : IDishesManager
     {
         private IDishesDB DishesDB { get; }
         private IRestaurantDishesDB RestaurantDishesDB { get; }
@@ -26,7 +26,7 @@ namespace BLL
             return DishesDB.GetDishes();
         }
 
-        public Dishes GetDish(string DishName)
+        public List<Dishes> GetDish(string DishName)
         {
             return DishesDB.GetDish(DishName);
         }
@@ -36,7 +36,7 @@ namespace BLL
             return DishesDB.AddDish(dish);
         }
 
-            public Dishes GetDishIP(int ID_Dishes)
+        public Dishes GetDishIP(int ID_Dishes)
         {
             return DishesDB.GetDishIP(ID_Dishes);
         }
@@ -48,19 +48,18 @@ namespace BLL
 
         public List<Restaurant> GetRestaurantFromDish(string DishName)
         {
-            
-            Dishes dish = DishesDB.GetDish(DishName);
-            var idDish = dish.ID_Dishes;
-            var restaurantDishes = RestaurantDishesDB.GetRestaurant(idDish);
-            var restaurants = new List<Restaurant>();
 
-            foreach (var m in restaurantDishes)
+            List<Dishes> dishes = DishesDB.GetDish(DishName);
+            var restaurants = new List<Restaurant>();
+            foreach (var m in dishes)
             {
-                var idRestaurant = m.ID_restaurant;
+                var idDish = m.ID_Dishes;
+                var restaurantDishes = RestaurantDishesDB.GetRestaurant(idDish);
+                var idRestaurant = restaurantDishes.ID_restaurant;
                 Restaurant restaurant = restaurantDB.GetRestaurantID(idRestaurant);
                 restaurants.Add(restaurant);
             }
-            
+
             return restaurants;
         }
 

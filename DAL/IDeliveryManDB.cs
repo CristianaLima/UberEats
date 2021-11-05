@@ -11,5 +11,7 @@ namespace DAL
         List<DeliveryMan> GetDeliveryMen();
         DeliveryMan ChangeIsWorking(int IdDelivery, int IsWorking);
         DeliveryMan ModifyAllDeliveryMan(DeliveryMan delivery);
+        void ChangeNbDeliveries(int n, int ID_DeliveryMan);
+        List<DeliveryMan> GetDeliveryManIDLocation(int ID_Location);
     }
 }

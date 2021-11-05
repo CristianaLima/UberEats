@@ -11,7 +11,7 @@ namespace DAL
     public interface IRestaurantDishesDB
     {
 
-        List<RestaurantDishes> GetRestaurant(int ID_Dish);
+        RestaurantDishes GetRestaurant(int ID_Dish);
         List<RestaurantDishes> GetDishes(int ID_restaurant);
         RestaurantDishes AddRestaurantDishes(RestaurantDishes restaurantDishes);
     }

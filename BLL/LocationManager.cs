@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BLL
 {
-    public class LocationManager
+    public class LocationManager : ILocationManager
     {
         private ILocationDB LocationDb { get; }
         private IRestaurantDB RestaurantDB { get; }
@@ -34,14 +34,14 @@ namespace BLL
         {
             return LocationDb.GetLocationNPA(NPA);
         }
-         public List<Location> GetLocations()
+        public List<Location> GetLocations()
         {
             return LocationDb.GetLocations();
         }
 
         public int GetLocationNPACity(string NPA, string City)
         {
-            return LocationDb.GetLocationNPACity(NPA,City);
+            return LocationDb.GetLocationNPACity(NPA, City);
         }
 
         public List<Location> GetLocationCanton(string Canton)
@@ -52,13 +52,13 @@ namespace BLL
         public List<Restaurant> GetRestaurantsFromLocation(string Canton)
         {
             var locations = LocationDb.GetLocationCanton(Canton);
-            
+
             var restaurants = new List<Restaurant>();
 
             foreach (var m in locations)
             {
                 var restaurantss = RestaurantDB.GetRestaurantIDLocation(m.ID_location);
-                if(restaurantss != null)
+                if (restaurantss != null)
                 {
                     restaurants.AddRange(restaurantss);
                 }

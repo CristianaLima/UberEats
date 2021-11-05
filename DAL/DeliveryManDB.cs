@@ -55,6 +55,7 @@ namespace DAL
                             if (dr["ImageDelivery"] != null)
                                 deliveryMan.ImageDelivery = (string)dr["ImageDelivery"];
                             deliveryMan.IsWorking = (int)dr["IsWorking"];
+                            deliveryMan.nbDeliveries = (int)dr["nbDeliveries"];
 
                             results.Add(deliveryMan);
                         }
@@ -108,6 +109,7 @@ namespace DAL
                             if (dr["ImageDelivery"] != null)
                                 deliveryMan.ImageDelivery = (string)dr["ImageDelivery"];
                             deliveryMan.IsWorking = (int)dr["IsWorking"];
+                            deliveryMan.nbDeliveries = (int)dr["nbDeliveries"];
 
                         }
                     }
@@ -157,6 +159,7 @@ namespace DAL
                             if (dr["ImageDelivery"] != null)
                                 deliveryMan.ImageDelivery = (string)dr["ImageDelivery"];
                             deliveryMan.IsWorking = (int)dr["IsWorking"];
+                            deliveryMan.nbDeliveries = (int)dr["nbDeliveries"];
 
                         }
                     }
@@ -178,8 +181,8 @@ namespace DAL
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
                     string query = "Insert into DeliveryMan( ID_Location, ID_workLocation, NameDelivery,FirstNameDelivery, AddressDelivery, " +
-                        "BirthDateDelivery,PhoneNumberDelivery,EmailDelivery, UsernameLoginDelivery, PasswordDelivery, ImageDelivery, IsWorking) values( @locationId," +
-                        " @workLocationId, @lastName, @firstName, @address, @birthDate, @phoneNumber, @email, @login, @password, @image, @isWorking); SELECT SCOPE_IDENTITY()";
+                        "BirthDateDelivery,PhoneNumberDelivery,EmailDelivery, UsernameLoginDelivery, PasswordDelivery, ImageDelivery, IsWorking, nbDeliveries) values( @locationId," +
+                        " @workLocationId, @lastName, @firstName, @address, @birthDate, @phoneNumber, @email, @login, @password, @image, @isWorking, @nbDeliveries); SELECT SCOPE_IDENTITY()";
                     
                     SqlCommand cmd = new SqlCommand(query, cn);
                     
@@ -195,6 +198,7 @@ namespace DAL
                     cmd.Parameters.AddWithValue("@password", delivery.PasswordDelivery);
                     cmd.Parameters.AddWithValue("@image", delivery.ImageDelivery);
                     cmd.Parameters.AddWithValue("@isWorking", delivery.IsWorking);  
+                    cmd.Parameters.AddWithValue("@nbDeliveries", delivery.nbDeliveries);  
 
                     cn.Open();
 
@@ -228,10 +232,6 @@ namespace DAL
 
                     cn.Open();
 
-                    deliveryMan.Id_Delivery = Convert.ToInt32(cmd.ExecuteScalar());
-                    deliveryMan.ID_Location = Convert.ToInt32(cmd.ExecuteScalar());
-                    deliveryMan.IsWorking = Convert.ToInt32(cmd.ExecuteScalar());
-
                 }
             }
             catch (Exception e)
@@ -250,7 +250,7 @@ namespace DAL
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
                     
-                    string query = "UPDATE DeliveryMan SET IsWorking = @IsWorking and ID_Location=@ID_Location and ID_workLocation=@ID_workLocation and NameDelivery=@NameDelivery and FirstNameDelivery=@FirstNameDelivery and AddressDelivery=@AddressDelivery and BirthDateDelivery=@BirthDateDelivery and PhoneNumberDelivery=@PhoneNumberDelivery and EmailDelivery=@EmailDelivery and UsernameLoginDelivery=@UsernameLoginDelivery and PasswordDelivery=@PasswordDelivery and ImageDelivery=@ImageDelivery Where Id_Delivery = @Id_Delivery ";
+                    string query = "UPDATE DeliveryMan SET IsWorking = @IsWorking and ID_Location=@ID_Location and ID_workLocation=@ID_workLocation and NameDelivery=@NameDelivery and FirstNameDelivery=@FirstNameDelivery and AddressDelivery=@AddressDelivery and BirthDateDelivery=@BirthDateDelivery and PhoneNumberDelivery=@PhoneNumberDelivery and EmailDelivery=@EmailDelivery and UsernameLoginDelivery=@UsernameLoginDelivery and PasswordDelivery=@PasswordDelivery and ImageDelivery=@ImageDelivery and nbDeliveries=@nbDeliveries Where Id_Delivery = @Id_Delivery ";
                     SqlCommand cmd = new SqlCommand(query, cn);
                     cmd.Parameters.AddWithValue("@Id_Delivery", delivery.Id_Delivery);
                     cmd.Parameters.AddWithValue("@locationId", delivery.ID_Location);
@@ -265,6 +265,7 @@ namespace DAL
                     cmd.Parameters.AddWithValue("@password", delivery.PasswordDelivery);
                     cmd.Parameters.AddWithValue("@image", delivery.ImageDelivery);
                     cmd.Parameters.AddWithValue("@IsWorking", delivery.IsWorking);
+                    cmd.Parameters.AddWithValue("@nbDeliveries", delivery.nbDeliveries);
 
                     cn.Open();
 
@@ -276,5 +277,85 @@ namespace DAL
             }
             return delivery;
         }
+
+        public List<DeliveryMan> GetDeliveryManIDLocation(int ID_Location)
+        {
+            List<DeliveryMan> results = null;
+
+            string connectionString = "Data Source = 153.109.124.35; Initial Catalog = UberEat_Theo_Cristiana; Integrated Security = False; User Id = 6231db; Password = Pwd46231.; MultipleActiveResultSets = True";
+
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(connectionString))
+                {
+                    string query = " Select * from DeliveryMan where ID_Location=@ID_Location";
+                    SqlCommand cmd = new SqlCommand(query, cn);
+                    cmd.Parameters.AddWithValue("@ID_Location", ID_Location);
+
+                    cn.Open();
+
+                    using (SqlDataReader dr = cmd.ExecuteReader())
+                    {
+                        while (dr.Read())
+                        {
+                            if (results == null)
+                                results = new List<DeliveryMan>();
+
+                            DeliveryMan deliveryMan = new DeliveryMan();
+
+                            deliveryMan.Id_Delivery = (int)dr["Id_Delivery"];
+                            deliveryMan.ID_Location = (int)dr["ID_Location"];
+                            deliveryMan.ID_workLocation = (int)dr["ID_workLocation"];
+                            deliveryMan.NameDelivery = (string)dr["NameDelivery"];
+                            deliveryMan.FirstNameDelivery = (string)dr["FirstNameDelivery"];
+                            deliveryMan.AddressDelivery = (string)dr["AddressDelivery"];
+                            deliveryMan.BirthDateDelivery = (DateTime)dr["BirthDateDelivery"];
+                            deliveryMan.PhoneNumberDelivery = (string)dr["PhoneNumberDelivery"];
+                            deliveryMan.EmailDelivery = (string)dr["EmailDelivery"];
+                            deliveryMan.UsernameLoginDelivery = (string)dr["UsernameLoginDelivery"];
+                            deliveryMan.PasswordDelivery = (string)dr["PasswordDelivery"];
+                            if (dr["ImageDelivery"] != null)
+                                deliveryMan.ImageDelivery = (string)dr["ImageDelivery"];
+                            deliveryMan.IsWorking = (int)dr["IsWorking"];
+                            deliveryMan.nbDeliveries = (int)dr["nbDeliveries"];
+                            results.Add(deliveryMan);
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            return results;
+        }
+
+        public void ChangeNbDeliveries(int n, int ID_DeliveryMan)
+        {
+            
+
+            string connectionString = "Data Source = 153.109.124.35; Initial Catalog = UberEat_Theo_Cristiana; Integrated Security = False; User Id = 6231db; Password = Pwd46231.; MultipleActiveResultSets = True";
+
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(connectionString))
+                {
+                    
+                    string query = "UPDATE DeliveryMan SET nbDeliveries = @nbDeliveries Where Id_Delivery = @ID_DeliveryMan; ";
+                    SqlCommand cmd = new SqlCommand(query, cn);
+                    cmd.Parameters.AddWithValue("@ID_DeliveryMan", ID_DeliveryMan);
+                    cmd.Parameters.AddWithValue("@nbDeliveries", n);
+
+                    cn.Open();
+
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            
+        }
+
     }
 }

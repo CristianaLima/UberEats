@@ -12,13 +12,13 @@ namespace DTO
 
         public int Id_Delivery { get; set; }
 
-        public string Statut { get; set; }
+        public int NumStatut { get; set; }
 
         public override string ToString()
         {
             return " ID_Order: " + ID_Order +
                     " ID_Delivery: " + Id_Delivery +
-                    " Statut: " + Statut;
+                    " NumStatut: " + NumStatut;
         }
     }
 }

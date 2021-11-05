@@ -69,9 +69,9 @@ namespace DAL
         }
 
 
-        public Dishes GetDish(string DishName)
+        public List<Dishes> GetDish(string DishName)
         {
-            Dishes dish = null;
+            List<Dishes> results = null;
 
             string connectionString = "Data Source = 153.109.124.35; Initial Catalog = UberEat_Theo_Cristiana; Integrated Security = False; User Id = 6231db; Password = Pwd46231.; MultipleActiveResultSets = True";
 
@@ -90,7 +90,10 @@ namespace DAL
                     {
                         if (dr.Read())
                         {
-                            dish = new Dishes();
+                            if (results == null)
+                                results = new List<Dishes>();
+
+                            Dishes dish = new Dishes();
 
                             dish.ID_Dishes = (int)dr["ID_Dishes"];
 
@@ -104,6 +107,8 @@ namespace DAL
                             dish.DishImage = (string)dr["DishImage"];
 
                             dish.isDishAvailable = (int)dr["isDishAvailable"];
+
+                            results.Add(dish);
                         }
                     }
                 }
@@ -113,7 +118,7 @@ namespace DAL
                 throw e;
             }
 
-            return dish;
+            return results;
         }
 
         public Dishes GetDishIP(int ID_Dishes)

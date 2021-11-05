@@ -146,5 +146,16 @@ namespace BLL
         {
             return DeliveryManDB.ModifyAllDeliveryMan(delivery);
         }
+
+        public List<DeliveryMan> GetDeliveryManIDLocation(int ID_Location)
+        {
+            return DeliveryManDB.GetDeliveryManIDLocation(ID_Location);
+        }
+
+        public void ChangeNbDeliveries(int n, int ID_DeliveryMan)
+        {
+            var deliveryman = DeliveryManDB.GetDeliveryManID(ID_DeliveryMan);
+            DeliveryManDB.ChangeNbDeliveries(deliveryman.nbDeliveries + n, ID_DeliveryMan);
+        }
     }
 }

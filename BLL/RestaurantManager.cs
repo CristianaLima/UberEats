@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BLL
 {
-    public class RestaurantManager
+    public class RestaurantManager : IRestaurantManager
     {
         private IRestaurantDB RestaurantDB { get; }
         private IDishesDB DishesDB { get; }

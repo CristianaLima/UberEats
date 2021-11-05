@@ -10,13 +10,14 @@ namespace DTO
     {
         public int ID_Order { get; set; }
         public int ID_person { get; set; }
-        
+        public DateTime DelaiLivraison { get; set; }       
         public DateTime OrderDate { get; set; }
         public override string ToString()
         {
             return " ID_Order: " + ID_Order +
                     " ID_Person: " + ID_person +
-                    " Date: " + OrderDate;
+                    " Date: " + OrderDate +
+                    " Délai Livraison : " + DelaiLivraison;
         }
     }
 }

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BLL
 {
-    public class PersonManager
+    public class PersonManager : IPersonManager
     {
 
         private IPersonDB PersonDB { get; }

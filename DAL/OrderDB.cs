@@ -45,7 +45,7 @@ namespace DAL
 
                             order.ID_person = (int)dr["ID_person"];
 
-                           
+                            order.DelaiLivraison = (DateTime)dr["DelaiLivraison"];
 
                             order.OrderDate = (DateTime)dr["OrderDate"];
 
@@ -114,15 +114,18 @@ namespace DAL
 
                     string query = "Insert into Order( ID_person, OrderDate) values( @ID_person, @OrderDate); SELECT SCOPE_IDENTITY()";
                     SqlCommand cmd = new SqlCommand(query, cn);
-                    
+                    DateTime currentTime = DateTime.Now;
+                    // Orderid person a faire dans le BLL ?
                     cmd.Parameters.AddWithValue("@ID_person", order.ID_person);
-                    cmd.Parameters.AddWithValue("@OrderDate", DateTime.Now);
+                    // Livraison délai 15min de base + délai livraison désirée par le client + délai livreur 
+                    cmd.Parameters.AddWithValue("@OrderDate", currentTime);
+                    cmd.Parameters.AddWithValue("@DelaiLivraison", order.DelaiLivraison);
 
 
 
                     cn.Open();
 
-                   order.ID_Order= Convert.ToInt32(cmd.ExecuteScalar());
+                    order.ID_Order= Convert.ToInt32(cmd.ExecuteScalar());
 
                 }
             }
@@ -165,6 +168,8 @@ namespace DAL
                             order.ID_person = (int)dr["ID_person"];
 
                             order.OrderDate = (DateTime)dr["OrderDate"];
+                            
+                            order.DelaiLivraison = (DateTime)dr["DelaiLivraison"];
 
                             results.Add(order);
                         }
@@ -207,6 +212,8 @@ namespace DAL
                             order.ID_person = (int)dr["ID_person"];
 
                             order.OrderDate = (DateTime)dr["OrderDate"];
+
+                            order.DelaiLivraison = (DateTime)dr["DelaiLivraison"];
                         }
                     }
                 }
@@ -227,11 +234,12 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "Update Order set ID_person = @ID_person and OrderName=@OrderName and OrderDate=@OrderDate where ID_Order=@ID_Order";
+                    string query = "Update Order set ID_person = @ID_person and OrderName=@OrderName and OrderDate=@OrderDate and DelaiLivraison=@DelaiLivraison where ID_Order=@ID_Order";
                     SqlCommand cmd = new SqlCommand(query, cn);
                     cmd.Parameters.AddWithValue("@ID_person", order.ID_person);
                     cmd.Parameters.AddWithValue("@OrderDate", order.OrderDate);
                     cmd.Parameters.AddWithValue("@ID_Order", order.ID_Order);
+                    cmd.Parameters.AddWithValue("@DelaiLivraison", order.DelaiLivraison);
 
                     cn.Open();
                 }
