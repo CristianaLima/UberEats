@@ -85,5 +85,10 @@ namespace BLL
 
             return location;
         }
+
+        public Restaurant ModifyAllRestaurant(Restaurant restaurant)
+        {
+            return RestaurantDB.ModifyAllRestaurant(restaurant);
+        }
     }
 }

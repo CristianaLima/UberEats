@@ -10,10 +10,10 @@ namespace DAL
     public interface IOrderDB
     {
         List<Order> GetOrders();
-        Order GetOrder(string OrderName);
         int GetOrderID(int ID_person, DateTime OrderDate);
         Order AddOrder(Order order);
         List<Order> GetOrderIDPerson(int idPerson);
         Order GetOrderIDOrder(int IdOrder);
+        Order ModifyAllOrder(Order order);
     }
 }

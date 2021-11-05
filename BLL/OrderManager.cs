@@ -31,10 +31,7 @@ namespace BLL
             return OrderDB.GetOrders();
         }
 
-        public Order GetOrder(string OrderName)
-        {
-            return OrderDB.GetOrder(OrderName);
-        }
+     
 
         public Order AddOrder(Order order)
         {
@@ -78,6 +75,11 @@ namespace BLL
             var deliveryMan = DeliveryManDB.GetDeliveryManID(deliveryManOrder.Id_Delivery);
             
             return deliveryMan;
+        }
+
+        public Order ModifyAllOrder(Order order)
+        {
+            return OrderDB.ModifyAllOrder(order);
         }
     }
 }

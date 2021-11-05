@@ -255,7 +255,7 @@ namespace DAL
             return person;
         }
 
-        public void ModifyIdLocation(int IdLocation, int IdPerson)
+        public Person ModifyAllPerson(Person person)
         {
             string connectionString = "Data Source = 153.109.124.35; Initial Catalog = UberEat_Theo_Cristiana; Integrated Security = False; User Id = 6231db; Password = Pwd46231.; MultipleActiveResultSets = True";
 
@@ -263,10 +263,20 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "Update Person set ID_location = @ID_location where ID_person=@ID_person ";
+                    string query = "Update Person set ID_location = @ID_location and Address=@Address and Name=@Name and FirstName=@FirstName and MailAddress=@MailAddress and BirthDate=@BirthDate and PhoneNumber=@PhoneNumber and isRestaurant=@isRestaurant and UsernameLogin=@UsernameLogin and PasswordLogin=@PasswordLogin and PersonImage=@PersonImage where ID_person=@ID_person ";
                     SqlCommand cmd = new SqlCommand(query, cn);
-                    cmd.Parameters.AddWithValue("@ID_location", IdLocation);
-                    cmd.Parameters.AddWithValue("@ID_person", IdPerson);
+                    cmd.Parameters.AddWithValue("@ID_location", person.ID_location);
+                    cmd.Parameters.AddWithValue("@ID_person", person.ID_person);
+                    cmd.Parameters.AddWithValue("@Address", person.Address);
+                    cmd.Parameters.AddWithValue("@Name", person.Name);
+                    cmd.Parameters.AddWithValue("@FirstName", person.FirstName);
+                    cmd.Parameters.AddWithValue("@MailAddress", person.MailAddress);
+                    cmd.Parameters.AddWithValue("@BirthDate", person.BirthDate);
+                    cmd.Parameters.AddWithValue("@PhoneNumber", person.PhoneNumber);
+                    cmd.Parameters.AddWithValue("@isRestaurant", person.isRestaurant);
+                    cmd.Parameters.AddWithValue("@UsernameLogin", person.UsernameLogin);
+                    cmd.Parameters.AddWithValue("@PasswordLogin", person.PasswordLogin);
+                    cmd.Parameters.AddWithValue("@PersonImage", person.PersonImage);
 
                     cn.Open();
 
@@ -276,6 +286,7 @@ namespace DAL
             {
                 throw e;
             }
+            return person;
             
         }
         public List<Person> GetPersonIDLocation(int IdLocation)

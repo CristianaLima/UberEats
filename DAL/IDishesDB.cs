@@ -14,5 +14,6 @@ namespace DAL
         Dishes GetDishIP(int ID_Dishes);
         Dishes AddDish(Dishes dish);
         Dishes ChangeAvailabilityDish(int ID_Dish, int isDishAvailable);
+        Dishes MofifyAllDishes(Dishes dish);
     }
 }

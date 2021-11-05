@@ -273,5 +273,32 @@ namespace DAL
 
             return results;
         }
+
+        public Restaurant ModifyAllRestaurant(Restaurant restaurant)
+        {
+            string connectionString = "Data Source = 153.109.124.35; Initial Catalog = UberEat_Theo_Cristiana; Integrated Security = False; User Id = 6231db; Password = Pwd46231.; MultipleActiveResultSets = True";
+
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(connectionString))
+                {
+                    string query = "Update Restaurant set ID_location = @ID_location and RestaurantName = @RestaurantName and RestaurantAddress=@RestaurantAddress and RestaurantImage=@RestaurantImage and IsRestaurantAvailable=@IsRestaurantAvailable where ID_Restaurant=@ID_Restaurant ";
+                    SqlCommand cmd = new SqlCommand(query, cn);
+                    cmd.Parameters.AddWithValue("@ID_Restaurant", restaurant.ID_restaurant);
+                    cmd.Parameters.AddWithValue("@ID_location", restaurant.ID_location);
+                    cmd.Parameters.AddWithValue("@RestaurantName", restaurant.RestaurantName);
+                    cmd.Parameters.AddWithValue("@RestaurantAddress", restaurant.RestaurantAddress);
+                    cmd.Parameters.AddWithValue("@RestaurantImage", restaurant.RestaurantImage);
+                    cmd.Parameters.AddWithValue("@IsRestaurantAvailable", restaurant.IsRestaurantAvailable);
+
+                    cn.Open();
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            return restaurant;
+        }
     }
 }

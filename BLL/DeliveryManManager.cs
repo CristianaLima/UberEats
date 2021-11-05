@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BLL
 {
-    public class DeliveryManManager
+    public class DeliveryManManager : IDeliveryManManager
     {
         private IDeliveryManDB DeliveryManDB { get; }
         private IDeliveryOrderListDB deliveryOrderListDb { get; }
@@ -64,7 +64,7 @@ namespace BLL
             List<DeliveryOrderList> deliveryOrderLists = deliveryOrderListDb.GetDeliveryOrderList(deliveryMan.Id_Delivery);
             List<Order> orders = new List<Order>();
 
-            foreach(var m in deliveryOrderLists)
+            foreach (var m in deliveryOrderLists)
             {
                 Order order = orderDb.GetOrderIDOrder(m.ID_Order);
                 orders.Add(order);
@@ -77,10 +77,10 @@ namespace BLL
         {
             List<WorkLocation> locations = WorkLocationDb.GetWorkLocationCanton(Canton);
             List<Restaurant> restaurantsEnd = new List<Restaurant>();
-            foreach(var m in locations)
+            foreach (var m in locations)
             {
                 List<Restaurant> restaurants = RestaurantDb.GetRestaurantIDLocation(m.ID_workLocation);
-                foreach(var n in restaurants)
+                foreach (var n in restaurants)
                 {
                     Restaurant restaurant = RestaurantDb.GetRestaurantID(n.ID_restaurant);
                     restaurantsEnd.Add(restaurant);
@@ -119,10 +119,10 @@ namespace BLL
         {
             List<Order> orders = GetOrders(login, password);
             List<Dishes> dishes = new List<Dishes>();
-            foreach(var m in orders)
+            foreach (var m in orders)
             {
                 List<OrderDishes> orderDishes = OrderDishesDb.GetOrderDishes(m.ID_Order);
-                foreach(var n in orderDishes)
+                foreach (var n in orderDishes)
                 {
                     Dishes dish = DishesDb.GetDishIP(n.ID_Dishes);
                     dishes.Add(dish);
@@ -141,6 +141,10 @@ namespace BLL
                 dishes.Add(dish);
             }
             return dishes;
+        }
+        public DeliveryMan ModifyAllDeliveryMan(DeliveryMan delivery)
+        {
+            return DeliveryManDB.ModifyAllDeliveryMan(delivery);
         }
     }
 }

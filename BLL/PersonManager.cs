@@ -42,9 +42,9 @@ namespace BLL
             return PersonDB.GetPeople();
         }
 
-        public void ModifyIdLocation(int IdLocation, int IdPerson)
+        public Person ModifyAllPerson(Person person)
         {
-            PersonDB.ModifyIdLocation(IdLocation, IdPerson);
+            return PersonDB.ModifyAllPerson(person);
         }
 
         public List<Order> GetListOrder(string login, string password)

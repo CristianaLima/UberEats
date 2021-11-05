@@ -240,5 +240,41 @@ namespace DAL
             }
             return deliveryMan;
         }
+
+        public DeliveryMan ModifyAllDeliveryMan(DeliveryMan delivery)
+        {
+            string connectionString = "Data Source = 153.109.124.35; Initial Catalog = UberEat_Theo_Cristiana; Integrated Security = False; User Id = 6231db; Password = Pwd46231.; MultipleActiveResultSets = True";
+
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(connectionString))
+                {
+                    
+                    string query = "UPDATE DeliveryMan SET IsWorking = @IsWorking and ID_Location=@ID_Location and ID_workLocation=@ID_workLocation and NameDelivery=@NameDelivery and FirstNameDelivery=@FirstNameDelivery and AddressDelivery=@AddressDelivery and BirthDateDelivery=@BirthDateDelivery and PhoneNumberDelivery=@PhoneNumberDelivery and EmailDelivery=@EmailDelivery and UsernameLoginDelivery=@UsernameLoginDelivery and PasswordDelivery=@PasswordDelivery and ImageDelivery=@ImageDelivery Where Id_Delivery = @Id_Delivery ";
+                    SqlCommand cmd = new SqlCommand(query, cn);
+                    cmd.Parameters.AddWithValue("@Id_Delivery", delivery.Id_Delivery);
+                    cmd.Parameters.AddWithValue("@locationId", delivery.ID_Location);
+                    cmd.Parameters.AddWithValue("@workLocationId", delivery.ID_workLocation);
+                    cmd.Parameters.AddWithValue("@lastName", delivery.NameDelivery);
+                    cmd.Parameters.AddWithValue("@firstName", delivery.FirstNameDelivery);
+                    cmd.Parameters.AddWithValue("@address", delivery.AddressDelivery);
+                    cmd.Parameters.AddWithValue("@birthDate", delivery.BirthDateDelivery);
+                    cmd.Parameters.AddWithValue("@phoneNumber", delivery.PhoneNumberDelivery);
+                    cmd.Parameters.AddWithValue("@email", delivery.EmailDelivery);
+                    cmd.Parameters.AddWithValue("@login", delivery.UsernameLoginDelivery);
+                    cmd.Parameters.AddWithValue("@password", delivery.PasswordDelivery);
+                    cmd.Parameters.AddWithValue("@image", delivery.ImageDelivery);
+                    cmd.Parameters.AddWithValue("@IsWorking", delivery.IsWorking);
+
+                    cn.Open();
+
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            return delivery;
+        }
     }
 }

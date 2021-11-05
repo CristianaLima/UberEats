@@ -45,7 +45,7 @@ namespace DAL
 
                             order.ID_person = (int)dr["ID_person"];
 
-                            order.OrderName = (string)dr["OrderName"];
+                           
 
                             order.OrderDate = (DateTime)dr["OrderDate"];
 
@@ -64,47 +64,6 @@ namespace DAL
         }
 
 
-        public Order GetOrder(string OrderName)
-        {
-            Order order = null;
-
-            string connectionString = "Data Source = 153.109.124.35; Initial Catalog = UberEat_Theo_Cristiana; Integrated Security = False; User Id = 6231db; Password = Pwd46231.; MultipleActiveResultSets = True";
-
-
-            try
-            {
-                using (SqlConnection cn = new SqlConnection(connectionString))
-                {
-                    string query = "Select * from Order where OrderName = @OrderName";
-                    SqlCommand cmd = new SqlCommand(query, cn);
-                    cmd.Parameters.AddWithValue("@OrderName", OrderName);
-
-                    cn.Open();
-
-                    using (SqlDataReader dr = cmd.ExecuteReader())
-                    {
-                        if (dr.Read())
-                        {
-                            order = new Order();
-
-                            order.ID_Order = (int)dr["ID_Order"];
-
-                            order.ID_person = (int)dr["ID_person"];
-
-                            order.OrderName = (string)dr["OrderName"];
-
-                            order.OrderDate = (DateTime)dr["OrderDate"];
-                        }
-                    }
-                }
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
-
-            return order;
-        }
 
         public int GetOrderID(int ID_person, DateTime OrderDate)
         {
@@ -153,12 +112,11 @@ namespace DAL
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
 
-                    string query = "Insert into Order( ID_person, OrderName, OrderDate) values( @ID_person, @OrderName, @OrderDate); SELECT SCOPE_IDENTITY()";
+                    string query = "Insert into Order( ID_person, OrderDate) values( @ID_person, @OrderDate); SELECT SCOPE_IDENTITY()";
                     SqlCommand cmd = new SqlCommand(query, cn);
                     
                     cmd.Parameters.AddWithValue("@ID_person", order.ID_person);
-                    cmd.Parameters.AddWithValue("@OrderName", order.OrderName);
-                    cmd.Parameters.AddWithValue("@OrderDate", order.OrderDate);
+                    cmd.Parameters.AddWithValue("@OrderDate", DateTime.Now);
 
 
 
@@ -206,8 +164,6 @@ namespace DAL
 
                             order.ID_person = (int)dr["ID_person"];
 
-                            order.OrderName = (string)dr["OrderName"];
-
                             order.OrderDate = (DateTime)dr["OrderDate"];
 
                             results.Add(order);
@@ -250,8 +206,6 @@ namespace DAL
 
                             order.ID_person = (int)dr["ID_person"];
 
-                            order.OrderName = (string)dr["OrderName"];
-
                             order.OrderDate = (DateTime)dr["OrderDate"];
                         }
                     }
@@ -262,6 +216,30 @@ namespace DAL
                 throw e;
             }
 
+            return order;
+        }
+
+        public Order ModifyAllOrder(Order order)
+        {
+            string connectionString = "Data Source = 153.109.124.35; Initial Catalog = UberEat_Theo_Cristiana; Integrated Security = False; User Id = 6231db; Password = Pwd46231.; MultipleActiveResultSets = True";
+
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(connectionString))
+                {
+                    string query = "Update Order set ID_person = @ID_person and OrderName=@OrderName and OrderDate=@OrderDate where ID_Order=@ID_Order";
+                    SqlCommand cmd = new SqlCommand(query, cn);
+                    cmd.Parameters.AddWithValue("@ID_person", order.ID_person);
+                    cmd.Parameters.AddWithValue("@OrderDate", order.OrderDate);
+                    cmd.Parameters.AddWithValue("@ID_Order", order.ID_Order);
+
+                    cn.Open();
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
             return order;
         }
     }

@@ -63,5 +63,10 @@ namespace BLL
             
             return restaurants;
         }
+
+        public Dishes MofifyAllDishes(Dishes dish)
+        {
+            return DishesDB.MofifyAllDishes(dish);
+        }
     }
 }

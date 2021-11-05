@@ -226,5 +226,36 @@ namespace DAL
 
             return dish;
         }
+
+        public Dishes MofifyAllDishes(Dishes dish)
+        {
+            string connectionString = "Data Source = 153.109.124.35; Initial Catalog = UberEat_Theo_Cristiana; Integrated Security = False; User Id = 6231db; Password = Pwd46231.; MultipleActiveResultSets = True";
+
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(connectionString))
+                {
+                    
+                    string query = "UPDATE Dishes SET isDishAvailable = @isDishAvailable and DishesName=@DishesName and DishesDescription=@DishesDescription and DishesPrice=@DishesPrice and DishImage=@DishImage Where ID_Dishes = @ID_Dishes; ";
+                    SqlCommand cmd = new SqlCommand(query, cn);
+                    cmd.Parameters.AddWithValue("@ID_Dishes", dish.ID_Dishes);
+                    cmd.Parameters.AddWithValue("@DishesName", dish.DishesName);
+                    cmd.Parameters.AddWithValue("@DishesDescription", dish.DishesDescription);
+                    cmd.Parameters.AddWithValue("@DishesPrice", dish.DishesPrice);
+                    cmd.Parameters.AddWithValue("@DishImage", dish.DishImage);
+                    cmd.Parameters.AddWithValue("@isDishAvailable", dish.isDishAvailable);
+
+                    cn.Open();
+
+
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return dish;
+        }
     }
 }
