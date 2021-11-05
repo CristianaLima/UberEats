@@ -18,7 +18,7 @@ namespace BLL
             RestaurantDishesDB = new RestaurantDishesDB(conf);
         }
 
-        public RestaurantDishes GetDishes(int ID_restaurant)
+        public List<RestaurantDishes> GetDishes(int ID_restaurant)
         {
             return RestaurantDishesDB.GetDishes(ID_restaurant);
         }

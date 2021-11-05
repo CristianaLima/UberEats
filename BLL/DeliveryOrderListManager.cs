@@ -34,5 +34,10 @@ namespace BLL
         {
             return DeliveryOrderListBd.ModifyStatut(deliveryOrderList);
         }
+
+        public DeliveryOrderList GetDeliveryFromOrder(int OrderID)
+        {
+            return DeliveryOrderListBd.GetDeliveryManFromOrderID(OrderID);
+        }
     }
 }

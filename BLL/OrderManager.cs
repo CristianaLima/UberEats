@@ -12,10 +12,18 @@ namespace BLL
     public class OrderManager
     {
         private IOrderDB OrderDB { get; }
+        private IOrderDishesDB OrderDishesDB { get; }
+        private IDishesDB DishesDB { get; }
+        private IDeliveryManDB DeliveryManDB { get; }
+        private IDeliveryOrderListDB DeliveryOrderListDB { get; }
 
         public OrderManager(IConfiguration conf)
         {
             OrderDB = new OrderDB(conf);
+            OrderDishesDB = new OrderDishesDB(conf);
+            DishesDB = new DishesDB(conf);
+            DeliveryManDB = new DeliveryManDB(conf);
+            DeliveryOrderListDB = new DeliveryOrderListDB(conf);
         }
 
         public List<Order> GetOrders()
@@ -46,6 +54,30 @@ namespace BLL
         public Order GetOrderIDOrder(int IdOrder)
         {
             return OrderDB.GetOrderIDOrder(IdOrder);
+        }
+
+        public List<Dishes> GetDishesFromOrder(int OrderID)
+        {
+            var dishesOrder = OrderDishesDB.GetOrderDishes(OrderID);
+            var dishes = new List<Dishes>();
+
+            foreach (var m in dishesOrder)
+            {
+                var idDishes = m.ID_Dishes;
+                Dishes dish = DishesDB.GetDishIP(idDishes);
+                dishes.Add(dish);
+            }
+
+            return dishes;
+        }
+
+        public DeliveryMan GetDeliveryManFromOrder(int OrderID)
+        {
+            var deliveryManOrder = DeliveryOrderListDB.GetDeliveryManFromOrderID(OrderID);
+           
+            var deliveryMan = DeliveryManDB.GetDeliveryManID(deliveryManOrder.Id_Delivery);
+            
+            return deliveryMan;
         }
     }
 }

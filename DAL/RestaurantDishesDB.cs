@@ -62,9 +62,9 @@ namespace DAL
             return results;
         }
 
-        public RestaurantDishes GetDishes(int ID_restaurant)
+        public List<RestaurantDishes> GetDishes(int ID_restaurant)
         {
-            RestaurantDishes restaurantdishes = null;
+            List<RestaurantDishes> results = null;
 
             string connectionString = "Data Source = 153.109.124.35; Initial Catalog = UberEat_Theo_Cristiana; Integrated Security = False; User Id = 6231db; Password = Pwd46231.; MultipleActiveResultSets = True";
 
@@ -83,11 +83,16 @@ namespace DAL
                     {
                         if (dr.Read())
                         {
-                            restaurantdishes = new RestaurantDishes();
+                            if (results == null)
+                                results = new List<RestaurantDishes>();
 
-                            restaurantdishes.ID_restaurant = (int)dr["ID_restaurant"];
+                            RestaurantDishes restaurantDishes = new RestaurantDishes();
 
-                            restaurantdishes.ID_Dishes = (int)dr["ID_Dishes"];
+                            restaurantDishes.ID_restaurant = (int)dr["ID_restaurant"];
+
+                            restaurantDishes.ID_Dishes = (int)dr["ID_Dishes"];
+
+                            results.Add(restaurantDishes);
                         }
                     }
                 }
@@ -97,7 +102,7 @@ namespace DAL
                 throw e;
             }
 
-            return restaurantdishes;
+            return results;
         }
 
         public RestaurantDishes AddRestaurantDishes(RestaurantDishes restaurantDishes)

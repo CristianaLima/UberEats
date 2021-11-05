@@ -12,10 +12,12 @@ namespace BLL
     public class LocationManager
     {
         private ILocationDB LocationDb { get; }
+        private IRestaurantDB RestaurantDB { get; }
 
         public LocationManager(IConfiguration conf)
         {
             LocationDb = new LocationDB(conf);
+            RestaurantDB = new RestaurantDB(conf);
         }
 
         public Location GetLocationCity(string City)
@@ -45,6 +47,24 @@ namespace BLL
         public List<Location> GetLocationCanton(string Canton)
         {
             return LocationDb.GetLocationCanton(Canton);
+        }
+
+        public List<Restaurant> GetRestaurantsFromLocation(string Canton)
+        {
+            var locations = LocationDb.GetLocationCanton(Canton);
+            
+            var restaurants = new List<Restaurant>();
+
+            foreach (var m in locations)
+            {
+                var restaurantss = RestaurantDB.GetRestaurantIDLocation(m.ID_location);
+                if(restaurantss != null)
+                {
+                    restaurants.AddRange(restaurantss);
+                }
+            }
+
+            return restaurants;
         }
     }
 }

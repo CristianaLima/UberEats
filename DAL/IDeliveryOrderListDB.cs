@@ -9,5 +9,6 @@ namespace DAL
         List<DeliveryOrderList> GetDeliveryOrderList(int IdDeliveryMan);
         List<DeliveryOrderList> GetDeliveryOrderLists();
         DeliveryOrderList ModifyStatut(DeliveryOrderList deliveryOrderList);
+        DeliveryOrderList GetDeliveryManFromOrderID(int OrderID);
     }
 }

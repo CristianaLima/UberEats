@@ -155,5 +155,39 @@ namespace DAL
             return deliveryOrderList;
 
         }
+
+        public DeliveryOrderList GetDeliveryManFromOrderID(int OrderID)
+        {
+            DeliveryOrderList deliveryOrderList = null;
+            string connectionString = "Data Source = 153.109.124.35; Initial Catalog = UberEat_Theo_Cristiana; Integrated Security = False; User Id = 6231db; Password = Pwd46231.; MultipleActiveResultSets = True";
+
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(connectionString))
+                {
+                    string query = "Select * from DeliveryOrderList where ID_Order=@ID_Order";
+                    SqlCommand cmd = new SqlCommand(query, cn);
+                    cmd.Parameters.AddWithValue("@ID_Order", OrderID);
+
+                    cn.Open();
+
+                    using (SqlDataReader dr = cmd.ExecuteReader())
+                    {
+                        while (dr.Read())
+                        {
+                            deliveryOrderList = new DeliveryOrderList();
+                            deliveryOrderList.Id_Delivery = (int)dr["Id_Delivery"];
+                            deliveryOrderList.ID_Order = (int)dr["ID_Order"];
+                            deliveryOrderList.Statut = (string)dr["Statut"];  
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            return deliveryOrderList;
+        }
     }
 }
