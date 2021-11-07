@@ -48,7 +48,9 @@ namespace BLL
             //1. retourner la liste des DeliveryMan dans la région du restaurant
             //   aller rechercher la location du restaurant
             List<OrderDishes> orderDishes = OrderDishesDB.GetOrderDishes(order.ID_Order);
-            var idDishes = orderDishes[0].ID_Dishes;
+            Console.WriteLine(orderDishes.First().ToString);
+            var firstDishes = orderDishes.First();
+            var idDishes = firstDishes.ID_Dishes;//[1].ID_Dishes;
             RestaurantDishes restaurantDishes = RestaurantDishesDB.GetRestaurant(idDishes);
             Restaurant restaurant = RestaurantDB.GetRestaurantID(restaurantDishes.ID_restaurant);
             Location locationRestaurant = LocationDB.GetLocationID(restaurant.ID_location);

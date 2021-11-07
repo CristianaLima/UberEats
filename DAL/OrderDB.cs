@@ -184,7 +184,7 @@ namespace DAL
             return results;
         }
 
-        public Order GetOrderIDOrder(int IdOrder)
+        public Order GetOrderIDOrder(int ID_Order)
         {
             Order order = null;
 
@@ -195,9 +195,9 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "Select * from Order where ID_Order = @IdOrder";
+                    string query = "Select * from Order where ID_Order = @ID_Order";
                     SqlCommand cmd = new SqlCommand(query, cn);
-                    cmd.Parameters.AddWithValue("@IdOrder", IdOrder);
+                    cmd.Parameters.AddWithValue("@ID_Order", ID_Order);
 
                     cn.Open();
 

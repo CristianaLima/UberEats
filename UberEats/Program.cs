@@ -36,7 +36,7 @@ namespace UberEats
              // Test modifier une ligne
              //DishesManager.ChangeAvailabilityDish(5, 0);*/
 
-            var RestaurantManager = new RestaurantManager(Configuration);
+            var OrderManager = new OrderManager(Configuration);
             /*var ordersDishes = orderDishesManager.GetOrderDishes(2);
 
             foreach(var m in ordersDishes)
@@ -45,13 +45,13 @@ namespace UberEats
             }*/
             //var newOrderDishes = DishesManager.AddDish(new Dishes { DishesDescription = "La pizza classique", DishesName = "Margarita", DishesPrice = 15, DishImage = "image", isDishAvailable = 1 }) ;
 
-            Console.WriteLine(RestaurantManager.GetLocationFromRestaurant("Tservetta"));
+            Console.WriteLine(OrderManager.AddOrder(new Order { DelaiLivraison = DateTime.Now.AddMinutes(45), ID_person = 1, ID_Order = 2}));
 
-            var newList = RestaurantManager.GetDishesFromRestaurant("Tservetta");
+            /*var newList = RestaurantManager.GetDishesFromRestaurant("Tservetta");
             foreach (var m in newList)
             {
                 Console.WriteLine(m.ToString());
-            }
+            }*/
 
 
         }
