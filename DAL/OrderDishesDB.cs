@@ -107,7 +107,8 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "Insert into OrderDishes(ID_Dishes, ID_Order, Quantity) values(@IdDishes, @IdOrder, @Quantity); SELECT SCOPE_IDENTITY()";
+                    
+                    string query = "Insert into OrderDishes(ID_Dishes, ID_Order, Quantity) values(@IdDishes, @IdOrder, @Quantity)";
 
                     SqlCommand cmd = new SqlCommand(query, cn);
                     cmd.Parameters.AddWithValue("@IdDishes", orderDishes.ID_Dishes);
@@ -115,8 +116,9 @@ namespace DAL
                     cmd.Parameters.AddWithValue("@Quantity", orderDishes.Quantity);
 
                     cn.Open();
+                    Console.WriteLine("hello2");
 
-                   
+
                 }
             }
             catch (Exception e)

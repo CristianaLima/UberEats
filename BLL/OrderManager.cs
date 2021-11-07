@@ -45,11 +45,16 @@ namespace BLL
 
         public Order AddOrder(Order order)
         {
+            return OrderDB.AddOrder(order);
+        }
+
+        public void AssignDeliveryMan(Order order)
+        {
             //1. retourner la liste des DeliveryMan dans la région du restaurant
             //   aller rechercher la location du restaurant
             List<OrderDishes> orderDishes = OrderDishesDB.GetOrderDishes(order.ID_Order);
-            Console.WriteLine(orderDishes.First().ToString);
-            var firstDishes = orderDishes.First();
+            //Console.WriteLine(orderDishes.First().ToString);
+            var firstDishes = orderDishes[0];
             var idDishes = firstDishes.ID_Dishes;//[1].ID_Dishes;
             RestaurantDishes restaurantDishes = RestaurantDishesDB.GetRestaurant(idDishes);
             Restaurant restaurant = RestaurantDB.GetRestaurantID(restaurantDishes.ID_restaurant);
@@ -82,9 +87,9 @@ namespace BLL
             }
             else
             {
+                Console.WriteLine(minNB + " " + idMin);
                 DeliveryOrderList deliveryOrderList = DeliveryOrderListDB.AddDeliveryOrderList(new DeliveryOrderList { Id_Delivery = idMin, ID_Order = order.ID_Order, NumStatut = 2 });
             }
-            return OrderDB.AddOrder(order);
         }
 
         public int GetOrderID(int ID_person, DateTime OrderDate)

@@ -3,7 +3,7 @@ using System.IO;
 using BLL;
 using Microsoft.Extensions.Configuration;
 using DTO;
-
+using System.Collections.Generic;
 
 namespace UberEats
 {
@@ -37,6 +37,7 @@ namespace UberEats
              //DishesManager.ChangeAvailabilityDish(5, 0);*/
 
             var OrderManager = new OrderManager(Configuration);
+            var OrderDishesManager = new OrderDishesManager(Configuration);
             /*var ordersDishes = orderDishesManager.GetOrderDishes(2);
 
             foreach(var m in ordersDishes)
@@ -45,7 +46,7 @@ namespace UberEats
             }*/
             //var newOrderDishes = DishesManager.AddDish(new Dishes { DishesDescription = "La pizza classique", DishesName = "Margarita", DishesPrice = 15, DishImage = "image", isDishAvailable = 1 }) ;
 
-            Console.WriteLine(OrderManager.AddOrder(new Order { DelaiLivraison = DateTime.Now.AddMinutes(45), ID_person = 1, ID_Order = 2}));
+            //Console.WriteLine(OrderManager.AddOrder(new Order { DelaiLivraison = DateTime.Now.AddMinutes(45), ID_person = 1, ID_Order = 2}));
 
             /*var newList = RestaurantManager.GetDishesFromRestaurant("Tservetta");
             foreach (var m in newList)
@@ -53,7 +54,27 @@ namespace UberEats
                 Console.WriteLine(m.ToString());
             }*/
 
+            List<Order> orders = OrderManager.GetOrders();
 
+            foreach (var m in orders)
+            {
+                Console.WriteLine(m.ToString());
+            }
+            //Order order = new Order { ID_Order = 5, ID_person = 1, DelaiLivraison = DateTime.Now.AddMinutes(45) };
+            // OrderManager.AddOrder(order);
+
+            //OrderDishes orderdish = new OrderDishes { ID_Dishes = 1, ID_Order = 5, Quantity = 10 };
+            //           // Ne add pas dans la table
+            // OrderDishesManager.AddOrderDishes(orderdish);
+
+            //OrderManager.AssignDeliveryMan( OrderManager.GetOrderIDOrder(5));
+
+            //var DeliveryManage = new DeliveryManManager(Configuration);
+            //List<DeliveryMan> deliveryMen = DeliveryManage.GetDeliveryMen();
+
+            var DeliveryOrderList = new DeliveryOrderListManager(Configuration);
+
+            DeliveryOrderList.AddDeliveryOrderList(new DeliveryOrderList { Id_Delivery = 1, ID_Order = 4, NumStatut = 3 });
         }
     }
 }

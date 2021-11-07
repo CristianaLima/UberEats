@@ -27,7 +27,7 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "Select * from Order";
+                    string query = "Select * from [Order]";
                     SqlCommand cmd = new SqlCommand(query, cn);
 
                     cn.Open();
@@ -76,7 +76,7 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "Select * from Order where ID_person = @ID_person AND Orderdate = @OrderDate";
+                    string query = "Select * from [Order] where ID_person = @ID_person AND Orderdate = @OrderDate";
                     SqlCommand cmd = new SqlCommand(query, cn);
                     cmd.Parameters.AddWithValue("@ID_Restaurant", ID_person);
                     cmd.Parameters.AddWithValue("@OrderDate", OrderDate);
@@ -112,7 +112,7 @@ namespace DAL
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
 
-                    string query = "Insert into Order( ID_person, OrderDate) values( @ID_person, @OrderDate); SELECT SCOPE_IDENTITY()";
+                    string query = "Insert into [Order]( ID_person, OrderDate, DelaiLivraison) values( @ID_person, @OrderDate, @DelaiLivraison); SELECT SCOPE_IDENTITY()";
                     SqlCommand cmd = new SqlCommand(query, cn);
                     DateTime currentTime = DateTime.Now;
                     // Orderid person a faire dans le BLL ?
@@ -148,7 +148,7 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "Select * from Order where ID_person = @ID_person";
+                    string query = "Select * from [Order] where ID_person = @ID_person";
                     SqlCommand cmd = new SqlCommand(query, cn);
                     cmd.Parameters.AddWithValue("@ID_person", idPerson);
 
@@ -156,7 +156,7 @@ namespace DAL
 
                     using (SqlDataReader dr = cmd.ExecuteReader())
                     {
-                        if (dr.Read())
+                        while (dr.Read())
                         {
                             if (results == null)
                                 results = new List<Order>();
@@ -195,7 +195,7 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "Select * from Order where ID_Order = @ID_Order";
+                    string query = "Select * from [Order] where ID_Order = @ID_Order";
                     SqlCommand cmd = new SqlCommand(query, cn);
                     cmd.Parameters.AddWithValue("@ID_Order", ID_Order);
 
@@ -203,7 +203,7 @@ namespace DAL
 
                     using (SqlDataReader dr = cmd.ExecuteReader())
                     {
-                        if (dr.Read())
+                        while (dr.Read())
                         {
                             order = new Order();
 
@@ -234,7 +234,7 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "Update Order set ID_person = @ID_person and OrderName=@OrderName and OrderDate=@OrderDate and DelaiLivraison=@DelaiLivraison where ID_Order=@ID_Order";
+                    string query = "Update [Order] set ID_person = @ID_person and OrderName=@OrderName and OrderDate=@OrderDate and DelaiLivraison=@DelaiLivraison where ID_Order=@ID_Order";
                     SqlCommand cmd = new SqlCommand(query, cn);
                     cmd.Parameters.AddWithValue("@ID_person", order.ID_person);
                     cmd.Parameters.AddWithValue("@OrderDate", order.OrderDate);
