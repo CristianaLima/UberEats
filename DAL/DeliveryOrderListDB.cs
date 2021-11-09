@@ -113,6 +113,7 @@ namespace DAL
                     cmd.Parameters.AddWithValue("@NumSatut", deliveryOrderList.NumStatut);
 
                     cn.Open();
+                    cmd.ExecuteNonQuery();
                 }
             }
             catch (Exception e)

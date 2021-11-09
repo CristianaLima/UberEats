@@ -116,7 +116,7 @@ namespace DAL
                     cmd.Parameters.AddWithValue("@Quantity", orderDishes.Quantity);
 
                     cn.Open();
-                    Console.WriteLine("hello2");
+                    cmd.ExecuteNonQuery();
 
 
                 }
