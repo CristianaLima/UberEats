@@ -12,8 +12,8 @@ namespace BLL
     public class DeliveryManManager : IDeliveryManManager
     {
         private IDeliveryManDB DeliveryManDB { get; }
-        private IDeliveryOrderListDB deliveryOrderListDb { get; }
-        private IOrderDB orderDb { get; }
+        private IDeliveryOrderListDB DeliveryOrderListDb { get; }
+        private IOrderDB OrderDb { get; }
         private IWorkLocationDB WorkLocationDb { get; }
         private IRestaurantDB RestaurantDb { get; }
         private ILocationDB LocationDb { get; }
@@ -21,11 +21,11 @@ namespace BLL
         private IOrderDishesDB OrderDishesDb { get; }
         private IDishesDB DishesDb { get; }
 
-        public DeliveryManManager(IConfiguration conf)
+        public DeliveryManManager(IDeliveryManDB deliveryManDB, IDeliveryOrderListDB deliveryOrderListDb, IOrderDB orderDb, IWorkLocationDB workLocationDb, IRestaurantDB restaurantDb, ILocationDB locationDb, IPersonDB personDb, IOrderDishesDB orderDishesDb, IDishesDB dishesDb)
         {
             DeliveryManDB = new DeliveryManDB(conf);
-            deliveryOrderListDb = new DeliveryOrderListDB(conf);
-            orderDb = new OrderDB(conf);
+            DeliveryOrderListDb = new DeliveryOrderListDB(conf);
+            OrderDb = new OrderDB(conf);
             WorkLocationDb = new WorkLocationDB(conf);
             RestaurantDb = new RestaurantDB(conf);
             LocationDb = new LocationDB(conf);
@@ -61,12 +61,12 @@ namespace BLL
         public List<Order> GetOrders(string login, string password)
         {
             DeliveryMan deliveryMan = DeliveryManDB.GetDeliveryMan(login, password);
-            List<DeliveryOrderList> deliveryOrderLists = deliveryOrderListDb.GetDeliveryOrderList(deliveryMan.Id_Delivery);
+            List<DeliveryOrderList> deliveryOrderLists = DeliveryOrderListDb.GetDeliveryOrderList(deliveryMan.Id_Delivery);
             List<Order> orders = new List<Order>();
 
             foreach (var m in deliveryOrderLists)
             {
-                Order order = orderDb.GetOrderIDOrder(m.ID_Order);
+                Order order = OrderDb.GetOrderIDOrder(m.ID_Order);
                 orders.Add(order);
             }
             return orders;
