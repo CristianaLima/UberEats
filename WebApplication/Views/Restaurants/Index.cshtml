@@ -1,4 +1,4 @@
-﻿@model DTO.Restaurant
+﻿@model IEnumerable<DTO.Restaurant>
 
 @{
     ViewData["Title"] = "Index";
@@ -6,49 +6,60 @@
 
 <h1>Index</h1>
 
-<div>
-    <h4>Restaurant</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ID_restaurant)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ID_restaurant)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ID_location)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ID_location)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.RestaurantName)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.RestaurantName)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.RestaurantAddress)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.RestaurantAddress)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.RestaurantImage)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.RestaurantImage)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IsRestaurantAvailable)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IsRestaurantAvailable)
-        </dd>
-    </dl>
-</div>
-<div>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-    <a asp-action="Index">Back to List</a>
-</div>
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ID_restaurant)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ID_location)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RestaurantName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RestaurantAddress)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RestaurantImage)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsRestaurantAvailable)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ID_restaurant)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ID_location)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RestaurantName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RestaurantAddress)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RestaurantImage)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsRestaurantAvailable)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
