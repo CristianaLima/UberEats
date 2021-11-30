@@ -13,9 +13,9 @@ namespace BLL
     {
         private IWorkLocationDB WorkLocationDB { get; }
 
-        public WorkLocationManager(IConfiguration conf)
+        public WorkLocationManager(IWorkLocationDB workLocationDB)
         {
-            WorkLocationDB = new WorkLocationDB(conf);
+            WorkLocationDB = workLocationDB;
         }
 
         public List<WorkLocation> GetWorkLocations()

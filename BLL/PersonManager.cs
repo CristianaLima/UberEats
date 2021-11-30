@@ -16,11 +16,11 @@ namespace BLL
         private IOrderDB OrderDb { get; }
         private ILocationDB LocationDb { get; }
 
-        public PersonManager(IConfiguration conf)
+        public PersonManager(IPersonDB personDB, IOrderDB orderDb, ILocationDB locationDb)
         {
-            PersonDB = new PersonDB(conf);
-            OrderDb = new OrderDB(conf);
-            LocationDb = new LocationDB(conf);
+            PersonDB = personDB;
+            OrderDb = orderDb;
+            LocationDb = locationDb;
         }
 
         public Person GetPerson(string UsernameLogin, string UsernamePassword)

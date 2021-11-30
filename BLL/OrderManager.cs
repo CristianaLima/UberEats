@@ -22,17 +22,17 @@ namespace BLL
         private IWorkLocationDB WorkLocationDB { get; }
 
 
-        public OrderManager(IConfiguration conf)
+        public OrderManager(IOrderDB orderDB, IOrderDishesDB orderDishesDB, IDishesDB dishesDB, IDeliveryManDB deliveryManDB, IDeliveryOrderListDB deliveryOrderListDB, IRestaurantDishesDB restaurantDishesDB, IRestaurantDB restaurantDB, ILocationDB locationDB, IWorkLocationDB workLocationDB)
         {
-            OrderDB = new OrderDB(conf);
-            OrderDishesDB = new OrderDishesDB(conf);
-            DishesDB = new DishesDB(conf);
-            DeliveryManDB = new DeliveryManDB(conf);
-            DeliveryOrderListDB = new DeliveryOrderListDB(conf);
-            RestaurantDishesDB = new RestaurantDishesDB(conf);
-            RestaurantDB = new RestaurantDB(conf);
-            LocationDB = new LocationDB(conf);
-            WorkLocationDB = new WorkLocationDB(conf);
+            OrderDB = orderDB;
+            OrderDishesDB = orderDishesDB;
+            DishesDB = dishesDB;
+            DeliveryManDB = deliveryManDB;
+            DeliveryOrderListDB = deliveryOrderListDB;
+            RestaurantDishesDB = restaurantDishesDB;
+            RestaurantDB = restaurantDB;
+            LocationDB = locationDB;
+            WorkLocationDB = workLocationDB;
 
         }
 

@@ -16,12 +16,12 @@ namespace BLL
         private IRestaurantDishesDB RestaurantDishesDB { get; }
         private ILocationDB LocationDB { get; }
 
-        public RestaurantManager(IConfiguration conf)
+        public RestaurantManager(IRestaurantDB restaurantDB, IDishesDB dishesDB, IRestaurantDishesDB restaurantDishesDB, ILocationDB locationDB)
         {
-            RestaurantDB = new RestaurantDB(conf);
-            RestaurantDishesDB = new RestaurantDishesDB(conf);
-            DishesDB = new DishesDB(conf);
-            LocationDB = new LocationDB(conf);
+            RestaurantDB = restaurantDB;
+            RestaurantDishesDB = restaurantDishesDB;
+            DishesDB = dishesDB;
+            LocationDB = locationDB;
         }
 
         public List<Restaurant> GetRestaurants()

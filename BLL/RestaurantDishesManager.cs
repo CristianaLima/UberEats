@@ -13,9 +13,9 @@ namespace BLL
     {
         private IRestaurantDishesDB RestaurantDishesDB { get; }
 
-        public RestaurantDishesManager(IConfiguration conf)
+        public RestaurantDishesManager(IRestaurantDishesDB restaurantDishesDB)
         {
-            RestaurantDishesDB = new RestaurantDishesDB(conf);
+            RestaurantDishesDB = restaurantDishesDB;
         }
 
         public List<RestaurantDishes> GetDishes(int ID_restaurant)
