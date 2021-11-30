@@ -1,4 +1,5 @@
 using BLL;
+using DAL;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -34,6 +35,19 @@ namespace WebApplication
             services.AddScoped<IRestaurantManager, RestaurantManager>();
             services.AddScoped<IRestaurantDishesManager, RestaurantDishesManager>();
             services.AddScoped<IWorkLocationManager, WorkLocationManager>();
+
+            services.AddScoped<IDeliveryManDB, DeliveryManDB>();
+            services.AddScoped<IDeliveryOrderListDB, DeliveryOrderListDB>();
+            services.AddScoped<IDishesDB, DishesDB>();
+            services.AddScoped<ILocationDB, LocationDB>();
+            services.AddScoped<IOrderDB, OrderDB>();
+            services.AddScoped<IOrderDishesDB, OrderDishesDB>();
+            services.AddScoped<IPersonDB, PersonDB>();
+            services.AddScoped<IRestaurantDB, RestaurantDB>();
+            services.AddScoped<IRestaurantDishesDB, RestaurantDishesDB>();
+            services.AddScoped<IWorkLocationDB, WorkLocationDB>();
+
+
 
             services.AddControllersWithViews();
         }
