@@ -13,12 +13,12 @@ namespace BLL
     {
         private IDishesDB DishesDB { get; }
         private IRestaurantDishesDB RestaurantDishesDB { get; }
-        private IRestaurantDB restaurantDB { get; }
-        public DishesManager(IConfiguration conf)
+        private IRestaurantDB RestaurantDB { get; }
+        public DishesManager(IDishesDB dishesDB, IRestaurantDishesDB restaurantDishesDB, IRestaurantDB restaurantDB)
         {
-            DishesDB = new DishesDB(conf);
-            RestaurantDishesDB = new RestaurantDishesDB(conf);
-            restaurantDB = new RestaurantDB(conf);
+            DishesDB = dishesDB;
+            RestaurantDishesDB = restaurantDishesDB;
+            RestaurantDB = restaurantDB;
         }
 
         public List<Dishes> GetDishes()
@@ -56,7 +56,7 @@ namespace BLL
                 var idDish = m.ID_Dishes;
                 var restaurantDishes = RestaurantDishesDB.GetRestaurant(idDish);
                 var idRestaurant = restaurantDishes.ID_restaurant;
-                Restaurant restaurant = restaurantDB.GetRestaurantID(idRestaurant);
+                Restaurant restaurant = RestaurantDB.GetRestaurantID(idRestaurant);
                 restaurants.Add(restaurant);
             }
 

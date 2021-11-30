@@ -14,10 +14,10 @@ namespace BLL
         private ILocationDB LocationDb { get; }
         private IRestaurantDB RestaurantDB { get; }
 
-        public LocationManager(IConfiguration conf)
+        public LocationManager(ILocationDB locationDb, IRestaurantDB restaurantDB)
         {
-            LocationDb = new LocationDB(conf);
-            RestaurantDB = new RestaurantDB(conf);
+            LocationDb = locationDb;
+            RestaurantDB = restaurantDB;
         }
 
         public Location GetLocationCity(string City)

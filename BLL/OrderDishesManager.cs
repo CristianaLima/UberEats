@@ -13,9 +13,9 @@ namespace BLL
     {
         private IOrderDishesDB OrderDishesDb { get; }
 
-        public OrderDishesManager(IConfiguration conf)
+        public OrderDishesManager(IOrderDishesDB orderDishesDb)
         {
-            OrderDishesDb = new OrderDishesDB(conf);
+            OrderDishesDb =orderDishesDb;
         }
         public OrderDishes AddOrderDishes(OrderDishes orderDishes)
         {

@@ -23,15 +23,15 @@ namespace BLL
 
         public DeliveryManManager(IDeliveryManDB deliveryManDB, IDeliveryOrderListDB deliveryOrderListDb, IOrderDB orderDb, IWorkLocationDB workLocationDb, IRestaurantDB restaurantDb, ILocationDB locationDb, IPersonDB personDb, IOrderDishesDB orderDishesDb, IDishesDB dishesDb)
         {
-            DeliveryManDB = new DeliveryManDB(conf);
-            DeliveryOrderListDb = new DeliveryOrderListDB(conf);
-            OrderDb = new OrderDB(conf);
-            WorkLocationDb = new WorkLocationDB(conf);
-            RestaurantDb = new RestaurantDB(conf);
-            LocationDb = new LocationDB(conf);
-            PersonDb = new PersonDB(conf);
-            OrderDishesDb = new OrderDishesDB(conf);
-            DishesDb = new DishesDB(conf);
+            DeliveryManDB = deliveryManDB;
+            DeliveryOrderListDb = deliveryOrderListDb;
+            OrderDb = orderDb;
+            WorkLocationDb = workLocationDb;
+            RestaurantDb = restaurantDb;
+            LocationDb = locationDb;
+            PersonDb = personDb;
+            OrderDishesDb = orderDishesDb;
+            DishesDb = dishesDb;
         }
 
         public DeliveryMan AddDeliveryMan(DeliveryMan delivery)
