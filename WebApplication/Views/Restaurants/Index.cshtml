@@ -1,65 +1,40 @@
 ﻿@model IEnumerable<DTO.Restaurant>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Restaurants";
 }
 
-<h1>Index</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.ID_restaurant)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ID_location)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.RestaurantName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.RestaurantAddress)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.RestaurantImage)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IsRestaurantAvailable)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.ID_restaurant)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ID_location)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.RestaurantName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.RestaurantAddress)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.RestaurantImage)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IsRestaurantAvailable)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+</head>
+<body>
+    <h1>Restaurants</h1>
+    <p>Voici la liste des restaurants disponibles.</p>
+
+    @foreach (var item in Model)
+    {
+        <h2 style="color:limegreen">
+            @Html.DisplayFor(modelItem => item.RestaurantName)
+        </h2>
+        <p>
+            <b>Addresse : </b>@Html.DisplayFor(modelItem => item.RestaurantAddress)
+        </p>
+        <p>
+            <img src="~/Images/Restaurants/@Html.DisplayFor(modelItem => item.RestaurantImage)" alt="@Html.DisplayFor(modelItem => item.RestaurantName)" width="400" height="400" />
+        </p>
+        <p>
+            @Html.ActionLink("Edit", "Edit", new
+            { /* id=item.PrimaryKey / }) |
+            @Html.ActionLink("Details", "Details", new { / id=item.PrimaryKey */
+            }) |
+        </p>
+
+    }
+</body>
+</html>

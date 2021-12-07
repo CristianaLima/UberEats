@@ -19,10 +19,10 @@ namespace WebApplication.Controllers
         // GET: RestaurantsController
         public ActionResult Index()
         {
-//            if(HttpContext.Session.GetInt32("ID_restaurant") == null)
-//           {
-//                return RedirectToAction("Index", "Login");
-//            }
+            //            if(HttpContext.Session.GetInt32("ID_restaurant") == null)
+            //           {
+            //                return RedirectToAction("Index", "Login");
+            //            }
 
             var restaurants = RestaurantManager.GetRestaurants();
             return View(restaurants);
@@ -58,21 +58,23 @@ namespace WebApplication.Controllers
         // GET: RestaurantsController/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            var restaurant = RestaurantManager.GetRestaurantID(id);
+            return View(restaurant);
         }
 
         // POST: RestaurantsController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(DTO.Restaurant r)
         {
             try
             {
+                RestaurantManager.ModifyAllRestaurant(r);
                 return RedirectToAction(nameof(Index));
             }
             catch
             {
-                return View();
+                return View(r);
             }
         }
 
