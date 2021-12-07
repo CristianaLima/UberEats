@@ -81,7 +81,7 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = " Select * from DeliveryMan where UsernameLogin = @UsernameLogin AND UsernamePassword = @UsernamePassword";
+                    string query = " Select * from DeliveryMan where UsernameLoginDelivery = @UsernameLogin AND PasswordDelivery = @UsernamePassword";
                     SqlCommand cmd = new SqlCommand(query, cn);
                     cmd.Parameters.AddWithValue("@UsernameLogin", username);
                     cmd.Parameters.AddWithValue("@UsernamePassword", password);
@@ -117,7 +117,7 @@ namespace DAL
             }
             catch (Exception e)
             {
-                throw e;
+                //throw e;
             }
             return deliveryMan;
         }

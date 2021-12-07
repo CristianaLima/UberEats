@@ -97,7 +97,7 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "Select * from Person where UsernameLogin = @UsernameLogin AND UsernamePassword = @UsernamePassword";
+                    string query = "Select * from Person where UsernameLogin = @UsernameLogin AND PasswordLogin = @UsernamePassword";
                     SqlCommand cmd = new SqlCommand(query, cn);
                     cmd.Parameters.AddWithValue("@UsernameLogin", UsernameLogin);
                     cmd.Parameters.AddWithValue("@UsernamePassword", UsernamePassword);

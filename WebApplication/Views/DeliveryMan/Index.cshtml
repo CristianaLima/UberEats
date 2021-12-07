@@ -1,7 +1,7 @@
-﻿@model IEnumerable<RestaurantDishesVM>
+﻿@model DTO.DeliveryMan
 
 @{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Welcome";
 }
 
 <!DOCTYPE html>
@@ -16,6 +16,9 @@
 <body>
     <h1>Welcome</h1>
 
-    <h2>Nom: @Html.DisplayFor(model => model.FirstName)</h2>
+    <h2>Nom: @Html.DisplayFor(model => model.FirstNameDelivery)</h2>
 </body>
 </html>
+
+    
+

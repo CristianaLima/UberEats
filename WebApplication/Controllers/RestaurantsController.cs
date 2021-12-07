@@ -19,10 +19,11 @@ namespace WebApplication.Controllers
         // GET: RestaurantsController
         public ActionResult Index()
         {
-            //            if(HttpContext.Session.GetInt32("ID_restaurant") == null)
-            //           {
-            //                return RedirectToAction("Index", "Login");
-            //            }
+            if(HttpContext.Session.GetInt32("IdDeliveryMan") == null)
+            {
+                if (HttpContext.Session.GetInt32("IdPerson") == null)
+                    return RedirectToAction("Index", "Login");
+            }
 
             var restaurants = RestaurantManager.GetRestaurants();
             return View(restaurants);
@@ -31,12 +32,22 @@ namespace WebApplication.Controllers
         // GET: RestaurantsController/Details/5
         public ActionResult Details(int id)
         {
+            if (HttpContext.Session.GetInt32("IdDeliveryMan") == null)
+            {
+                if (HttpContext.Session.GetInt32("IdPerson") == null)
+                    return RedirectToAction("Index", "Login");
+            }
             return View();
         }
 
         // GET: RestaurantsController/Create
         public ActionResult Create()
         {
+            if (HttpContext.Session.GetInt32("IdDeliveryMan") == null)
+            {
+                if (HttpContext.Session.GetInt32("IdPerson") == null)
+                    return RedirectToAction("Index", "Login");
+            }
             return View();
         }
 
@@ -45,6 +56,11 @@ namespace WebApplication.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(IFormCollection collection)
         {
+            if (HttpContext.Session.GetInt32("IdDeliveryMan") == null)
+            {
+                if (HttpContext.Session.GetInt32("IdPerson") == null)
+                    return RedirectToAction("Index", "Login");
+            }
             try
             {
                 return RedirectToAction(nameof(Index));
@@ -58,6 +74,11 @@ namespace WebApplication.Controllers
         // GET: RestaurantsController/Edit/5
         public ActionResult Edit(int id)
         {
+            if (HttpContext.Session.GetInt32("IdDeliveryMan") == null)
+            {
+                if (HttpContext.Session.GetInt32("IdPerson") == null)
+                    return RedirectToAction("Index", "Login");
+            }
             var restaurant = RestaurantManager.GetRestaurantID(id);
             return View(restaurant);
         }
@@ -67,6 +88,11 @@ namespace WebApplication.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(DTO.Restaurant r)
         {
+            if (HttpContext.Session.GetInt32("IdDeliveryMan") == null)
+            {
+                if (HttpContext.Session.GetInt32("IdPerson") == null)
+                    return RedirectToAction("Index", "Login");
+            }
             try
             {
                 RestaurantManager.ModifyAllRestaurant(r);
@@ -81,6 +107,11 @@ namespace WebApplication.Controllers
         // GET: RestaurantsController/Delete/5
         public ActionResult Delete(int id)
         {
+            if (HttpContext.Session.GetInt32("IdDeliveryMan") == null)
+            {
+                if (HttpContext.Session.GetInt32("IdPerson") == null)
+                    return RedirectToAction("Index", "Login");
+            }
             return View();
         }
 
@@ -89,6 +120,11 @@ namespace WebApplication.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id, IFormCollection collection)
         {
+            if (HttpContext.Session.GetInt32("IdDeliveryMan") == null)
+            {
+                if (HttpContext.Session.GetInt32("IdPerson") == null)
+                    return RedirectToAction("Index", "Login");
+            }
             try
             {
                 return RedirectToAction(nameof(Index));

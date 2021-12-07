@@ -48,7 +48,7 @@ namespace WebApplication
             services.AddScoped<IWorkLocationDB, WorkLocationDB>();
 
 
-
+            services.AddSession();
             services.AddControllersWithViews();
         }
 
@@ -71,6 +71,8 @@ namespace WebApplication
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.UseSession();
 
             app.UseEndpoints(endpoints =>
             {
