@@ -16,6 +16,20 @@
 <body>
     <h1>Welcome</h1>
 
-    <h2>Nom: @Html.DisplayFor(model => model.FirstName)</h2>
-</body>
+    @foreach (var item in Model)
+    {
+        <h2 style="color:limegreen">
+            @Html.DisplayFor(modelItem => item.RestaurantName)
+        </h2>
+        <p>
+            <b>Addresse : </b>@Html.DisplayFor(modelItem => item.RestaurantAddress)
+        </p>
+        <p>
+            <img src="~/Images/Restaurants/@Html.DisplayFor(modelItem => item.RestaurantImage)" alt="@Html.DisplayFor(modelItem => item.RestaurantName)" width="400" height="400" />
+        </p>
+        <p>
+            <b>Dishes: </b>@Html.DisplayFor(modelItem => item.DishesName)
+        </p>
+    }
+    </body>
 </html>

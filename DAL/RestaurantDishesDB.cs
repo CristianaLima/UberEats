@@ -78,7 +78,7 @@ namespace DAL
 
                     using (SqlDataReader dr = cmd.ExecuteReader())
                     {
-                        if (dr.Read())
+                        while (dr.Read())
                         {
                             if (results == null)
                                 results = new List<RestaurantDishes>();

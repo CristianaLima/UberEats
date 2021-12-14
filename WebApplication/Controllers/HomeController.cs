@@ -26,13 +26,33 @@ namespace WebApplication.Controllers
             RestaurantManager = restaurantManager;
         }
 
-        public IActionResult Index(RestaurantDishesVM restaurantDishesVM)
+        public IActionResult Index()
         {
             if (HttpContext.Session.GetInt32("IdPerson") == null)
                 return RedirectToAction("Index", "Login");
-            var dishes = DishesManager.GetDishes();
+            List<RestaurantDishesVM> restaurantsDishes = new List<RestaurantDishesVM>();
             var restaurants = RestaurantManager.GetRestaurants();
-            return View(restaurantDishesVM);
+            foreach(var restaurant in restaurants)
+            {
+                
+                var dishes = RestaurantManager.GetDishesFromRestaurant(restaurant.RestaurantName);
+
+                foreach(var dish in dishes)
+                {
+                    RestaurantDishesVM restaurantDishes = new RestaurantDishesVM();
+                    restaurantDishes.RestaurantName = restaurant.RestaurantName;
+                    restaurantDishes.RestaurantAddress = restaurant.RestaurantAddress;
+                    restaurantDishes.RestaurantImage = restaurant.RestaurantImage;
+                    restaurantDishes.DishesName = dish.DishesName;
+                    restaurantDishes.DishesDescription = dish.DishesDescription;
+                    restaurantDishes.DishesPrice = dish.DishesPrice;
+                    restaurantDishes.DishImage = dish.DishImage;
+
+                    restaurantsDishes.Add(restaurantDishes);
+                }
+            }
+
+            return View(restaurantsDishes);
         }
        
 
