@@ -8,12 +8,14 @@ namespace WebApplication.Models
     public class RestaurantDishesVM
     {
         public string RestaurantName { get; set; }
+        public int RestaurantId { get; set; }
         public string RestaurantAddress { get; set; }
         public string RestaurantImage { get; set; }
 
-        public string DishesName { get; set; }
-        public string DishesDescription { get; set; }
-        public int DishesPrice { get; set; }
-        public string DishImage { get; set; }
+        public List<string> DishesName { get; set; }
+        public List<int> DishesId { get; set; }
+        public List<string> DishesDescription { get; set; }
+        public List<int> DishesPrice { get; set; }
+        public List<string> DishImage { get; set; }
     }
 }
