@@ -49,24 +49,28 @@ namespace WebApplication.Controllers
                 List<int> dishId = null;
                 foreach (var dish in dishes)
                 {
-                    if(dishDescription == null)
+                    if (dish.isDishAvailable == 1)
                     {
-                        dishName = new List<string>();
-                        dishDescription = new List<string>();
-                        dishPrice = new List<int>();
-                        dishImage = new List<string>();
-                        dishId = new List<int>();
-                    }
-                    
 
 
-                    dishName.Add(dish.DishesName);
-                    dishDescription.Add(dish.DishesDescription);
-                    dishPrice.Add(dish.DishesPrice);
-                    dishImage.Add(dish.DishImage);
-                    dishId.Add(dish.ID_Dishes);
+                        if (dishDescription == null)
+                        {
+                            dishName = new List<string>();
+                            dishDescription = new List<string>();
+                            dishPrice = new List<int>();
+                            dishImage = new List<string>();
+                            dishId = new List<int>();
+                        }
 
-                    
+
+
+                        dishName.Add(dish.DishesName);
+                        dishDescription.Add(dish.DishesDescription);
+                        dishPrice.Add(dish.DishesPrice);
+                        dishImage.Add(dish.DishImage);
+                        dishId.Add(dish.ID_Dishes);
+
+                    } 
                 }
                 restaurantDishes.DishesName = dishName;
                 restaurantDishes.DishesDescription = dishDescription;
@@ -89,8 +93,8 @@ namespace WebApplication.Controllers
             return View();
         }
 
-       /* [HttpPost]
-        public IActionResult Dish(int id)
+        [HttpPost]
+        public IActionResult Dishes(int id)
         {
             List<int> idDishes = new List<int>();
             if ( HttpContext.Session.Get<List<int>>("listIdDishes")==null)
@@ -101,15 +105,21 @@ namespace WebApplication.Controllers
             }
             idDishes = HttpContext.Session.Get<List<int>>("listIdDishes");
             idDishes.Add(id);
+            HttpContext.Session.Remove("listIdDishes");
             HttpContext.Session.Set<List<int>>("listIdDishes", idDishes);
 
             return View();
-        }*/
+        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        public IActionResult Dishes()
+        {
+            return View();
         }
     }
 }

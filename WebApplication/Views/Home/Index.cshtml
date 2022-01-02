@@ -26,6 +26,7 @@
         </p>
         for (int i = 0; i < item.DishesName.Count; i++)
         {
+
             <p>
                 <b>Dishes: </b>@Html.DisplayFor(modelItem => item.DishesName[i])
             </p>
@@ -35,7 +36,10 @@
             <p>
                 <b>Prix: </b>@Html.DisplayFor(modelItem => item.DishesPrice[i])
             </p>
-
+            <p>
+                <a id="btnDish" class="btn" asp-controller="Home" asp-action="Dishes"><img src="~/Images/Dishes/@Html.DisplayFor(modelItem => item.DishImage[i])" alt="@Html.DisplayFor(modelItem => item.DishesName[i])" width="400" height="400" /></a>
+            </p>
+            <br />
         }
 
     }
