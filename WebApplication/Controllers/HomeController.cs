@@ -94,21 +94,24 @@ namespace WebApplication.Controllers
         }
 
         [HttpPost]
-        public IActionResult Dishes(int id)
+        public IActionResult Index(int idOrder)
         {
             List<int> idDishes = new List<int>();
             if ( HttpContext.Session.Get<List<int>>("listIdDishes")==null)
-            {
-                
-                idDishes.Add(id);
+            {               
+                idDishes.Add(idOrder);
                 HttpContext.Session.Set<List<int>>("listIdDishes",idDishes);
             }
-            idDishes = HttpContext.Session.Get<List<int>>("listIdDishes");
-            idDishes.Add(id);
-            HttpContext.Session.Remove("listIdDishes");
-            HttpContext.Session.Set<List<int>>("listIdDishes", idDishes);
+            else
+            {
+                idDishes = HttpContext.Session.Get<List<int>>("listIdDishes");
+                idDishes.Add(idOrder);
+                HttpContext.Session.Remove("listIdDishes");
+                HttpContext.Session.Set<List<int>>("listIdDishes", idDishes);
+            }
 
-            return View();
+            var dish = DishesManager.GetDishIP(idOrder);
+            return View(dish);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
@@ -117,9 +120,15 @@ namespace WebApplication.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        public IActionResult Dishes()
+        public IActionResult Dishes(int id)
         {
-            return View();
+            if (HttpContext.Session.GetInt32("IdPerson") == null)
+                return RedirectToAction("Index", "Login");
+
+            var dish = DishesManager.GetDishIP(id);
+            return View(dish);
         }
+
+       
     }
 }

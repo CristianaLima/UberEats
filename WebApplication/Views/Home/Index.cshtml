@@ -28,7 +28,7 @@
         {
 
             <p>
-                <b>Dishes: </b>@Html.DisplayFor(modelItem => item.DishesName[i])
+                <b>Dishes: </b>@Html.ActionLink(item.DishesName[i], "Dishes", "Home", new { id = item.DishesId[i] }, null);
             </p>
             <p>
                 <b>Description: </b>@Html.DisplayFor(modelItem => item.DishesDescription[i])
@@ -37,7 +37,7 @@
                 <b>Prix: </b>@Html.DisplayFor(modelItem => item.DishesPrice[i])
             </p>
             <p>
-                <a id="btnDish" class="btn" asp-controller="Home" asp-action="Dishes"><img src="~/Images/Dishes/@Html.DisplayFor(modelItem => item.DishImage[i])" alt="@Html.DisplayFor(modelItem => item.DishesName[i])" width="400" height="400" /></a>
+                <a class="btn" asp-controller="Home" asp-action="Dishes"><img src="~/Images/Dishes/@Html.DisplayFor(modelItem => item.DishImage[i])" alt="@Html.DisplayFor(modelItem => item.DishesName[i])" width="400" height="400"/></a>
             </p>
             <br />
         }
