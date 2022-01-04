@@ -67,11 +67,73 @@ namespace WebApplication.Controllers
             Cart.DishesTotalPrice = DishesTotalPrice;
             Cart.TotalPrice = Total;
 
+            HttpContext.Session.Set<CartVM>("Cart", Cart);
             
             
             return View(Cart);
         }
+        public ActionResult More(int id)
+        {
+            CartVM newCart = HttpContext.Session.Get<CartVM>("Cart");
+            HttpContext.Session.Remove("Cart");
+            int index = newCart.DishesId.IndexOf(id);
+            newCart.Quantity[index] += 1;
+            newCart.DishesTotalPrice[index] = newCart.DishesUnitePrice[index] * newCart.Quantity[index];
+            int total = 0;
+            foreach(int price in newCart.DishesTotalPrice)
+            {
+                total += price;
+            }
+            newCart.TotalPrice = total;
+            HttpContext.Session.Set<CartVM>("Cart", newCart);
 
-       
+
+            return View("Index",newCart);
+        }
+        public ActionResult Less(int id)
+        {
+            
+            CartVM newCart = HttpContext.Session.Get<CartVM>("Cart");
+            HttpContext.Session.Remove("Cart");
+            int index = newCart.DishesId.IndexOf(id);
+            if(newCart.Quantity[index]-1 != 0)
+            {
+                newCart.Quantity[index] -= 1;
+                newCart.DishesTotalPrice[index] = newCart.DishesUnitePrice[index] * newCart.Quantity[index];
+                int total=0;
+                foreach (int price in newCart.DishesTotalPrice)
+                {
+                    total += price;
+                }
+                newCart.TotalPrice = total;
+            }
+            
+
+            HttpContext.Session.Set<CartVM>("Cart", newCart);
+
+
+            return View("Index", newCart);
+        }
+        public ActionResult Remove(int id)
+        {
+            CartVM newCart = HttpContext.Session.Get<CartVM>("Cart");
+            HttpContext.Session.Remove("Cart");
+            int index = newCart.DishesId.IndexOf(id);
+            newCart.DishesId.RemoveAt(index);
+            newCart.DishesName.RemoveAt(index);
+            newCart.DishesUnitePrice.RemoveAt(index);
+            newCart.Quantity.RemoveAt(index);
+            int dishTotal = newCart.DishesTotalPrice[index];
+            int newTotal = newCart.TotalPrice - dishTotal;
+            newCart.DishesTotalPrice.RemoveAt(index);
+            newCart.TotalPrice = newTotal;
+
+            HttpContext.Session.Set<CartVM>("Cart", newCart);
+
+
+            return View("Index", newCart);
+        }
+
+
     }
 }

@@ -25,9 +25,9 @@
             @Html.DisplayFor(model => model.DishesUnitePrice[i])
         </dt>
         <dt class="col">
-            @Html.ActionLink("<=", "Minus", "Cart", new { id = Model.DishesId[i] }, null)
+            @Html.ActionLink("<=", "Less", "Cart", new { id = Model.DishesId[i] }, null)
             @Html.DisplayFor(model => model.Quantity[i])
-            @Html.ActionLink("=>", "Plus", "Cart", new { id = Model.DishesId[i] }, null)
+            @Html.ActionLink("=>", "More", "Cart", new { id = Model.DishesId[i] }, null)
         </dt>
         <dt class="col">
             @Html.DisplayFor(model => model.DishesTotalPrice[i])
