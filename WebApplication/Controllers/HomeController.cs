@@ -93,25 +93,27 @@ namespace WebApplication.Controllers
             return View();
         }
 
-        [HttpPost]
-        public IActionResult Index(int idOrder)
+     
+        public IActionResult Choice(int id)
         {
+            if (HttpContext.Session.GetInt32("IdPerson") == null)
+                return RedirectToAction("Index", "Login");
+
             List<int> idDishes = new List<int>();
             if ( HttpContext.Session.Get<List<int>>("listIdDishes")==null)
             {               
-                idDishes.Add(idOrder);
+                idDishes.Add(id);
                 HttpContext.Session.Set<List<int>>("listIdDishes",idDishes);
             }
             else
             {
                 idDishes = HttpContext.Session.Get<List<int>>("listIdDishes");
-                idDishes.Add(idOrder);
+                idDishes.Add(id);
                 HttpContext.Session.Remove("listIdDishes");
                 HttpContext.Session.Set<List<int>>("listIdDishes", idDishes);
             }
 
-            var dish = DishesManager.GetDishIP(idOrder);
-            return View(dish);
+            return View();
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

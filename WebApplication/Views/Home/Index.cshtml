@@ -18,29 +18,28 @@
 
     @foreach (var item in Model)
     {
-        <h2 style="color:limegreen">
-            @Html.DisplayFor(modelItem => item.RestaurantName)
-        </h2>
-        <p>
-            <b>Addresse : </b>@Html.DisplayFor(modelItem => item.RestaurantAddress)
-        </p>
-        for (int i = 0; i < item.DishesName.Count; i++)
-        {
+        <div>
+            <h2 style="color:limegreen">
+                @Html.DisplayFor(modelItem => item.RestaurantName)
+            </h2>
+            <p>
+                <b>Addresse : </b>@Html.DisplayFor(modelItem => item.RestaurantAddress)
+            </p>
+            @for (int i = 0; i < item.DishesName.Count; i++)
+            {
 
             <p>
-                <b>Dishes: </b>@Html.ActionLink(item.DishesName[i], "Dishes", "Home", new { id = item.DishesId[i] }, null);
+                <img src="~/Images/Dishes/@Html.DisplayFor(modelItem => item.DishImage[i])" alt="@Html.DisplayFor(modelItem => item.DishesName[i])" width="400" height="400" />
             </p>
             <p>
-                <b>Description: </b>@Html.DisplayFor(modelItem => item.DishesDescription[i])
+                @Html.ActionLink(item.DishesName[i], "Dishes", "Home", new { id = item.DishesId[i] }, null)
             </p>
             <p>
                 <b>Prix: </b>@Html.DisplayFor(modelItem => item.DishesPrice[i])
             </p>
-            <p>
-                <a class="btn" asp-controller="Home" asp-action="Dishes"><img src="~/Images/Dishes/@Html.DisplayFor(modelItem => item.DishImage[i])" alt="@Html.DisplayFor(modelItem => item.DishesName[i])" width="400" height="400"/></a>
-            </p>
             <br />
-        }
+            }
+        </div>
 
     }
 </body>
