@@ -1,11 +1,21 @@
-﻿@model WebApplication.Models.CartVM
+﻿@model WebApplication.Models.OrderVM
 
 @{
-    ViewData["Title"] = "Cart";
+    ViewData["Title"] = "Order";
 }
 
+<h4>Informations de Livraison</h4>
 
-<h1>Panier</h1>
+<dl class="row">
+    <dt class="col">
+        <label asp-for="Address" class="control-label"></label>
+        <input asp-for="Address" class="form-control" />
+        <span asp-validation-for="Address" class="text-danger"></span>
+    </dt>
+</dl>
+
+
+<h4>Votre Commande</h4>
 <hr />
 
 <dl class="row">
@@ -25,23 +35,22 @@
             @Html.DisplayFor(model => model.DishesUnitePrice[i])
         </dt>
         <dt class="col">
-            @Html.ActionLink("<=", "Less", "Cart", new { id = Model.DishesId[i] }, null)
             @Html.DisplayFor(model => model.Quantity[i])
-            @Html.ActionLink("=>", "More", "Cart", new { id = Model.DishesId[i] }, null)
         </dt>
         <dt class="col">
             @Html.DisplayFor(model => model.DishesTotalPrice[i])
-            @Html.ActionLink("  X", "Remove", "Cart", new { id = Model.DishesId[i] }, null)
         </dt>
     </dl>
-    }
+}
 
-    
+
 <div>
     <dl class="row">
         <dt class="col">
+
         </dt>
         <dt class="col">
+
         <dt class="col">
         </dt>
         <dt class="col">
@@ -55,7 +64,7 @@
         <dt class="col">
         </dt>
         <dt class="col">
-            @Html.ActionLink("Order Now", "Index", "Order")
+            <a asp-controller="Cart" asp-action="Index">Retour au Panier</a>
         </dt>
     </dl>
 </div>

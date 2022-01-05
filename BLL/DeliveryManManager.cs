@@ -39,9 +39,9 @@ namespace BLL
             return DeliveryManDB.AddDeliveryMan(delivery);
         }
 
-        public DeliveryMan GetDeliveryMan(string username, string password)
+        public DeliveryMan GetDeliveryMan(string EmailDelivery, string password)
         {
-            return DeliveryManDB.GetDeliveryMan(username, password);
+            return DeliveryManDB.GetDeliveryMan(EmailDelivery, password);
         }
 
         public DeliveryMan GetDeliveryManID(int deliveryMamId)

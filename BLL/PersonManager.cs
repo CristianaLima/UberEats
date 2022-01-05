@@ -23,9 +23,9 @@ namespace BLL
             LocationDb = locationDb;
         }
 
-        public Person GetPerson(string UsernameLogin, string UsernamePassword)
+        public Person GetPerson(string MailAddress, string UsernamePassword)
         {
-            return PersonDB.GetPerson(UsernameLogin, UsernamePassword);
+            return PersonDB.GetPerson(MailAddress, UsernamePassword);
         }
         public Person GetPersonID(int ID_person)
         {

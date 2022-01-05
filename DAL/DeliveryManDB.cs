@@ -71,7 +71,7 @@ namespace DAL
 
         }
 
-        public DeliveryMan GetDeliveryMan(string username, string password)
+        public DeliveryMan GetDeliveryMan(string EmailDelivery, string password)
         {
             DeliveryMan deliveryMan = null;
 
@@ -81,9 +81,9 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = " Select * from DeliveryMan where UsernameLoginDelivery = @UsernameLogin AND PasswordDelivery = @UsernamePassword";
+                    string query = " Select * from DeliveryMan where EmailDelivery = @EmailDelivery AND PasswordDelivery = @UsernamePassword";
                     SqlCommand cmd = new SqlCommand(query, cn);
-                    cmd.Parameters.AddWithValue("@UsernameLogin", username);
+                    cmd.Parameters.AddWithValue("@EmailDelivery", EmailDelivery);
                     cmd.Parameters.AddWithValue("@UsernamePassword", password);
 
                     cn.Open();

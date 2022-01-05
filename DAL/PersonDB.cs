@@ -86,7 +86,7 @@ namespace DAL
         }
 
 
-        public Person GetPerson(string UsernameLogin, string UsernamePassword)
+        public Person GetPerson(string MailAddress, string UsernamePassword)
         {
             Person person = null;
 
@@ -97,9 +97,9 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "Select * from Person where UsernameLogin = @UsernameLogin AND PasswordLogin = @UsernamePassword";
+                    string query = "Select * from Person where MailAddress = @MailAddress AND PasswordLogin = @UsernamePassword";
                     SqlCommand cmd = new SqlCommand(query, cn);
-                    cmd.Parameters.AddWithValue("@UsernameLogin", UsernameLogin);
+                    cmd.Parameters.AddWithValue("@MailAddress", MailAddress);
                     cmd.Parameters.AddWithValue("@UsernamePassword", UsernamePassword);
 
                     cn.Open();
