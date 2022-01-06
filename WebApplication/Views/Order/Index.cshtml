@@ -5,117 +5,119 @@
 }
 
 <h4>Heure de livraison</h4>
-<dl class="row">
-    <dt class="col">
-        <label class="control-label">Horaire</label>
-    </dt>
-    <dt class="col">
-        @Html.DropDownListFor(model => model.DelaiLivraison,
-            new SelectList(Model.ListPossibleDate),
-            "Selectionne l'horaire")
-        <span asp-validation-for="ListPossibleDate" class="text-danger"></span>
-    </dt>
-    <dt class="col"></dt>
-    <dt class="col"></dt>
-</dl>
-
-
-<h4>Informations de Livraison</h4>
-
-<dl class="row">
-    <dt class="col">Informations Personnelles :</dt>
-    <dt class="col">@Html.DisplayFor(model => model.Name)</dt>
-    <dt class="col">@Html.DisplayFor(model => model.FirstName)</dt>
-    <dt class="col">@Html.DisplayFor(model => model.PhoneNumber)</dt>
-</dl>
-
-
-<dl class="row">
-    <dt class="col">
-        <label asp-for="Address" class="control-label"></label>
-    </dt>
-    <dt class="col">
-        <input asp-for="Address" class="form-control" />
-        <span asp-validation-for="Address" class="text-danger"></span>
-    </dt>
-    <dt class="col"></dt>
-    <dt class="col"></dt>
-</dl>
-<dl class="row">
-    <dt class="col">
-        <label asp-for="NPA" class="control-label"></label>
-    </dt>
-    <dt class="col">
-        <input asp-for="NPA" class="form-control" />
-        <span asp-validation-for="NPA" class="text-danger"></span>
-    </dt>
-    <dt class="col"></dt>
-    <dt class="col"></dt>
-</dl>
-<dl class="row">
-    <dt class="col">
-        <label asp-for="City" class="control-label"></label>
-    </dt>
-    <dt class="col">
-        <input asp-for="City" class="form-control" />
-        <span asp-validation-for="City" class="text-danger"></span>
-    </dt>
-    <dt class="col"></dt>
-    <dt class="col"></dt>
-</dl>
-
-
-<h4>Votre Commande</h4>
-<hr />
-
-<dl class="row">
-    <dt class="col">Nom</dt>
-    <dt class="col">Prix unitaire</dt>
-    <dt class="col">Quantité</dt>
-    <dt class="col">Prix total</dt>
-</dl>
-
-@for (int i = 0; i < Model.DishesName.Count; i++)
-{
+<form asp-action="Index">
     <dl class="row">
         <dt class="col">
-            @Html.DisplayFor(model => model.DishesName[i])
+            <label class="control-label">Horaire</label>
         </dt>
         <dt class="col">
-            @Html.DisplayFor(model => model.DishesUnitePrice[i])
+            @Html.DropDownListFor(model => model.DelaiLivraison,
+                new SelectList(Model.ListPossibleDate),
+                Model.ListPossibleDate[0])
+            <span asp-validation-for="ListPossibleDate" class="text-danger"></span>
         </dt>
-        <dt class="col">
-            @Html.DisplayFor(model => model.Quantity[i])
-        </dt>
-        <dt class="col">
-            @Html.DisplayFor(model => model.DishesTotalPrice[i])
-        </dt>
+        <dt class="col"></dt>
+        <dt class="col"></dt>
     </dl>
-}
 
 
-<div>
+    <h4>Informations de Livraison</h4>
+
+    <dl class="row">
+        <dt class="col">Informations Personnelles :</dt>
+        <dt class="col">@Html.DisplayFor(model => model.Name)</dt>
+        <dt class="col">@Html.DisplayFor(model => model.FirstName)</dt>
+        <dt class="col">@Html.DisplayFor(model => model.PhoneNumber)</dt>
+    </dl>
+
+
     <dl class="row">
         <dt class="col">
-
+            <label asp-for="Address" class="control-label"></label>
         </dt>
         <dt class="col">
-
-        <dt class="col">
+            <input asp-for="Address" class="form-control" />
+            <span asp-validation-for="Address" class="text-danger"></span>
         </dt>
-        <dt class="col">
-            @Html.DisplayFor(model => model.TotalPrice)
-        </dt>
+        <dt class="col"></dt>
+        <dt class="col"></dt>
     </dl>
     <dl class="row">
         <dt class="col">
-            <a asp-controller="Cart" asp-action="Index">Retour au Panier</a>
+            <label asp-for="NPA" class="control-label"></label>
         </dt>
         <dt class="col">
-        <dt class="col">
+            <input asp-for="NPA" class="form-control" />
+            <span asp-validation-for="NPA" class="text-danger"></span>
         </dt>
-        <dt class="col">
-            <input type="submit" value="Confirmer" class="btn btn-primary" />
-        </dt>
+        <dt class="col"></dt>
+        <dt class="col"></dt>
     </dl>
-</div>
+    <dl class="row">
+        <dt class="col">
+            <label asp-for="City" class="control-label"></label>
+        </dt>
+        <dt class="col">
+            <input asp-for="City" class="form-control" />
+            <span asp-validation-for="City" class="text-danger"></span>
+        </dt>
+        <dt class="col"></dt>
+        <dt class="col"></dt>
+    </dl>
+
+
+    <h4>Votre Commande</h4>
+    <hr />
+
+    <dl class="row">
+        <dt class="col">Nom</dt>
+        <dt class="col">Prix unitaire</dt>
+        <dt class="col">Quantité</dt>
+        <dt class="col">Prix total</dt>
+    </dl>
+
+    @for (int i = 0; i < Model.DishesName.Count; i++)
+    {
+        <dl class="row">
+            <dt class="col">
+                @Html.DisplayFor(model => model.DishesName[i])
+            </dt>
+            <dt class="col">
+                @Html.DisplayFor(model => model.DishesUnitePrice[i])
+            </dt>
+            <dt class="col">
+                @Html.DisplayFor(model => model.Quantity[i])
+            </dt>
+            <dt class="col">
+                @Html.DisplayFor(model => model.DishesTotalPrice[i])
+            </dt>
+        </dl>
+    }
+
+
+    <div>
+        <dl class="row">
+            <dt class="col">
+
+            </dt>
+            <dt class="col">
+
+            <dt class="col">
+            </dt>
+            <dt class="col">
+                @Html.DisplayFor(model => model.TotalPrice)
+            </dt>
+        </dl>
+        <dl class="row">
+            <dt class="col">
+                <a asp-controller="Cart" asp-action="Index">Retour au Panier</a>
+            </dt>
+            <dt class="col">
+            <dt class="col">
+            </dt>
+            <dt class="col">
+                <input type="submit" value="Confirmer" class="btn btn-primary" />
+            </dt>
+        </dl>
+    </div>
+</form>

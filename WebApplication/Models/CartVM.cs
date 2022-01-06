@@ -13,5 +13,6 @@ namespace WebApplication.Models
         public List<int> DishesTotalPrice { get; set; }
         public List<int> Quantity { get; set; }
         public int TotalPrice { get; set; }
+
     }
 }

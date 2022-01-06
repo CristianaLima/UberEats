@@ -78,7 +78,7 @@ namespace DAL
                 {
                     string query = "Select * from [Order] where ID_person = @ID_person AND Orderdate = @OrderDate";
                     SqlCommand cmd = new SqlCommand(query, cn);
-                    cmd.Parameters.AddWithValue("@ID_Restaurant", ID_person);
+                    cmd.Parameters.AddWithValue("@ID_person", ID_person);
                     cmd.Parameters.AddWithValue("@OrderDate", OrderDate);
 
                     cn.Open();
@@ -90,6 +90,11 @@ namespace DAL
                             order = new Order();
 
                             order.ID_Order = (int)dr["ID_Order"];
+                            order.ID_person = (int)dr["ID_person"];
+
+                            order.DelaiLivraison = (DateTime)dr["DelaiLivraison"];
+
+                            order.OrderDate = (DateTime)dr["OrderDate"];
                         }
                     }
                 }
@@ -249,6 +254,27 @@ namespace DAL
                 throw e;
             }
             return order;
+        }
+
+        public void Remove(int idorder)
+        {
+            string connectionString = "Data Source = 153.109.124.35; Initial Catalog = UberEat_Theo_Cristiana; Integrated Security = False; User Id = 6231db; Password = Pwd46231.; MultipleActiveResultSets = True";
+
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(connectionString))
+                {
+                    string query = "Delete [Order] set ID_Order = @ID_Order";
+                    SqlCommand cmd = new SqlCommand(query, cn);
+                    cmd.Parameters.AddWithValue("@ID_Order", idorder);
+
+                    cn.Open();
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
         }
     }
 }

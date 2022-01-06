@@ -30,7 +30,7 @@ namespace BLL
             return LocationDb.GetLocationID(IdLocation);
         }
 
-        public Location GetLocationNPA(string NPA)
+        public Location GetLocationNPA(int NPA)
         {
             return LocationDb.GetLocationNPA(NPA);
         }
@@ -39,7 +39,7 @@ namespace BLL
             return LocationDb.GetLocations();
         }
 
-        public int GetLocationNPACity(string NPA, string City)
+        public int GetLocationNPACity(int NPA, string City)
         {
             return LocationDb.GetLocationNPACity(NPA, City);
         }

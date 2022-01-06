@@ -15,5 +15,6 @@ namespace DAL
         List<Order> GetOrderIDPerson(int idPerson);
         Order GetOrderIDOrder(int IdOrder);
         Order ModifyAllOrder(Order order);
+        void Remove(int idorder);
     }
 }

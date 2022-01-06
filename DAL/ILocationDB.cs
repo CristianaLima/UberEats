@@ -7,9 +7,9 @@ namespace DAL
     {
         Location GetLocationCity(string City);
         Location GetLocationID(int IdLocation);
-        Location GetLocationNPA(string NPA);
+        Location GetLocationNPA(int NPA);
         List<Location> GetLocations();
-        int GetLocationNPACity(string NPA, string City);
+        int GetLocationNPACity(int NPA, string City);
 
         List<Location> GetLocationCanton(string Canton);
     }

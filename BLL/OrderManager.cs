@@ -48,7 +48,7 @@ namespace BLL
             return OrderDB.AddOrder(order);
         }
 
-        public void AssignDeliveryMan(Order order)
+        public DeliveryMan AssignDeliveryMan(Order order)
         {
             //1. retourner la liste des DeliveryMan dans la région du restaurant
             //   aller rechercher la location du restaurant
@@ -83,13 +83,14 @@ namespace BLL
 
             if (idMin == -1)
             {
-                Console.WriteLine("There's no delivery man available at the moment");
+                DeliveryMan deli = null;
+                return deli;
             }
-            else
-            {
-                Console.WriteLine(minNB + " " + idMin);
-                DeliveryOrderList deliveryOrderList = DeliveryOrderListDB.AddDeliveryOrderList(new DeliveryOrderList { Id_Delivery = idMin, ID_Order = order.ID_Order, NumStatut = 2 });
-            }
+            
+            Console.WriteLine(minNB + " " + idMin);
+            DeliveryOrderList deliveryOrderList = DeliveryOrderListDB.AddDeliveryOrderList(new DeliveryOrderList { Id_Delivery = idMin, ID_Order = order.ID_Order, NumStatut = 1 });
+            
+            return DeliveryManDB.GetDeliveryManID(idMin);
         }
 
         public int GetOrderID(int ID_person, DateTime OrderDate)
@@ -150,6 +151,10 @@ namespace BLL
                 }
             }
             return nbDeliveries;
+        }
+        public void Remove(int idorder)
+        {
+            OrderDB.Remove(idorder);
         }
     }
 }

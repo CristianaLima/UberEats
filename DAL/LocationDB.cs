@@ -64,7 +64,7 @@ namespace DAL
 
 
         }
-        public Location GetLocationNPA(string NPA)
+        public Location GetLocationNPA(int NPA)
         {
             Location location = null;
             string connectionString = "Data Source = 153.109.124.35; Initial Catalog = UberEat_Theo_Cristiana; Integrated Security = False; User Id = 6231db; Password = Pwd46231.; MultipleActiveResultSets = True";
@@ -190,7 +190,7 @@ namespace DAL
 
         }
 
-        public int GetLocationNPACity(string NPA, string City)
+        public int GetLocationNPACity(int NPA, string City)
         {
             Location location = null;
             string connectionString = "Data Source = 153.109.124.35; Initial Catalog = UberEat_Theo_Cristiana; Integrated Security = False; User Id = 6231db; Password = Pwd46231.; MultipleActiveResultSets = True";
@@ -228,6 +228,10 @@ namespace DAL
             catch (Exception e)
             {
                 throw e;
+            }
+            if(location == null)
+            {
+                return 0;
             }
             return location.ID_location;
 

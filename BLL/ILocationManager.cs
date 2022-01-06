@@ -8,8 +8,8 @@ namespace BLL
         List<Location> GetLocationCanton(string Canton);
         Location GetLocationCity(string City);
         Location GetLocationID(int IdLocation);
-        Location GetLocationNPA(string NPA);
-        int GetLocationNPACity(string NPA, string City);
+        Location GetLocationNPA(int NPA);
+        int GetLocationNPACity(int NPA, string City);
         List<Location> GetLocations();
         List<Restaurant> GetRestaurantsFromLocation(string Canton);
     }

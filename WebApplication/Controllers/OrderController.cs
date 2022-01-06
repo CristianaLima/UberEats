@@ -19,14 +19,16 @@ namespace WebApplication.Controllers
         private IPersonManager PersonManager;
         private IOrderManager OrderManager;
         private ILocationManager LocationManager;
+        private IOrderDishesManager OrderDishesManager;
 
-        public OrderController(ILogger<OrderController> logger, IDishesManager dishesManager, IPersonManager personManager, IOrderManager orderManager, ILocationManager locationManager)
+        public OrderController(ILogger<OrderController> logger, IDishesManager dishesManager, IPersonManager personManager, IOrderManager orderManager, ILocationManager locationManager, IOrderDishesManager orderDishesManager)
         {
             _logger = logger;
             DishesManager = dishesManager;
             PersonManager = personManager;
             OrderManager = orderManager;
             LocationManager = locationManager;
+            OrderDishesManager = orderDishesManager;
     }
         public IActionResult Index()
         {
@@ -35,28 +37,61 @@ namespace WebApplication.Controllers
                 return RedirectToAction("Index", "Login");
 
             // Cart
+            int quant = 1;
             OrderVM orderVM = new OrderVM();
-            var Cart = HttpContext.Session.Get<CartVM>("Cart");
-            orderVM.DishesName = Cart.DishesName;
-            orderVM.DishesId = Cart.DishesId;
-            orderVM.DishesUnitePrice = Cart.DishesUnitePrice;
-            orderVM.Quantity = Cart.Quantity;
-            orderVM.DishesTotalPrice = Cart.DishesTotalPrice;
-            orderVM.TotalPrice = Cart.TotalPrice;
+            var IdDishesList = HttpContext.Session.Get<List<int>>("listIdDishes");
+            if (IdDishesList == null)
+            {
+                return View();
+            }
+
+            List<String> namesDishes = null;
+            List<int> DishesUnitePrice = null;
+            List<int> DishesTotalPrice = null;
+            List<int> Quantity = null;
+            int Total = 0;
+
+            foreach (var IdDish in IdDishesList)
+            {
+                if (namesDishes == null)
+                {
+                    namesDishes = new List<string>();
+                    DishesUnitePrice = new List<int>();
+                    DishesTotalPrice = new List<int>();
+                    Quantity = new List<int>();
+                }
+                var dish = DishesManager.GetDishIP(IdDish);
+                namesDishes.Add(dish.DishesName);
+                DishesUnitePrice.Add(dish.DishesPrice);
+                Quantity.Add(quant);
+                DishesTotalPrice.Add(dish.DishesPrice * quant);
+
+            }
+            foreach (var totalPrice in DishesTotalPrice)
+            {
+                Total += totalPrice;
+            }
+            orderVM.DishesName = namesDishes;
+            orderVM.DishesId = IdDishesList;
+            orderVM.DishesUnitePrice = DishesUnitePrice;
+            orderVM.Quantity = Quantity;
+            orderVM.DishesTotalPrice = DishesTotalPrice;
+            orderVM.TotalPrice = Total;
 
             // Person
-            int idPerson = (int) HttpContext.Session.GetInt32("IdPerson");
-            Person person = PersonManager.GetPersonID(idPerson);
+            int idPerson = (int)HttpContext.Session.GetInt32("IdPerson");
+            Person person = (Person)PersonManager.GetPersonID(idPerson);
             orderVM.Name = person.Name;
             orderVM.FirstName = person.FirstName;
             orderVM.PhoneNumber = person.PhoneNumber;
             orderVM.Address = person.Address;
 
             // Order
+            orderVM.OrderDate = DateTime.Now;
             List<DateTime> dateList = new List<DateTime>();
-            for(int i = 1; i < 11; i++)
+            for (int i = 1; i < 10; i++)
             {
-                if(DateTime.Now.AddMinutes(15*i).Hour < 23)
+                if (DateTime.Now.AddMinutes(15 * i).Hour < 23)
                 {
                     dateList.Add(DateTime.Now.AddMinutes(15 * i));
                 }
@@ -75,6 +110,8 @@ namespace WebApplication.Controllers
             orderVM.City = location.City;
             orderVM.NPA = location.NPA;
 
+            HttpContext.Session.Set<OrderVM>("Order", orderVM);
+
             return View(orderVM);
         }
 
@@ -82,7 +119,52 @@ namespace WebApplication.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Index(OrderVM orderVM)
         {
-            return View(orderVM);
+            if (ModelState.IsValid)
+            {
+                var idLocation = LocationManager.GetLocationNPACity(orderVM.NPA, orderVM.City);
+                if (idLocation == 0)
+                {
+                    ModelState.AddModelError("NPA","le NPA ou la ville est incorrect");
+                    return View(HttpContext.Session.Get<OrderVM>("Order"));
+                }
+                var location = LocationManager.GetLocationID(idLocation);
+                var oldOrder = HttpContext.Session.Get<OrderVM>("Order");
+
+
+                HttpContext.Session.Remove("Order");
+                Order order = new Order();
+                order.DelaiLivraison = orderVM.DelaiLivraison;
+                order.ID_person = (int)HttpContext.Session.GetInt32("IdPerson");
+                order.OrderDate = oldOrder.OrderDate;
+                OrderManager.AddOrder(order);
+                OrderDishes orderDishes = new OrderDishes();
+
+                for(int i=0; i<oldOrder.DishesId.Count; i++)
+                {
+                    orderDishes.ID_Dishes = oldOrder.DishesId[i];
+                    orderDishes.Quantity = oldOrder.Quantity[i];
+                    orderDishes.ID_Order = order.ID_Order;
+                    OrderDishesManager.AddOrderDishes(orderDishes);
+                }
+
+
+                if(OrderManager.AssignDeliveryMan(order) == null)
+                {
+                    ModelState.AddModelError("ListPossibleDate", "Aucun livreur n'est disponible pour le moment");
+                    return View(HttpContext.Session.Get<OrderVM>("Order"));
+                }
+                var deli = OrderManager.AssignDeliveryMan(order);
+
+                List<Order> listOrder = new List<Order>();
+                listOrder.Add(order);
+                HttpContext.Session.Set<List<Order>>("ListOrder",listOrder) ;
+
+
+                return RedirectToAction("Index", "Status");
+
+            }
+
+                return View(HttpContext.Session.Get<OrderVM>("Order"));
         }
     }
 }
