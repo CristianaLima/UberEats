@@ -13,6 +13,5 @@ namespace BLL
         Person GetPersonID(int ID_person);
         List<Person> GetPersonIDLocation(int IdLocation);
         Person ModifyAllPerson(Person person);
-        object GetPersonID(int? idPerson);
     }
 }

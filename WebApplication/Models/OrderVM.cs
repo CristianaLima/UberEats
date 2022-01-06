@@ -16,7 +16,6 @@ namespace WebApplication.Models
 
         public String Name { get; set; }
         public String FirstName { get; set; }
-        public String MailAddress { get; set; }
         public String PhoneNumber { get; set; }
         public String Address { get; set; }
 

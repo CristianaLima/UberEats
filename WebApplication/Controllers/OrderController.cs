@@ -35,59 +35,26 @@ namespace WebApplication.Controllers
                 return RedirectToAction("Index", "Login");
 
             // Cart
-            int quant = 1;
             OrderVM orderVM = new OrderVM();
-            var IdDishesList = HttpContext.Session.Get<List<int>>("listIdDishes");
-            if (IdDishesList == null)
-            {
-                return View();
-            }
-
-            List<String> namesDishes = null;
-            List<int> DishesUnitePrice = null;
-            List<int> DishesTotalPrice = null;
-            List<int> Quantity = null;
-            int Total = 0;
-
-            foreach (var IdDish in IdDishesList)
-            {
-                if (namesDishes == null)
-                {
-                    namesDishes = new List<string>();
-                    DishesUnitePrice = new List<int>();
-                    DishesTotalPrice = new List<int>();
-                    Quantity = new List<int>();
-                }
-                var dish = DishesManager.GetDishIP(IdDish);
-                namesDishes.Add(dish.DishesName);
-                DishesUnitePrice.Add(dish.DishesPrice);
-                Quantity.Add(quant);
-                DishesTotalPrice.Add(dish.DishesPrice * quant);
-
-            }
-            foreach (var totalPrice in DishesTotalPrice)
-            {
-                Total += totalPrice;
-            }
-            orderVM.DishesName = namesDishes;
-            orderVM.DishesId = IdDishesList;
-            orderVM.DishesUnitePrice = DishesUnitePrice;
-            orderVM.Quantity = Quantity;
-            orderVM.DishesTotalPrice = DishesTotalPrice;
-            orderVM.TotalPrice = Total;
+            var Cart = HttpContext.Session.Get<CartVM>("Cart");
+            orderVM.DishesName = Cart.DishesName;
+            orderVM.DishesId = Cart.DishesId;
+            orderVM.DishesUnitePrice = Cart.DishesUnitePrice;
+            orderVM.Quantity = Cart.Quantity;
+            orderVM.DishesTotalPrice = Cart.DishesTotalPrice;
+            orderVM.TotalPrice = Cart.TotalPrice;
 
             // Person
-            int idPerson = (int)HttpContext.Session.GetInt32("IdPerson");
-            Person person = (Person)PersonManager.GetPersonID(idPerson);
+            int idPerson = (int) HttpContext.Session.GetInt32("IdPerson");
+            Person person = PersonManager.GetPersonID(idPerson);
             orderVM.Name = person.Name;
             orderVM.FirstName = person.FirstName;
-            orderVM.MailAddress = person.MailAddress;
             orderVM.PhoneNumber = person.PhoneNumber;
             orderVM.Address = person.Address;
 
             // Order
             List<DateTime> dateList = new List<DateTime>();
-            for(int i = 1; i < 10; i++)
+            for(int i = 1; i < 11; i++)
             {
                 if(DateTime.Now.AddMinutes(15*i).Hour < 23)
                 {
@@ -111,9 +78,11 @@ namespace WebApplication.Controllers
             return View(orderVM);
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Index(OrderVM orderVM)
         {
-
+            return View(orderVM);
         }
     }
 }
