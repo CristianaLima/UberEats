@@ -89,6 +89,7 @@ namespace WebApplication.Controllers
         public IActionResult Index(OrderVM orderVM)
         {
             var oldOrder = HttpContext.Session.Get<OrderVM>("Order");
+           
             if (ModelState.IsValid)
             {
                 var idLocation = LocationManager.GetLocationNPACity(orderVM.NPA, orderVM.City);
@@ -126,7 +127,7 @@ namespace WebApplication.Controllers
                     return View(oldOrder);
                 }
                 //var deli = OrderManager.AssignDeliveryMan(order);
-
+                HttpContext.Session.Remove("Cart");
                 return RedirectToAction("Index", "Status");
 
             }
