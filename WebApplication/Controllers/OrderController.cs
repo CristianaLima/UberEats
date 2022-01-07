@@ -37,46 +37,15 @@ namespace WebApplication.Controllers
                 return RedirectToAction("Index", "Login");
 
             // Cart
-            int quant = 1;
             OrderVM orderVM = new OrderVM();
-            var IdDishesList = HttpContext.Session.Get<List<int>>("listIdDishes");
-            if (IdDishesList == null)
-            {
-                return View();
-            }
+            var cart = HttpContext.Session.Get<CartVM>("Cart");
 
-            List<String> namesDishes = null;
-            List<int> DishesUnitePrice = null;
-            List<int> DishesTotalPrice = null;
-            List<int> Quantity = null;
-            int Total = 0;
-
-            foreach (var IdDish in IdDishesList)
-            {
-                if (namesDishes == null)
-                {
-                    namesDishes = new List<string>();
-                    DishesUnitePrice = new List<int>();
-                    DishesTotalPrice = new List<int>();
-                    Quantity = new List<int>();
-                }
-                var dish = DishesManager.GetDishIP(IdDish);
-                namesDishes.Add(dish.DishesName);
-                DishesUnitePrice.Add(dish.DishesPrice);
-                Quantity.Add(quant);
-                DishesTotalPrice.Add(dish.DishesPrice * quant);
-
-            }
-            foreach (var totalPrice in DishesTotalPrice)
-            {
-                Total += totalPrice;
-            }
-            orderVM.DishesName = namesDishes;
-            orderVM.DishesId = IdDishesList;
-            orderVM.DishesUnitePrice = DishesUnitePrice;
-            orderVM.Quantity = Quantity;
-            orderVM.DishesTotalPrice = DishesTotalPrice;
-            orderVM.TotalPrice = Total;
+            orderVM.DishesName = cart.DishesName;
+            orderVM.DishesId = cart.DishesId;
+            orderVM.DishesUnitePrice = cart.DishesUnitePrice;
+            orderVM.Quantity = cart.Quantity;
+            orderVM.DishesTotalPrice = cart.DishesTotalPrice;
+            orderVM.TotalPrice = cart.TotalPrice;
 
             // Person
             int idPerson = (int)HttpContext.Session.GetInt32("IdPerson");
