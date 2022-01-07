@@ -66,7 +66,7 @@ namespace WebApplication.Controllers
             Cart.Quantity = Quantity;
             Cart.DishesTotalPrice = DishesTotalPrice;
             Cart.TotalPrice = Total;
-
+            
             HttpContext.Session.Set<CartVM>("Cart", Cart);
             
             

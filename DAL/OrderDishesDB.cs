@@ -128,5 +128,27 @@ namespace DAL
             return orderDishes;
         }
 
+        public void Remove(int idOrder, int idDish)
+        {
+            string connectionString = "Data Source = 153.109.124.35; Initial Catalog = UberEat_Theo_Cristiana; Integrated Security = False; User Id = 6231db; Password = Pwd46231.; MultipleActiveResultSets = True";
+
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(connectionString))
+                {
+                    string query = "Delete OrderDishes set ID_Order = @ID_Order and ID_Dishes =@IdDishes";
+                    SqlCommand cmd = new SqlCommand(query, cn);
+                    cmd.Parameters.AddWithValue("@ID_Order", idOrder);
+                    cmd.Parameters.AddWithValue("@IdDishes", idDish);
+
+                    cn.Open();
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
     }
 }

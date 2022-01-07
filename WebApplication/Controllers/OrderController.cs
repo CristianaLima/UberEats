@@ -122,11 +122,17 @@ namespace WebApplication.Controllers
 
                 if(OrderManager.AssignDeliveryMan(order) == null)
                 {
+                    for (int i = 0; i < oldOrder.DishesId.Count; i++)
+                    {
+                        OrderDishesManager.Remove(order.ID_Order, oldOrder.DishesId[i]);
+                    }
+                    OrderManager.Remove(order.ID_Order);
                     ModelState.AddModelError("ListPossibleDate", "Aucun livreur n'est disponible pour le moment");
                     HttpContext.Session.Set<OrderVM>("Order", oldOrder);
                     return View(oldOrder);
                 }
                 //var deli = OrderManager.AssignDeliveryMan(order);
+                HttpContext.Session.Remove("listIdDishes");
                 HttpContext.Session.Remove("Cart");
                 return RedirectToAction("Index", "Status");
 

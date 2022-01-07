@@ -31,5 +31,9 @@ namespace BLL
         {
             return OrderDishesDb.GetOrderDishes(IdOrder);
         }
+        public void Remove(int idOrder, int idDish)
+        {
+           OrderDishesDb.Remove(idOrder, idDish);
+        }
     }
 }
