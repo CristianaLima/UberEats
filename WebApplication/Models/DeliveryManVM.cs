@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WebApplication.Models
 {
-    public class DeliveryMan
+    public class DeliveryManVM
     {
         public int Id_Delivery { get; set; }
         [Required]

@@ -18,7 +18,6 @@ namespace DTO
         public DateTime BirthDate { get; set; }
         public string PhoneNumber { get; set; }
         public int isRestaurant { get; set; }
-        public string UsernameLogin { get; set; }
         public string PasswordLogin { get; set; }
         public string PersonImage { get; set; }
 
@@ -33,7 +32,6 @@ namespace DTO
                     " Person BirthDate " + BirthDate +
                     " Person PhoneNumber " + PhoneNumber +
                     " is this a Restaurant ? " + isRestaurant +
-                    " Username Login " + UsernameLogin +
                     " Person Image " + PersonImage;
         }
     }

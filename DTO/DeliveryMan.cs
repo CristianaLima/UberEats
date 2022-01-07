@@ -18,7 +18,6 @@ namespace DTO
         public string AddressDelivery { get; set; }
         public DateTime BirthDateDelivery { get; set; }
         public string PhoneNumberDelivery { get; set; }
-        public string UsernameLoginDelivery { get; set; }
         public string PasswordDelivery { get; set; }
         public string ImageDelivery { get; set; }
         public string EmailDelivery { get; set; }
@@ -38,7 +37,6 @@ namespace DTO
                    " Birthday: " + BirthDateDelivery +
                    " PhoneNumber: " + PhoneNumberDelivery +
                    " Email: " + EmailDelivery +
-                   " Username: " + UsernameLoginDelivery +
                    " Image: " + ImageDelivery +
                    " Is working ?: " + IsWorking +
                    " nb Deliveries : " + nbDeliveries;

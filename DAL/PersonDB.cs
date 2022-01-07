@@ -67,8 +67,6 @@ namespace DAL
                             if (dr["isRestaurant"] != null)
                                 person.isRestaurant = (int)dr["isRestaurant"];
 
-                            person.UsernameLogin = (string)dr["UsernameLogin"];
-
                             person.PasswordLogin = (string)dr["PasswordLogin"];
 
                             results.Add(person);
@@ -136,9 +134,6 @@ namespace DAL
                                 person.isRestaurant = (int)dr["isRestaurant"];
 
                             
-                            person.UsernameLogin = (string)dr["UsernameLogin"];
-
-                            
                             person.PasswordLogin = (string)dr["PasswordLogin"];
                         }
                     }
@@ -203,9 +198,6 @@ namespace DAL
                                 person.isRestaurant = (int)dr["isRestaurant"];
 
                             
-                            person.UsernameLogin = (string)dr["UsernameLogin"];
-
-                            
                             person.PasswordLogin = (string)dr["PasswordLogin"];
                         }
                     }
@@ -227,7 +219,7 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "Insert into Person( ID_location, Address, Name, FirstName, MailAddress, BirthDate, PhoneNumber, isRestaurant, UsernameLogin, PasswordLogin, PersonImage) values( @ID_location, @Address, @Name, @FirstName, @MailAddress, @BirthDate, @PhoneNumber, @isRestaurant, @UsernameLogin, @PasswordLogin, @PersonImage); SELECT SCOPE_IDENTITY()";
+                    string query = "Insert into Person( ID_location, Address, Name, FirstName, MailAddress, BirthDate, PhoneNumber, isRestaurant, PasswordLogin, PersonImage) values( @ID_location, @Address, @Name, @FirstName, @MailAddress, @BirthDate, @PhoneNumber, @isRestaurant, @PasswordLogin, @PersonImage); SELECT SCOPE_IDENTITY()";
                     SqlCommand cmd = new SqlCommand(query, cn);
                     
                     cmd.Parameters.AddWithValue("@ID_location", person.ID_location);
@@ -238,7 +230,6 @@ namespace DAL
                     cmd.Parameters.AddWithValue("@BirthDate", person.BirthDate);
                     cmd.Parameters.AddWithValue("@PhoneNumber", person.PhoneNumber);
                     cmd.Parameters.AddWithValue("@isRestaurant", person.isRestaurant);
-                    cmd.Parameters.AddWithValue("@UsernameLogin", person.UsernameLogin);
                     cmd.Parameters.AddWithValue("@PasswordLogin", person.PasswordLogin);
                     cmd.Parameters.AddWithValue("@PersonImage", person.PersonImage);
 
@@ -263,7 +254,7 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "Update Person set ID_location = @ID_location and Address=@Address and Name=@Name and FirstName=@FirstName and MailAddress=@MailAddress and BirthDate=@BirthDate and PhoneNumber=@PhoneNumber and isRestaurant=@isRestaurant and UsernameLogin=@UsernameLogin and PasswordLogin=@PasswordLogin and PersonImage=@PersonImage where ID_person=@ID_person ";
+                    string query = "Update Person set ID_location = @ID_location and Address=@Address and Name=@Name and FirstName=@FirstName and MailAddress=@MailAddress and BirthDate=@BirthDate and PhoneNumber=@PhoneNumber and isRestaurant=@isRestaurant and PasswordLogin=@PasswordLogin and PersonImage=@PersonImage where ID_person=@ID_person ";
                     SqlCommand cmd = new SqlCommand(query, cn);
                     cmd.Parameters.AddWithValue("@ID_location", person.ID_location);
                     cmd.Parameters.AddWithValue("@ID_person", person.ID_person);
@@ -274,7 +265,6 @@ namespace DAL
                     cmd.Parameters.AddWithValue("@BirthDate", person.BirthDate);
                     cmd.Parameters.AddWithValue("@PhoneNumber", person.PhoneNumber);
                     cmd.Parameters.AddWithValue("@isRestaurant", person.isRestaurant);
-                    cmd.Parameters.AddWithValue("@UsernameLogin", person.UsernameLogin);
                     cmd.Parameters.AddWithValue("@PasswordLogin", person.PasswordLogin);
                     cmd.Parameters.AddWithValue("@PersonImage", person.PersonImage);
 
@@ -340,11 +330,7 @@ namespace DAL
 
                             if (dr["isRestaurant"] != null)
                                 person.isRestaurant = (int)dr["isRestaurant"];
-
-
-                            person.UsernameLogin = (string)dr["UsernameLogin"];
-
-
+                                                       
                             person.PasswordLogin = (string)dr["PasswordLogin"];
 
                             results.Add(person);

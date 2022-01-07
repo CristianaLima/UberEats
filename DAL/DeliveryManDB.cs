@@ -50,7 +50,6 @@ namespace DAL
                             deliveryMan.BirthDateDelivery = (DateTime)dr["BirthDateDelivery"];
                             deliveryMan.PhoneNumberDelivery = (string)dr["PhoneNumberDelivery"];
                             deliveryMan.EmailDelivery = (string)dr["EmailDelivery"];
-                            deliveryMan.UsernameLoginDelivery = (string)dr["UsernameLoginDelivery"];
                             deliveryMan.PasswordDelivery = (string)dr["PasswordDelivery"];
                             if (dr["ImageDelivery"] != null)
                                 deliveryMan.ImageDelivery = (string)dr["ImageDelivery"];
@@ -104,7 +103,6 @@ namespace DAL
                             deliveryMan.BirthDateDelivery = (DateTime)dr["BirthDateDelivery"];
                             deliveryMan.PhoneNumberDelivery = (string)dr["PhoneNumberDelivery"];
                             deliveryMan.EmailDelivery = (string)dr["EmailDelivery"];
-                            deliveryMan.UsernameLoginDelivery = (string)dr["UsernameLoginDelivery"];
                             deliveryMan.PasswordDelivery = (string)dr["PasswordDelivery"];
                             if (dr["ImageDelivery"] != null)
                                 deliveryMan.ImageDelivery = (string)dr["ImageDelivery"];
@@ -154,7 +152,6 @@ namespace DAL
                             deliveryMan.BirthDateDelivery = (DateTime)dr["BirthDateDelivery"];
                             deliveryMan.PhoneNumberDelivery = (string)dr["PhoneNumberDelivery"];
                             deliveryMan.EmailDelivery = (string)dr["EmailDelivery"];
-                            deliveryMan.UsernameLoginDelivery = (string)dr["UsernameLoginDelivery"];
                             deliveryMan.PasswordDelivery = (string)dr["PasswordDelivery"];
                             if (dr["ImageDelivery"] != null)
                                 deliveryMan.ImageDelivery = (string)dr["ImageDelivery"];
@@ -181,8 +178,8 @@ namespace DAL
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
                     string query = "Insert into DeliveryMan( ID_Location, ID_workLocation, NameDelivery,FirstNameDelivery, AddressDelivery, " +
-                        "BirthDateDelivery,PhoneNumberDelivery,EmailDelivery, UsernameLoginDelivery, PasswordDelivery, ImageDelivery, IsWorking, nbDeliveries) values( @locationId," +
-                        " @workLocationId, @lastName, @firstName, @address, @birthDate, @phoneNumber, @email, @login, @password, @image, @isWorking, @nbDeliveries); SELECT SCOPE_IDENTITY()";
+                        "BirthDateDelivery,PhoneNumberDelivery,EmailDelivery, PasswordDelivery, ImageDelivery, IsWorking, nbDeliveries) values( @locationId," +
+                        " @workLocationId, @lastName, @firstName, @address, @birthDate, @phoneNumber, @email, @password, @image, @isWorking, @nbDeliveries); SELECT SCOPE_IDENTITY()";
                     
                     SqlCommand cmd = new SqlCommand(query, cn);
                     
@@ -194,7 +191,6 @@ namespace DAL
                     cmd.Parameters.AddWithValue("@birthDate", delivery.BirthDateDelivery);
                     cmd.Parameters.AddWithValue("@phoneNumber", delivery.PhoneNumberDelivery);
                     cmd.Parameters.AddWithValue("@email", delivery.EmailDelivery);
-                    cmd.Parameters.AddWithValue("@login", delivery.UsernameLoginDelivery);
                     cmd.Parameters.AddWithValue("@password", delivery.PasswordDelivery);
                     cmd.Parameters.AddWithValue("@image", delivery.ImageDelivery);
                     cmd.Parameters.AddWithValue("@isWorking", delivery.IsWorking);  
@@ -250,7 +246,7 @@ namespace DAL
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
                     
-                    string query = "UPDATE DeliveryMan SET IsWorking = @IsWorking and ID_Location=@ID_Location and ID_workLocation=@ID_workLocation and NameDelivery=@NameDelivery and FirstNameDelivery=@FirstNameDelivery and AddressDelivery=@AddressDelivery and BirthDateDelivery=@BirthDateDelivery and PhoneNumberDelivery=@PhoneNumberDelivery and EmailDelivery=@EmailDelivery and UsernameLoginDelivery=@UsernameLoginDelivery and PasswordDelivery=@PasswordDelivery and ImageDelivery=@ImageDelivery and nbDeliveries=@nbDeliveries Where Id_Delivery = @Id_Delivery ";
+                    string query = "UPDATE DeliveryMan SET IsWorking = @IsWorking and ID_Location=@ID_Location and ID_workLocation=@ID_workLocation and NameDelivery=@NameDelivery and FirstNameDelivery=@FirstNameDelivery and AddressDelivery=@AddressDelivery and BirthDateDelivery=@BirthDateDelivery and PhoneNumberDelivery=@PhoneNumberDelivery and EmailDelivery=@EmailDelivery and PasswordDelivery=@PasswordDelivery and ImageDelivery=@ImageDelivery and nbDeliveries=@nbDeliveries Where Id_Delivery = @Id_Delivery ";
                     SqlCommand cmd = new SqlCommand(query, cn);
                     cmd.Parameters.AddWithValue("@Id_Delivery", delivery.Id_Delivery);
                     cmd.Parameters.AddWithValue("@locationId", delivery.ID_Location);
@@ -261,7 +257,6 @@ namespace DAL
                     cmd.Parameters.AddWithValue("@birthDate", delivery.BirthDateDelivery);
                     cmd.Parameters.AddWithValue("@phoneNumber", delivery.PhoneNumberDelivery);
                     cmd.Parameters.AddWithValue("@email", delivery.EmailDelivery);
-                    cmd.Parameters.AddWithValue("@login", delivery.UsernameLoginDelivery);
                     cmd.Parameters.AddWithValue("@password", delivery.PasswordDelivery);
                     cmd.Parameters.AddWithValue("@image", delivery.ImageDelivery);
                     cmd.Parameters.AddWithValue("@IsWorking", delivery.IsWorking);
@@ -312,7 +307,6 @@ namespace DAL
                             deliveryMan.BirthDateDelivery = (DateTime)dr["BirthDateDelivery"];
                             deliveryMan.PhoneNumberDelivery = (string)dr["PhoneNumberDelivery"];
                             deliveryMan.EmailDelivery = (string)dr["EmailDelivery"];
-                            deliveryMan.UsernameLoginDelivery = (string)dr["UsernameLoginDelivery"];
                             deliveryMan.PasswordDelivery = (string)dr["PasswordDelivery"];
                             if (dr["ImageDelivery"] != null)
                                 deliveryMan.ImageDelivery = (string)dr["ImageDelivery"];

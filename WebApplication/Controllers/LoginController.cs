@@ -6,6 +6,7 @@ using BLL;
 using WebApplication.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using DTO;
 
 namespace WebApplication.Controllers
 {
@@ -13,13 +14,28 @@ namespace WebApplication.Controllers
     {
         private IDeliveryManManager DeliveryManManager { get; }
         private IPersonManager PersonManager { get; }
-        public LoginController(IDeliveryManManager deliveryManManager, IPersonManager personManager)
+        private ILocationManager LocationManager { get; }
+        public LoginController(IDeliveryManManager deliveryManManager, IPersonManager personManager, ILocationManager locationManager)
         {
             DeliveryManManager = deliveryManManager;
             PersonManager = personManager;
+            LocationManager = locationManager;
         }
 
         public IActionResult Index()
+        {
+            return View();
+        }
+
+        public IActionResult Choice()
+        {
+            return View();
+        }
+        public IActionResult AddDeliveryMan()
+        {
+            return View();
+        }
+        public IActionResult AddPerson()
         {
             return View();
         }
@@ -47,6 +63,88 @@ namespace WebApplication.Controllers
                 ModelState.AddModelError(string.Empty, "Invalid email or password");
             }
             return View(loginVM);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult AddDeliveryMan(AccountVM accountVM)
+        {
+
+            if (ModelState.IsValid)
+            {
+                // Location
+                var idLocation = LocationManager.GetLocationNPACity(accountVM.NPA, accountVM.City);
+                if (idLocation == 0)
+                {
+                    ModelState.AddModelError("NPA", "le NPA ou la ville est incorrect");
+                    return View();
+                }
+                var location = LocationManager.GetLocationID(idLocation);
+
+                // WorkLocation
+                var idWorkLocation = LocationManager.GetLocationNPACity(accountVM.WorkNPA, accountVM.WorkCity);
+                if (idWorkLocation == 0)
+                {
+                    ModelState.AddModelError("WorkNPA", "le NPA ou la ville est incorrect");
+                    return View();
+                }
+                var workLocation = LocationManager.GetLocationID(idWorkLocation);
+
+                // Ajout données deliveryMan
+                DeliveryMan deliveryMan = new DeliveryMan();
+                deliveryMan.AddressDelivery = accountVM.Address;
+                deliveryMan.BirthDateDelivery = accountVM.BirthDate;
+                deliveryMan.EmailDelivery = accountVM.Email;
+                deliveryMan.FirstNameDelivery = accountVM.FirstName;
+                deliveryMan.NameDelivery = accountVM.Name;
+                deliveryMan.PhoneNumberDelivery = accountVM.PhoneNumber;
+                deliveryMan.PasswordDelivery = accountVM.Password;
+                deliveryMan.IsWorking = 0;
+                deliveryMan.nbDeliveries = 0;
+                deliveryMan.ID_Location = location.ID_location;
+                deliveryMan.ID_workLocation = workLocation.ID_location;
+                DeliveryManManager.AddDeliveryMan(deliveryMan);
+
+                // Tout juste, donc retourne à l'index
+                return View("Index");            
+            }
+                        
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult AddPerson(AccountVM accountVM)
+        {
+            if (ModelState.IsValid)
+            {
+                // Location
+                var idLocation = LocationManager.GetLocationNPACity(accountVM.NPA, accountVM.City);
+                if (idLocation == 0)
+                {
+                    ModelState.AddModelError("NPA", "le NPA ou la ville est incorrect");
+                    return View();
+                }
+                var location = LocationManager.GetLocationID(idLocation);
+                                
+                // Ajout données deliveryMan
+                Person person = new Person();
+                person.Address = accountVM.Address;
+                person.BirthDate = accountVM.BirthDate;
+                person.MailAddress = accountVM.Email;
+                person.FirstName = accountVM.FirstName;
+                person.Name = accountVM.Name;
+                person.PhoneNumber = accountVM.PhoneNumber;
+                person.PasswordLogin = accountVM.Password;
+                person.isRestaurant = 0;
+                person.ID_location = location.ID_location;
+                PersonManager.AddPerson(person);
+
+                // Tout juste, donc retourne à l'index
+                return View("Index");
+            }
+
+            return View();
         }
     }
 }
