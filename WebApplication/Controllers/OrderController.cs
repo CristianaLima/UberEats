@@ -58,7 +58,7 @@ namespace WebApplication.Controllers
             // Order
             orderVM.OrderDate = DateTime.Now;
             List<DateTime> dateList = new List<DateTime>();
-            for (int i = 1; i < 10; i++)
+            for (int i = 1; i < 100; i++)
             {
                 if (DateTime.Now.AddMinutes(15 * i).Hour < 23)
                 {

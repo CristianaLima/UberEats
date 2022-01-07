@@ -61,3 +61,19 @@
         </dt>
     </dl>
 </div>
+
+<div>
+    <dl class="row">
+        <dt class="col">
+        </dt>
+        <dt class="col">
+        <dt class="col">
+        </dt>
+        <dt class="col">
+            @if (Model.DelaiLivraison.AddHours(-3) > DateTime.Now)
+            {
+                @Html.ActionLink("Supprimer", "Remove", "Status", new { id = Model.IdOrder }, null)
+            }
+        </dt>
+    </dl>
+</div>

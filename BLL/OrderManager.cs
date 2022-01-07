@@ -70,7 +70,8 @@ namespace BLL
             }
             foreach (var m in deliverymen)
             {
-                if (m.IsWorking == 1)
+                var deliveryOrder = DeliveryOrderListDB.GetDeliveryManFromOrderID(order.ID_Order);
+                if (m.IsWorking == 1 && deliveryOrder.NumStatut!=0)
                 {
                     DateTime min = order.DelaiLivraison.AddMinutes(-15);
                     DateTime max = order.DelaiLivraison.AddMinutes(15);

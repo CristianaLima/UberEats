@@ -273,7 +273,7 @@ namespace DAL
             return delivery;
         }
 
-        public List<DeliveryMan> GetDeliveryManIDLocation(int ID_Location)
+        public List<DeliveryMan> GetDeliveryManIDLocation(int ID_workLocation)
         {
             List<DeliveryMan> results = null;
 
@@ -283,9 +283,9 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = " Select * from DeliveryMan where ID_Location=@ID_Location";
+                    string query = " Select * from DeliveryMan where ID_workLocation=@ID_workLocation";
                     SqlCommand cmd = new SqlCommand(query, cn);
-                    cmd.Parameters.AddWithValue("@ID_Location", ID_Location);
+                    cmd.Parameters.AddWithValue("@ID_workLocation", ID_workLocation);
 
                     cn.Open();
 

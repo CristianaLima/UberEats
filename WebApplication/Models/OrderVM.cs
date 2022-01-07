@@ -7,6 +7,8 @@ namespace WebApplication.Models
 {
     public class OrderVM
     {
+        public int IdOrder { get; set; }
+
         public List<string> DishesName { get; set; }
         public List<int> DishesId { get; set; }
         public List<int> DishesUnitePrice { get; set; }

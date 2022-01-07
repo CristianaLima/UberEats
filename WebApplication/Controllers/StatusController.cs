@@ -56,6 +56,7 @@ namespace WebApplication.Controllers
         public ActionResult Detail(int id)
         {
             OrderVM order = new OrderVM();
+            order.IdOrder = id;
             var orderDishes = OrderDishesManager.GetOrderDishes(id);
             List<string> DishesName = new List<string>();
             List<int> DishesId = new List<int>();
@@ -92,6 +93,15 @@ namespace WebApplication.Controllers
             order.DeliveryManTel = deliveryMan.PhoneNumberDelivery;
 
             return View(order);
+        }
+
+        public ActionResult Remove(int id)
+        {
+            var deliveryOrderList = DeliveryOrderListManager.GetDeliveryFromOrder(id);
+            deliveryOrderList.NumStatut = 0;
+            DeliveryOrderListManager.ModifyStatut(deliveryOrderList);
+
+            return RedirectToAction("Index");
         }
 
         
