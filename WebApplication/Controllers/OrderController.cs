@@ -119,16 +119,18 @@ namespace WebApplication.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Index(OrderVM orderVM)
         {
+            var oldOrder = HttpContext.Session.Get<OrderVM>("Order");
             if (ModelState.IsValid)
             {
                 var idLocation = LocationManager.GetLocationNPACity(orderVM.NPA, orderVM.City);
                 if (idLocation == 0)
                 {
                     ModelState.AddModelError("NPA","le NPA ou la ville est incorrect");
-                    return View(HttpContext.Session.Get<OrderVM>("Order"));
+                    HttpContext.Session.Set<OrderVM>("Order", oldOrder);
+                    return View(oldOrder);
                 }
                 var location = LocationManager.GetLocationID(idLocation);
-                var oldOrder = HttpContext.Session.Get<OrderVM>("Order");
+                
 
 
                 HttpContext.Session.Remove("Order");
@@ -151,20 +153,16 @@ namespace WebApplication.Controllers
                 if(OrderManager.AssignDeliveryMan(order) == null)
                 {
                     ModelState.AddModelError("ListPossibleDate", "Aucun livreur n'est disponible pour le moment");
-                    return View(HttpContext.Session.Get<OrderVM>("Order"));
+                    HttpContext.Session.Set<OrderVM>("Order", oldOrder);
+                    return View(oldOrder);
                 }
-                var deli = OrderManager.AssignDeliveryMan(order);
-
-                List<Order> listOrder = new List<Order>();
-                listOrder.Add(order);
-                HttpContext.Session.Set<List<Order>>("ListOrder",listOrder) ;
-
+                //var deli = OrderManager.AssignDeliveryMan(order);
 
                 return RedirectToAction("Index", "Status");
 
             }
-
-                return View(HttpContext.Session.Get<OrderVM>("Order"));
+            HttpContext.Session.Set<OrderVM>("Order", oldOrder);
+            return View(oldOrder);
         }
     }
 }

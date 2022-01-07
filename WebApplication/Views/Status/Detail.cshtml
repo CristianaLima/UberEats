@@ -1,0 +1,63 @@
+﻿@model WebApplication.Models.OrderVM
+
+@{
+    ViewData["Title"] = "View";
+}
+
+<h4>Livreur</h4>
+<dl class="row">
+    <dt class="col">Nom du livreur :</dt>
+    <dt class="col">
+        @Html.DisplayFor(model => model.DeliveryManName)
+    </dt>
+    <dt class="col">Numéro de téléphone :</dt>
+    <dt class="col">
+        @Html.DisplayFor(model => model.DeliveryManTel)
+    </dt>
+</dl>
+
+
+
+<h4>Commande</h4>
+
+<dl class="row">
+    <dt class="col">Nom</dt>
+    <dt class="col">Prix unitaire</dt>
+    <dt class="col">Quantité</dt>
+    <dt class="col">Prix total</dt>
+</dl>
+
+@for (int i = 0; i < Model.DishesName.Count; i++)
+{
+<dl class="row">
+    <dt class="col">
+        @Html.DisplayFor(model => model.DishesName[i])
+    </dt>
+    <dt class="col">
+        @Html.DisplayFor(model => model.DishesUnitePrice[i])
+    </dt>
+    <dt class="col">
+        
+        @Html.DisplayFor(model => model.Quantity[i])
+       
+    </dt>
+    <dt class="col">
+        @Html.DisplayFor(model => model.DishesTotalPrice[i])
+        
+    </dt>
+</dl>
+    }
+
+
+<div>
+    <dl class="row">
+        <dt class="col">
+        </dt>
+        <dt class="col">
+        <dt class="col">
+        </dt>
+        <dt class="col">
+            @Html.DisplayFor(model => model.TotalPrice)
+        </dt>
+    </dl>
+</div>

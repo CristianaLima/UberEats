@@ -26,5 +26,8 @@ namespace WebApplication.Models
         public int NPA { get; set; }
         public String City { get; set; }
         public String Canton { get; set; }
+
+        public String DeliveryManName { get; set; }
+        public String DeliveryManTel { get; set; }
     }
 }

@@ -107,6 +107,7 @@ namespace DAL
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
                     string query = "Insert into DeliveryOrderList(Id_Delivery, ID_Order, NumStatut) values(@IdDelivery, @IdOrder, @NumSatut); SELECT SCOPE_IDENTITY()";
+                    
                     SqlCommand cmd = new SqlCommand(query, cn);
                     cmd.Parameters.AddWithValue("@IdDelivery", deliveryOrderList.Id_Delivery);
                     cmd.Parameters.AddWithValue("@IdOrder", deliveryOrderList.ID_Order);

@@ -1,0 +1,61 @@
+﻿@model WebApplication.Models.StatusVM
+
+@{
+    ViewData["Title"] = "Statut";
+}
+
+<h1>Statut</h1>
+
+<dl class="row">
+    <dt class="col">N° commande</dt>
+    <dt class="col">Date Commande</dt>
+    <dt class="col">Horaire livraison</dt>
+    <dt class="col">Satut</dt>
+    <dt class="col"></dt>
+</dl>
+
+
+@for (int i = 0; i < Model.orders.Count; i++)
+{
+<dl class="row">
+    <dt class="col">
+        @Html.DisplayFor(model => model.orders[i].ID_Order)
+    </dt>
+    <dt class="col">
+        @Html.DisplayFor(model => model.orders[i].OrderDate)
+    </dt>
+    <dt class="col">
+        @Html.DisplayFor(model => model.orders[i].DelaiLivraison)
+    </dt>
+    <dt class="col">
+        @switch (Model.status[i])
+        {
+            case 0:
+                {
+                    <label>Annuler</label>
+                    break;
+                }
+            case 1:
+                {
+                    <label>En cours de traitement</label>
+                    break;
+                }
+            case 2:
+                {
+                    <label>En cours de livraison</label>
+                    break;
+                }
+            case 3:
+                {
+                    <label>Livré</label>
+                    break;
+                }
+
+        }
+
+    </dt>
+    <dt class="col">
+        @Html.ActionLink("voir détails", "Detail", "Status", new { id = Model.orders[i].ID_Order }, null)
+    </dt>
+</dl>
+}

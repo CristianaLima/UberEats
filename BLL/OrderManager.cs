@@ -63,6 +63,11 @@ namespace BLL
             // aller chercher la worklocation des deliveryMan
             List<DeliveryMan> deliverymen = DeliveryManDB.GetDeliveryManIDLocation(locationRestaurant.ID_location);
             int minNB = 1000, idMin = -1;
+            if(deliverymen == null)
+            {
+                DeliveryMan deli = null;
+                return deli;
+            }
             foreach (var m in deliverymen)
             {
                 if (m.IsWorking == 1)
