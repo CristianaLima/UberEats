@@ -38,6 +38,7 @@ namespace WebApplication.Controllers
             int idPerson = (int) HttpContext.Session.GetInt32("IdPerson");
             var listOrders = OrderManager.GetOrderIDPerson(idPerson);
             List<int> listNumStatut = new List<int>();
+            StatusVM status = new StatusVM();
             if (listOrders != null)
             {
                 foreach (var order in listOrders)
@@ -45,7 +46,7 @@ namespace WebApplication.Controllers
                     var deliveryOrderList = DeliveryOrderListManager.GetDeliveryFromOrder(order.ID_Order);
                     listNumStatut.Add(deliveryOrderList.NumStatut);
                 }
-                StatusVM status = new StatusVM();
+                
                 status.orders = listOrders;
                 status.status = listNumStatut;
             }
