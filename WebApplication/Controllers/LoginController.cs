@@ -148,5 +148,12 @@ namespace WebApplication.Controllers
 
             return View();
         }
+
+        public IActionResult Logout()
+        {
+            HttpContext.Session.Remove("IdDeliveryMan");
+            HttpContext.Session.Remove("IdPerson");
+            return View("Index");
+        }
     }
 }
