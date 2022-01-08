@@ -16,6 +16,7 @@
 </dl>
 
 
+@if (Model.orders != null) { 
 
 @for (int i = 0; i < Model.orders.Count; i++)
 {
@@ -96,7 +97,7 @@
         </div>
     }
 }
-
+}
 
 
 
