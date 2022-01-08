@@ -103,6 +103,7 @@ namespace WebApplication.Controllers
                 deliveryMan.nbDeliveries = 0;
                 deliveryMan.ID_Location = location.ID_location;
                 deliveryMan.ID_workLocation = workLocation.ID_location;
+                deliveryMan.ImageDelivery = "limagedudeliveryman";
                 DeliveryManManager.AddDeliveryMan(deliveryMan);
 
                 // Tout juste, donc retourne à l'index
@@ -138,6 +139,7 @@ namespace WebApplication.Controllers
                 person.PasswordLogin = accountVM.Password;
                 person.isRestaurant = 0;
                 person.ID_location = location.ID_location;
+                person.PersonImage = "limagedelapersonne";
                 PersonManager.AddPerson(person);
 
                 // Tout juste, donc retourne à l'index

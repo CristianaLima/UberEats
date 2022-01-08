@@ -199,6 +199,7 @@ namespace DAL
                     cn.Open();
 
                     delivery.Id_Delivery = Convert.ToInt32(cmd.ExecuteScalar());
+                    cmd.ExecuteNonQuery();
                 }
             }
             catch (Exception e)

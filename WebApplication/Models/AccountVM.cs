@@ -25,14 +25,11 @@ namespace WebApplication.Models
         public string PhoneNumber { get; set; }
 
 
-
         [Required]
         public string City { get; set; }
         [Required]
         public int NPA { get; set; }
-        [Required]
         public string WorkCity { get; set; }
-        [Required]
         public int WorkNPA { get; set; }
 
     }

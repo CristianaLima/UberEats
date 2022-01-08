@@ -22,7 +22,7 @@
                 <span asp-validation-for="Password" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <a class="btn" asp-action="Choice">Créer un compte</a>
+                <a @Html.ActionLink("Créer un compte","Choice", "Login")</a>
             </div>
             <div class="form-group">
                 <input type="submit" value="Login" class="btn btn-primary" />

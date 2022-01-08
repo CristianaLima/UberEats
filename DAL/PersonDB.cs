@@ -236,6 +236,7 @@ namespace DAL
                     cn.Open();
 
                     person.ID_person = Convert.ToInt32(cmd.ExecuteScalar());
+                    cmd.ExecuteNonQuery();
                 }
             }
             catch (Exception e)
