@@ -46,9 +46,10 @@ namespace BLL
             return DishesDB.ChangeAvailabilityDish(ID_Dish, isDishAvailable);
         }
 
+        //To get a list of restaurants with its dishName
         public List<Restaurant> GetRestaurantFromDish(string DishName)
         {
-
+            //pour avoir la liste de plat
             List<Dishes> dishes = DishesDB.GetDish(DishName);
             var restaurants = new List<Restaurant>();
             foreach (var m in dishes)

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace WebApplication.Models
 {
+    //for all the persons need to see them orders
     public class StatusVM
     {
         public List<Order> orders { get; set; }

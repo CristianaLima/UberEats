@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 
 namespace WebApplication.Models
 {
+    //all informations that the client need to know about his/her order
     public class OrderVM
     {
         public int IdOrder { get; set; }

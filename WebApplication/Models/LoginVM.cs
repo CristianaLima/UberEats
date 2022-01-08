@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace WebApplication.Models
 {
+    //To login
     public class LoginVM
     {
         [Required]

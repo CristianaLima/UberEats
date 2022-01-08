@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 
 namespace WebApplication.Models
 {
+    //To have all the informations about the cart
     public class CartVM
     {
         public List<string> DishesName { get; set; }

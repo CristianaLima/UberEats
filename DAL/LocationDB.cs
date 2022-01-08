@@ -18,6 +18,7 @@ namespace DAL
             Configuration = configuration;
         }
 
+        //To get all the locations
         public List<Location> GetLocations()
         {
             List<Location> results = null;
@@ -64,6 +65,8 @@ namespace DAL
 
 
         }
+
+        //To get the location with its NPA
         public Location GetLocationNPA(int NPA)
         {
             Location location = null;
@@ -106,6 +109,7 @@ namespace DAL
 
         }
 
+        //To get a location with its id
         public Location GetLocationID(int IdLocation)
         {
             Location location = null;
@@ -148,6 +152,7 @@ namespace DAL
 
         }
 
+        //To get a location with its name of the city
         public Location GetLocationCity(string City)
         {
             Location location = null;
@@ -190,6 +195,7 @@ namespace DAL
 
         }
 
+        //To get the id of a location with its NPA and its name of the city
         public int GetLocationNPACity(int NPA, string City)
         {
             Location location = null;
@@ -236,6 +242,8 @@ namespace DAL
             return location.ID_location;
 
         }
+
+        //To get a list of locations with its initials of the canton
         public List<Location> GetLocationCanton(string Canton)
         {
             List<Location> results = null;

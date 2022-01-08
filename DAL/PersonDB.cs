@@ -19,6 +19,7 @@ namespace DAL
             Configuration = configuration;
         }
 
+        //To get all the persons in the database
         public List<Person> GetPeople()
         {
             List<Person> results = null;
@@ -84,6 +85,7 @@ namespace DAL
         }
 
 
+        //To get a person with his/her email and his/her password
         public Person GetPerson(string MailAddress, string UsernamePassword)
         {
             Person person = null;
@@ -147,7 +149,7 @@ namespace DAL
             return person;
         }
 
-
+        //To get a person with his/her id
         public Person GetPersonID(int ID_person)
         {
             Person person = null;
@@ -211,6 +213,7 @@ namespace DAL
             return person;
         }
 
+        //To add a person in the database
         public Person AddPerson(Person person)
         {
             string connectionString = "Data Source = 153.109.124.35; Initial Catalog = UberEat_Theo_Cristiana; Integrated Security = False; User Id = 6231db; Password = Pwd46231.; MultipleActiveResultSets = True";
@@ -247,6 +250,7 @@ namespace DAL
             return person;
         }
 
+        //To modify a person
         public Person ModifyAllPerson(Person person)
         {
             string connectionString = "Data Source = 153.109.124.35; Initial Catalog = UberEat_Theo_Cristiana; Integrated Security = False; User Id = 6231db; Password = Pwd46231.; MultipleActiveResultSets = True";
@@ -280,6 +284,8 @@ namespace DAL
             return person;
             
         }
+
+        //To get a list of person with them idLocation
         public List<Person> GetPersonIDLocation(int IdLocation)
         {
             List<Person> results = null;

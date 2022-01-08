@@ -18,7 +18,7 @@ namespace DAL
             Configuration = configuration;
         }
 
-
+        //To get the restaurantDishes with the id of the dish
         public RestaurantDishes GetRestaurant(int ID_Dish)
         {
             RestaurantDishes restaurantDishes = null;
@@ -59,6 +59,7 @@ namespace DAL
             return restaurantDishes;
         }
 
+        //To get a list of restaurantDishes with the id of the restaurant
         public List<RestaurantDishes> GetDishes(int ID_restaurant)
         {
             List<RestaurantDishes> results = null;
@@ -102,6 +103,7 @@ namespace DAL
             return results;
         }
 
+        //To add a restaurantDishes to the database
         public RestaurantDishes AddRestaurantDishes(RestaurantDishes restaurantDishes)
         {
             string connectionString = "Data Source = 153.109.124.35; Initial Catalog = UberEat_Theo_Cristiana; Integrated Security = False; User Id = 6231db; Password = Pwd46231.; MultipleActiveResultSets = True";

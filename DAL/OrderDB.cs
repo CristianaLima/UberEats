@@ -18,6 +18,7 @@ namespace DAL
             Configuration = configuration;
         }
 
+        //To get all orders
         public List<Order> GetOrders()
         {
             List<Order> results = null;
@@ -64,7 +65,7 @@ namespace DAL
         }
 
 
-
+        // To get the id of the order with the id of the person and the dateTime it was made
         public int GetOrderID(int ID_person, DateTime OrderDate)
         {
             Order order = null;
@@ -108,7 +109,7 @@ namespace DAL
         }
 
 
-
+        //To add a order to the database
         public Order AddOrder(Order order)
         {
 
@@ -144,6 +145,7 @@ namespace DAL
             return order;
         }
 
+        //To get a list of orders with the id of the person
         public List<Order> GetOrderIDPerson(int idPerson)
         {
             List<Order> results = null;
@@ -191,6 +193,7 @@ namespace DAL
             return results;
         }
 
+        //To get a order with its id
         public Order GetOrderIDOrder(int ID_Order)
         {
             Order order = null;
@@ -233,6 +236,7 @@ namespace DAL
             return order;
         }
 
+        //To modify a order
         public Order ModifyAllOrder(Order order)
         {
             string connectionString = "Data Source = 153.109.124.35; Initial Catalog = UberEat_Theo_Cristiana; Integrated Security = False; User Id = 6231db; Password = Pwd46231.; MultipleActiveResultSets = True";
@@ -258,6 +262,7 @@ namespace DAL
             return order;
         }
 
+        //To remove a order with its id
         public void Remove(int idorder)
         {
             string connectionString = "Data Source = 153.109.124.35; Initial Catalog = UberEat_Theo_Cristiana; Integrated Security = False; User Id = 6231db; Password = Pwd46231.; MultipleActiveResultSets = True";

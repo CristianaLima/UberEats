@@ -22,7 +22,7 @@
             @Html.DisplayFor(model => model.DishesName[i])
         </dt>
         <dt class="col">
-            @Html.DisplayFor(model => model.DishesUnitePrice[i])
+            @Html.DisplayFor(model => model.DishesUnitePrice[i]).00 CHF
         </dt>
         <dt class="col">
             @Html.ActionLink("<=", "Less", "Cart", new { id = Model.DishesId[i] }, null)
@@ -30,7 +30,7 @@
             @Html.ActionLink("=>", "More", "Cart", new { id = Model.DishesId[i] }, null)
         </dt>
         <dt class="col">
-            @Html.DisplayFor(model => model.DishesTotalPrice[i])
+            @Html.DisplayFor(model => model.DishesTotalPrice[i]).00 CHF
             @Html.ActionLink("  X", "Remove", "Cart", new { id = Model.DishesId[i] }, null)
         </dt>
     </dl>
@@ -45,7 +45,7 @@
         <dt class="col">
         </dt>
         <dt class="col">
-            @Html.DisplayFor(model => model.TotalPrice)
+            @Html.DisplayFor(model => model.TotalPrice).00 CHF
         </dt>
     </dl>
     <dl class="row">

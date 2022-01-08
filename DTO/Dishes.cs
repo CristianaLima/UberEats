@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace DTO
 {
+    //To have all informations about a dish
     public class Dishes
     {
         public int ID_Dishes { get; set; }
@@ -15,6 +16,7 @@ namespace DTO
         public string DishImage { get; set; }
         public int isDishAvailable { get; set; }
 
+        //To write the informations of the dish
         public override string ToString()
         {
             return " ID_Dishes: " + ID_Dishes +

@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 
 namespace WebApplication.Models
 {
+    //To have all informations that the deliveryman can delivery the order
     public class DeliveryOrderDetailVM
     {
         public List<string> DishesName { get; set; }

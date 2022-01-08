@@ -35,7 +35,7 @@
                 @Html.ActionLink(item.DishesName[i], "Dishes", "Home", new { id = item.DishesId[i] }, null)
             </p>
             <p>
-                <b>Prix: </b>@Html.DisplayFor(modelItem => item.DishesPrice[i])
+                <b>Prix: </b>@Html.DisplayFor(modelItem => item.DishesPrice[i]).00 CHF
             </p>
             <br />
             }

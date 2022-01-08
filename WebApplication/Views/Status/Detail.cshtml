@@ -34,7 +34,7 @@
         @Html.DisplayFor(model => model.DishesName[i])
     </dt>
     <dt class="col">
-        @Html.DisplayFor(model => model.DishesUnitePrice[i])
+        @Html.DisplayFor(model => model.DishesUnitePrice[i]).00 CHF
     </dt>
     <dt class="col">
         
@@ -42,8 +42,8 @@
        
     </dt>
     <dt class="col">
-        @Html.DisplayFor(model => model.DishesTotalPrice[i])
-        
+        @Html.DisplayFor(model => model.DishesTotalPrice[i]).00 CHF
+
     </dt>
 </dl>
     }
@@ -57,7 +57,7 @@
         <dt class="col">
         </dt>
         <dt class="col">
-            @Html.DisplayFor(model => model.TotalPrice)
+            @Html.DisplayFor(model => model.TotalPrice).00 CHF
         </dt>
     </dl>
 </div>

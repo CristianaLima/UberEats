@@ -28,81 +28,80 @@ namespace WebApplication.Controllers
 
         public IActionResult Index()
         {
+            //verifie que la person est bien connecte
             if (HttpContext.Session.GetInt32("IdPerson") == null)
                 return RedirectToAction("Index", "Login");
+
             List<RestaurantDishesVM> restaurantsDishes = new List<RestaurantDishesVM>();
+            //va chercher tout les restaurants
             var restaurants = RestaurantManager.GetRestaurants();
             foreach(var restaurant in restaurants)
             {
-                
-                var dishes = RestaurantManager.GetDishesFromRestaurant(restaurant.RestaurantName);
-                RestaurantDishesVM restaurantDishes = new RestaurantDishesVM();
-                restaurantDishes.RestaurantName = restaurant.RestaurantName;
-                restaurantDishes.RestaurantAddress = restaurant.RestaurantAddress;
-                restaurantDishes.RestaurantImage = restaurant.RestaurantImage;
-                restaurantDishes.RestaurantId = restaurant.ID_restaurant;
+                //verifie que le restaurant est actif
+                if (restaurant.IsRestaurantAvailable == 1) { 
+                    //va chercher tout les plats du restaurant
+                    var dishes = RestaurantManager.GetDishesFromRestaurant(restaurant.RestaurantName);
+                    RestaurantDishesVM restaurantDishes = new RestaurantDishesVM();
+                    restaurantDishes.RestaurantName = restaurant.RestaurantName;
+                    restaurantDishes.RestaurantAddress = restaurant.RestaurantAddress;
+                    restaurantDishes.RestaurantImage = restaurant.RestaurantImage;
+                    restaurantDishes.RestaurantId = restaurant.ID_restaurant;
 
-                List<String> dishName = null;
-                List<String> dishDescription = null;
-                List<int> dishPrice = null;
-                List<String> dishImage = null;
-                List<int> dishId = null;
-                foreach (var dish in dishes)
-                {
-                    if (dish.isDishAvailable == 1)
+                    List<String> dishName = null;
+                    List<String> dishDescription = null;
+                    List<int> dishPrice = null;
+                    List<String> dishImage = null;
+                    List<int> dishId = null;
+                    foreach (var dish in dishes)
                     {
-
-
-                        if (dishDescription == null)
+                        //regarde si le plat est actif
+                        if (dish.isDishAvailable == 1)
                         {
-                            dishName = new List<string>();
-                            dishDescription = new List<string>();
-                            dishPrice = new List<int>();
-                            dishImage = new List<string>();
-                            dishId = new List<int>();
-                        }
+
+
+                            if (dishDescription == null)
+                            {
+                                dishName = new List<string>();
+                                dishDescription = new List<string>();
+                                dishPrice = new List<int>();
+                                dishImage = new List<string>();
+                                dishId = new List<int>();
+                            }
 
 
 
-                        dishName.Add(dish.DishesName);
-                        dishDescription.Add(dish.DishesDescription);
-                        dishPrice.Add(dish.DishesPrice);
-                        dishImage.Add(dish.DishImage);
-                        dishId.Add(dish.ID_Dishes);
+                            dishName.Add(dish.DishesName);
+                            dishDescription.Add(dish.DishesDescription);
+                            dishPrice.Add(dish.DishesPrice);
+                            dishImage.Add(dish.DishImage);
+                            dishId.Add(dish.ID_Dishes);
 
-                    } 
+                        } 
+                    }
+                    restaurantDishes.DishesName = dishName;
+                    restaurantDishes.DishesDescription = dishDescription;
+                    restaurantDishes.DishesPrice = dishPrice;
+                    restaurantDishes.DishImage = dishImage;
+                    restaurantDishes.DishesId = dishId;
+
+                    restaurantsDishes.Add(restaurantDishes);
                 }
-                restaurantDishes.DishesName = dishName;
-                restaurantDishes.DishesDescription = dishDescription;
-                restaurantDishes.DishesPrice = dishPrice;
-                restaurantDishes.DishImage = dishImage;
-                restaurantDishes.DishesId = dishId;
-
-                restaurantsDishes.Add(restaurantDishes);
             }
 
             return View(restaurantsDishes);
         }
-       
-
-        public IActionResult Privacy()
-        {
-            if (HttpContext.Session.GetInt32("IdPerson") == null)
-                return RedirectToAction("Index", "Login");
-
-            return View();
-        }
-
-     
         public IActionResult Choice(int id)
         {
+            //verifie que la person est bien connecte
             if (HttpContext.Session.GetInt32("IdPerson") == null)
                 return RedirectToAction("Index", "Login");
 
             List<int> idDishes = new List<int>();
+            //regarde si listIdDishes est deja dans les sessions ou pas
             if ( HttpContext.Session.Get<List<int>>("listIdDishes")==null)
             {               
                 idDishes.Add(id);
+                //creer listIdDishes dans les sessions
                 HttpContext.Session.Set<List<int>>("listIdDishes",idDishes);
             }
             else
@@ -124,6 +123,7 @@ namespace WebApplication.Controllers
 
         public IActionResult Dishes(int id)
         {
+            //verifie que la person est bien connecte
             if (HttpContext.Session.GetInt32("IdPerson") == null)
                 return RedirectToAction("Index", "Login");
 

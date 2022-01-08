@@ -18,6 +18,7 @@ namespace DAL
             Configuration = configuration;
         }
 
+        //To get all the deliveryOrderList
         public List<DeliveryOrderList> GetDeliveryOrderLists()
         {
             List<DeliveryOrderList> results = null;
@@ -58,6 +59,7 @@ namespace DAL
             return results;
         }
 
+        //To get a list of deliveryOrderList with the idDeliveryman
         public List<DeliveryOrderList> GetDeliveryOrderList(int IdDeliveryMan)
         {
             List<DeliveryOrderList> results = null;
@@ -98,6 +100,7 @@ namespace DAL
             return results;
         }
 
+        //To add a deliveryOrderList to the database
         public DeliveryOrderList AddDeliveryOrderList(DeliveryOrderList deliveryOrderList)
         {
             string connectionString = "Data Source = 153.109.124.35; Initial Catalog = UberEat_Theo_Cristiana; Integrated Security = False; User Id = 6231db; Password = Pwd46231.; MultipleActiveResultSets = True";
@@ -126,6 +129,11 @@ namespace DAL
 
         }
 
+        //To modify the deliveryOrderList
+        //If the number of the statut is 0, the order is cancel
+        //If the number of the statut is 1, the order is being processed
+        //If the number of the statut is 2, the order is being delivered
+        //If the number of the statut is 3, the order is delivered
         public DeliveryOrderList ModifyStatut(DeliveryOrderList deliveryOrderList)
         {
             string connectionString = "Data Source = 153.109.124.35; Initial Catalog = UberEat_Theo_Cristiana; Integrated Security = False; User Id = 6231db; Password = Pwd46231.; MultipleActiveResultSets = True";
@@ -154,6 +162,7 @@ namespace DAL
 
         }
 
+        //To get a deliveryOrderList with its idOrder
         public DeliveryOrderList GetDeliveryManFromOrderID(int OrderID)
         {
             DeliveryOrderList deliveryOrderList = null;

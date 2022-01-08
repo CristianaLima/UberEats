@@ -44,11 +44,14 @@ namespace WebApplication.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Index(LoginVM loginVM)
         {
+            //voit si toutes les informations son bien mises
             if (ModelState.IsValid)
             {
+                //va chercher le livreur et la personne
                 var deliveryMan = DeliveryManManager.GetDeliveryMan(loginVM.Email, loginVM.Password);
                 var person = PersonManager.GetPerson(loginVM.Email, loginVM.Password);
 
+                //mais dans la session la personne ou le livreur
                 if (deliveryMan != null)
                 {
                     HttpContext.Session.SetInt32("IdDeliveryMan", deliveryMan.Id_Delivery);
@@ -69,10 +72,10 @@ namespace WebApplication.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult AddDeliveryMan(AccountVM accountVM)
         {
-
+            //voit si toutes les informations son bien mises
             if (ModelState.IsValid)
             {
-                // Location
+                //verifie que la Location soit correcte
                 var idLocation = LocationManager.GetLocationNPACity(accountVM.NPA, accountVM.City);
                 if (idLocation == 0)
                 {
@@ -81,7 +84,7 @@ namespace WebApplication.Controllers
                 }
                 var location = LocationManager.GetLocationID(idLocation);
 
-                // WorkLocation
+                //verifie que la WorkLocation soit correcte
                 var idWorkLocation = LocationManager.GetLocationNPACity(accountVM.WorkNPA, accountVM.WorkCity);
                 if (idWorkLocation == 0)
                 {
@@ -117,9 +120,10 @@ namespace WebApplication.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult AddPerson(AccountVM accountVM)
         {
+            //voit si toutes les informations son bien mises
             if (ModelState.IsValid)
             {
-                // Location
+                //verifie que la Location soit correcte
                 var idLocation = LocationManager.GetLocationNPACity(accountVM.NPA, accountVM.City);
                 if (idLocation == 0)
                 {
@@ -151,6 +155,7 @@ namespace WebApplication.Controllers
 
         public IActionResult Logout()
         {
+            //supprime l'id de la personne et du livreur
             HttpContext.Session.Remove("IdDeliveryMan");
             HttpContext.Session.Remove("IdPerson");
             return View("Index");

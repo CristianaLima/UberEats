@@ -18,6 +18,7 @@ namespace DAL
             Configuration = configuration;
         }
 
+        //To get all the workLocations
         public List<WorkLocation> GetWorkLocations()
         {
             List<WorkLocation> results = null;
@@ -63,7 +64,7 @@ namespace DAL
             return results;
         }
 
-
+        //To get the id of the workLocation with the NPA and the name of the City
         public int GetWorkLocationNPACity(int NPA_Work, string CityWork)
         {
             WorkLocation workLocation = null;
@@ -102,6 +103,7 @@ namespace DAL
             return workLocation.ID_workLocation;
         }
 
+        //To get the workLocation with it id
         public WorkLocation GetWorkLocationID(int IdWorkLocation)
         {
             WorkLocation workLocation = null;
@@ -144,6 +146,7 @@ namespace DAL
 
         }
 
+        //To get the workLocation with the name of the city
         public WorkLocation GetWorkLocationCity(string City)
         {
             WorkLocation workLocation = null;
@@ -186,6 +189,7 @@ namespace DAL
 
         }
 
+        //To get a list of workLocations with the initials of the canton
         public List<WorkLocation> GetWorkLocationCanton(string Canton)
         {
             List<WorkLocation> results = null;

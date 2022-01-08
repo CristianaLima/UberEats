@@ -18,6 +18,7 @@ namespace DAL
             Configuration = configuration;
         }
 
+        //To have all the restaurants
         public List<Restaurant> GetRestaurants()
         {
             List<Restaurant> results = null;
@@ -67,7 +68,7 @@ namespace DAL
             return results;
         }
 
-
+        //To get the restaurant with its name
         public Restaurant GetRestaurant(string RestaurantName)
         {
             Restaurant restaurant = null;
@@ -114,6 +115,7 @@ namespace DAL
             return restaurant;
         }
 
+        //To get the restaurant with its id
         public Restaurant GetRestaurantID(int ID_Restaurant)
         {
             Restaurant restaurant = null;
@@ -160,6 +162,7 @@ namespace DAL
             return restaurant;
         }
 
+        //To add a restaurant to the database
         public Restaurant AddRestaurant(Restaurant restaurant)
         {
 
@@ -195,6 +198,9 @@ namespace DAL
             return restaurant;
         }
 
+        //To change the availability of the restaurant
+        //If the availability is 0, it's closed
+        // If the availability is 1, it's open
         public Restaurant ChangeAvailabilityRestaurant(int ID_restaurant, int IsRestaurantAvailable)
         {
 
@@ -225,6 +231,7 @@ namespace DAL
             return restaurant;
         }
 
+        //To get a list of restaurant with a id of the location
         public List<Restaurant> GetRestaurantIDLocation( int IdLocation)
         {
             List<Restaurant> results = null;
@@ -274,6 +281,7 @@ namespace DAL
             return results;
         }
 
+        //To modify a restaurant
         public Restaurant ModifyAllRestaurant(Restaurant restaurant)
         {
             string connectionString = "Data Source = 153.109.124.35; Initial Catalog = UberEat_Theo_Cristiana; Integrated Security = False; User Id = 6231db; Password = Pwd46231.; MultipleActiveResultSets = True";

@@ -62,7 +62,7 @@ namespace BLL
 
             //on a l'ID du resto, on veut maintenant l'ID des Dishes 
             var restaurantDishes = RestaurantDishesDB.GetDishes(restaurantID);
-            //on crée ensuite la variable de liste de dishes
+            //on cree ensuite la variable de liste de dishes
             var dishes = new List<Dishes>();
             foreach (var m in restaurantDishes)
             {

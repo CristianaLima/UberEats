@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 
 namespace WebApplication.Models
 {
+    //To display the restaurant with its dishes
     public class RestaurantDishesVM
     {
         public string RestaurantName { get; set; }

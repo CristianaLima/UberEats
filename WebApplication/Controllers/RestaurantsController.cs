@@ -19,7 +19,8 @@ namespace WebApplication.Controllers
         // GET: RestaurantsController
         public ActionResult Index()
         {
-            if(HttpContext.Session.GetInt32("IdDeliveryMan") == null)
+            //verifie que la person ou le livreur est bien connecte
+            if (HttpContext.Session.GetInt32("IdDeliveryMan") == null)
             {
                 if (HttpContext.Session.GetInt32("IdPerson") == null)
                     return RedirectToAction("Index", "Login");
@@ -32,6 +33,7 @@ namespace WebApplication.Controllers
         // GET: RestaurantsController/Details/5
         public ActionResult Details(int id)
         {
+            //verifie que la person ou le livreur est bien connecte
             if (HttpContext.Session.GetInt32("IdDeliveryMan") == null)
             {
                 if (HttpContext.Session.GetInt32("IdPerson") == null)
@@ -43,6 +45,7 @@ namespace WebApplication.Controllers
         // GET: RestaurantsController/Create
         public ActionResult Create()
         {
+            //verifie que la person ou le livreur est bien connecte
             if (HttpContext.Session.GetInt32("IdDeliveryMan") == null)
             {
                 if (HttpContext.Session.GetInt32("IdPerson") == null)
@@ -56,6 +59,7 @@ namespace WebApplication.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(IFormCollection collection)
         {
+            //verifie que la person ou le livreur est bien connecte
             if (HttpContext.Session.GetInt32("IdDeliveryMan") == null)
             {
                 if (HttpContext.Session.GetInt32("IdPerson") == null)
@@ -74,6 +78,7 @@ namespace WebApplication.Controllers
         // GET: RestaurantsController/Edit/5
         public ActionResult Edit(int id)
         {
+            //verifie que la person ou le livreur est bien connecte
             if (HttpContext.Session.GetInt32("IdDeliveryMan") == null)
             {
                 if (HttpContext.Session.GetInt32("IdPerson") == null)
@@ -88,6 +93,7 @@ namespace WebApplication.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(DTO.Restaurant r)
         {
+            //verifie que la person ou le livreur est bien connecte
             if (HttpContext.Session.GetInt32("IdDeliveryMan") == null)
             {
                 if (HttpContext.Session.GetInt32("IdPerson") == null)
@@ -107,6 +113,7 @@ namespace WebApplication.Controllers
         // GET: RestaurantsController/Delete/5
         public ActionResult Delete(int id)
         {
+            //verifie que la person ou le livreur est bien connecte
             if (HttpContext.Session.GetInt32("IdDeliveryMan") == null)
             {
                 if (HttpContext.Session.GetInt32("IdPerson") == null)
@@ -120,6 +127,7 @@ namespace WebApplication.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id, IFormCollection collection)
         {
+            //verifie que la person ou le livreur est bien connecte
             if (HttpContext.Session.GetInt32("IdDeliveryMan") == null)
             {
                 if (HttpContext.Session.GetInt32("IdPerson") == null)

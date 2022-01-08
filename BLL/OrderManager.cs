@@ -48,9 +48,10 @@ namespace BLL
             return OrderDB.AddOrder(order);
         }
 
+        //To assign a deliveryman to a order
         public DeliveryMan AssignDeliveryMan(Order order)
         {
-            //1. retourner la liste des DeliveryMan dans la région du restaurant
+            //1. retourner la liste des DeliveryMan dans la region du restaurant
             //   aller rechercher la location du restaurant
             List<OrderDishes> orderDishes = OrderDishesDB.GetOrderDishes(order.ID_Order);
             //Console.WriteLine(orderDishes.First().ToString);
@@ -63,6 +64,7 @@ namespace BLL
             // aller chercher la worklocation des deliveryMan
             List<DeliveryMan> deliverymen = DeliveryManDB.GetDeliveryManIDLocation(locationRestaurant.ID_location);
             int minNB = 1000, idMin = -1;
+            //S'il n'a pas de deliveryman alors il retourne null
             if(deliverymen == null)
             {
                 DeliveryMan deli = null;
@@ -70,14 +72,18 @@ namespace BLL
             }
             foreach (var m in deliverymen)
             {
-                
+                // regarde s'il travail
                 if (m.IsWorking == 1)
                 {
+                    // pour savoir le nombre de commande il a deja a faire entre avant et apres 15 minutes
+                    //de l'horaire de livraison de la nouvelle commande
                     DateTime min = order.DelaiLivraison.AddMinutes(-15);
                     DateTime max = order.DelaiLivraison.AddMinutes(15);
                     int nb = NbDeliveries(m.Id_Delivery, min, max);
+                    //S'il est plus petit que 5, on peut lui assigner cette commande
                     if (nb < 5)
                     {
+                        //On prend le livreur qui a le moins de commande a livrer
                         if (nb < minNB)
                         {
                             minNB = nb;
@@ -86,14 +92,14 @@ namespace BLL
                     }
                 }
             }
-
+            //Si idMin est egale a -1 ça veut dire qu'il n'y a pas de livreur disponible
             if (idMin == -1)
             {
                 DeliveryMan deli = null;
                 return deli;
             }
             
-            Console.WriteLine(minNB + " " + idMin);
+            //assigne le livreur a la commande
             DeliveryOrderList deliveryOrderList = DeliveryOrderListDB.AddDeliveryOrderList(new DeliveryOrderList { Id_Delivery = idMin, ID_Order = order.ID_Order, NumStatut = 1 });
             
             return DeliveryManDB.GetDeliveryManID(idMin);
@@ -114,8 +120,10 @@ namespace BLL
             return OrderDB.GetOrderIDOrder(IdOrder);
         }
 
+        //To get a list of dishes with its idOrder
         public List<Dishes> GetDishesFromOrder(int OrderID)
         {
+            //avec cette methode on a une list de orderDishes et nous voulons une liste de dishes
             var dishesOrder = OrderDishesDB.GetOrderDishes(OrderID);
             var dishes = new List<Dishes>();
 
@@ -143,6 +151,7 @@ namespace BLL
             return OrderDB.ModifyAllOrder(order);
         }
 
+        //To get the number of deliveries by a deliveryman at a given time
         public int NbDeliveries(int ID_DeliveryMan, DateTime minimum, DateTime maximum)
         {
             //aller chercher les orders du deliveryMan
@@ -150,8 +159,10 @@ namespace BLL
             int nbDeliveries = 0;
             foreach (var m in deliveriesOrderList)
             {
+                //on compte seulement les commandes qui ne sont pas annule
                 if(m.NumStatut!=0) {
                 Order order = OrderDB.GetOrderIDOrder(m.ID_Order);
+                //verifie si la commande rentre dans le temps donne
                 if (order.DelaiLivraison > minimum && order.DelaiLivraison < maximum)
                 {
                     nbDeliveries++;

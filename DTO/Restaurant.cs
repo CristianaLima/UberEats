@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace DTO
 {
+    //To have the informations about a restaurant
     public class Restaurant
     {
         public int ID_restaurant { get; set; }
@@ -15,6 +16,7 @@ namespace DTO
         public string RestaurantImage { get; set; }
         public int IsRestaurantAvailable { get; set; }
 
+        //To write the informations of the Restaurant
         public override string ToString()
         {
             return  " ID_Restaurant " + ID_restaurant +

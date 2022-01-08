@@ -49,18 +49,20 @@ namespace BLL
             return LocationDb.GetLocationCanton(Canton);
         }
 
+        //To get a list of restaurant with the initials of the canton
         public List<Restaurant> GetRestaurantsFromLocation(string Canton)
         {
+            //va cherche les location avec le canton
             var locations = LocationDb.GetLocationCanton(Canton);
 
             var restaurants = new List<Restaurant>();
 
             foreach (var m in locations)
             {
-                var restaurantss = RestaurantDB.GetRestaurantIDLocation(m.ID_location);
-                if (restaurantss != null)
+                var restaurant = RestaurantDB.GetRestaurantIDLocation(m.ID_location);
+                if (restaurant != null)
                 {
-                    restaurants.AddRange(restaurantss);
+                    restaurants.AddRange(restaurant);
                 }
             }
 

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace WebApplication.Models
 {
+   
     public static class SessionExtensions
     {
         public static void Set<T>(this ISession session, string key, T value)

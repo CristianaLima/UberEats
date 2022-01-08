@@ -58,9 +58,12 @@ namespace BLL
             return DeliveryManDB.ChangeIsWorking(IdDelivery, IsWorking);
         }
 
+        //To get a list of orders with the email and password of the deliveryman
         public List<Order> GetOrders(string login, string password)
         {
+            //va chercher le livreur
             DeliveryMan deliveryMan = DeliveryManDB.GetDeliveryMan(login, password);
+            //va chercher les deliveryOrderLists avec le livreur
             List<DeliveryOrderList> deliveryOrderLists = DeliveryOrderListDb.GetDeliveryOrderList(deliveryMan.Id_Delivery);
             List<Order> orders = new List<Order>();
 
@@ -73,12 +76,15 @@ namespace BLL
 
         }
 
+        //To get a list of restaurants with the initiales of the canton
         public List<Restaurant> GetRestaurantsWorkCanton(string Canton)
         {
+            //va chercher toute les workLocations avec les initiales du canton
             List<WorkLocation> locations = WorkLocationDb.GetWorkLocationCanton(Canton);
             List<Restaurant> restaurantsEnd = new List<Restaurant>();
             foreach (var m in locations)
             {
+                //va chercher la liste de restaurants qu'il y a a cette endroit
                 List<Restaurant> restaurants = RestaurantDb.GetRestaurantIDLocation(m.ID_workLocation);
                 foreach (var n in restaurants)
                 {
@@ -89,59 +95,43 @@ namespace BLL
             return restaurantsEnd;
         }
 
+        //To get a list of restaurants with the name of the city
         public List<Restaurant> GetRestaurantsWorkCity(string City)
         {
+            //va chercher toute les workLocations avec le nom de la ville
             WorkLocation workLocation = WorkLocationDb.GetWorkLocationCity(City);
             List<Restaurant> restaurants = RestaurantDb.GetRestaurantIDLocation(workLocation.ID_workLocation);
             return restaurants;
         }
 
+        //To get the location with the email and the password of the deliveryman
         public Location GetLocation(string login, string password)
         {
+            //va chercher le livreur
             DeliveryMan deliveryMan = DeliveryManDB.GetDeliveryMan(login, password);
             Location location = LocationDb.GetLocationID(deliveryMan.ID_Location);
             return location;
         }
+
+        //To get the workLocation with the email and the password of the deliveryman
         public WorkLocation GetWorkLocation(string login, string password)
         {
+            //va chercher le livreur
             DeliveryMan deliveryMan = DeliveryManDB.GetDeliveryMan(login, password);
             WorkLocation workLocation = WorkLocationDb.GetWorkLocationID(deliveryMan.ID_Location);
             return workLocation;
         }
+
+        //To get a list of person with the name of a city
         public List<Person> GetPersonWorkCity(string City)
         {
+            //va chercher la workLocation
             WorkLocation workLocation = WorkLocationDb.GetWorkLocationCity(City);
             List<Person> persons = PersonDb.GetPersonIDLocation(workLocation.ID_workLocation);
             return persons;
         }
 
-        public List<Dishes> GetAllDishes(string login, string password)
-        {
-            List<Order> orders = GetOrders(login, password);
-            List<Dishes> dishes = new List<Dishes>();
-            foreach (var m in orders)
-            {
-                List<OrderDishes> orderDishes = OrderDishesDb.GetOrderDishes(m.ID_Order);
-                foreach (var n in orderDishes)
-                {
-                    Dishes dish = DishesDb.GetDishIP(n.ID_Dishes);
-                    dishes.Add(dish);
-                }
-            }
-            return dishes;
-
-        }
-        public List<Dishes> GetDishes(int IdOrder)
-        {
-            List<OrderDishes> orderDishes = OrderDishesDb.GetOrderDishes(IdOrder);
-            List<Dishes> dishes = new List<Dishes>();
-            foreach (var n in orderDishes)
-            {
-                Dishes dish = DishesDb.GetDishIP(n.ID_Dishes);
-                dishes.Add(dish);
-            }
-            return dishes;
-        }
+        
         public DeliveryMan ModifyAllDeliveryMan(DeliveryMan delivery)
         {
             return DeliveryManDB.ModifyAllDeliveryMan(delivery);

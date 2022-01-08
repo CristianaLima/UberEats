@@ -32,7 +32,7 @@ namespace WebApplication.Controllers
     }
         public IActionResult Index()
         {
-            // Login 
+            //verifie que la person est bien connecte
             if (HttpContext.Session.GetInt32("IdPerson") == null)
                 return RedirectToAction("Index", "Login");
 
@@ -79,6 +79,7 @@ namespace WebApplication.Controllers
             orderVM.City = location.City;
             orderVM.NPA = location.NPA;
 
+            //met l'orderVM dans les sessions
             HttpContext.Session.Set<OrderVM>("Order", orderVM);
 
             return View(orderVM);
@@ -88,10 +89,13 @@ namespace WebApplication.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Index(OrderVM orderVM)
         {
+            //va chercher l'orderVM dans les sessions
             var oldOrder = HttpContext.Session.Get<OrderVM>("Order");
-           
+
+            //voit si toutes les informations son bien mises
             if (ModelState.IsValid)
             {
+                //verifie que la Location soit correcte
                 var idLocation = LocationManager.GetLocationNPACity(orderVM.NPA, orderVM.City);
                 if (idLocation == 0)
                 {
@@ -100,17 +104,19 @@ namespace WebApplication.Controllers
                     return View(oldOrder);
                 }
                 var location = LocationManager.GetLocationID(idLocation);
-                
 
 
+                //enleve l'orderVM des sessions
                 HttpContext.Session.Remove("Order");
                 Order order = new Order();
                 order.DelaiLivraison = orderVM.DelaiLivraison;
                 order.ID_person = (int)HttpContext.Session.GetInt32("IdPerson");
                 order.OrderDate = oldOrder.OrderDate;
+                //met la commande dans la base de donnee
                 OrderManager.AddOrder(order);
                 OrderDishes orderDishes = new OrderDishes();
 
+                //met le lien entre les plats et la commande dans la base de donnée
                 for(int i=0; i<oldOrder.DishesId.Count; i++)
                 {
                     orderDishes.ID_Dishes = oldOrder.DishesId[i];
@@ -119,24 +125,28 @@ namespace WebApplication.Controllers
                     OrderDishesManager.AddOrderDishes(orderDishes);
                 }
 
-
+                //assigne a un livreur la commande et verifie s'il le peut en meme temps
                 if(OrderManager.AssignDeliveryMan(order) == null)
                 {
+                    //supprime les lien entre les plat et la commande de la base de donnee
                     for (int i = 0; i < oldOrder.DishesId.Count; i++)
                     {
                         OrderDishesManager.Remove(order.ID_Order, oldOrder.DishesId[i]);
                     }
+                    //supprime la commande de la base de donnee
                     OrderManager.Remove(order.ID_Order);
                     ModelState.AddModelError("ListPossibleDate", "Aucun livreur n'est disponible pour le moment");
+                    //remet l'orderVM dans les sessions
                     HttpContext.Session.Set<OrderVM>("Order", oldOrder);
                     return View(oldOrder);
                 }
-                //var deli = OrderManager.AssignDeliveryMan(order);
+                //supprime la listIdDishes et le panier des sessions
                 HttpContext.Session.Remove("listIdDishes");
                 HttpContext.Session.Remove("Cart");
                 return RedirectToAction("Index", "Status");
 
             }
+            //remet l'orderVM dans les sessions
             HttpContext.Session.Set<OrderVM>("Order", oldOrder);
             return View(oldOrder);
         }

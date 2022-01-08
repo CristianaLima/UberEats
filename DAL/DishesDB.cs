@@ -18,6 +18,7 @@ namespace DAL
             Configuration = configuration;
         }
 
+        //To get all the dishes
         public List<Dishes> GetDishes()
         {
             List<Dishes> results = null;
@@ -68,7 +69,7 @@ namespace DAL
             return results;
         }
 
-
+        //To get a list od dishes with its name
         public List<Dishes> GetDish(string DishName)
         {
             List<Dishes> results = null;
@@ -121,6 +122,7 @@ namespace DAL
             return results;
         }
 
+        //To get a dish with its id
         public Dishes GetDishIP(int ID_Dishes)
         {
             Dishes dish = null;
@@ -168,6 +170,7 @@ namespace DAL
             return dish;
         }
 
+        //To add a dish to the database
         public Dishes AddDish(Dishes dish)
         {
 
@@ -202,6 +205,9 @@ namespace DAL
             return dish;
         }
 
+        //To modify the availability of a dish with its id and its new number of availability
+        //If the availability is 0, the dish don't available
+        //If the availability is 1, the dish is avalaible
         public Dishes ChangeAvailabilityDish(int ID_Dish, int isDishAvailable)
         {
 
@@ -232,6 +238,7 @@ namespace DAL
             return dish;
         }
 
+        //To modify a dish
         public Dishes MofifyAllDishes(Dishes dish)
         {
             string connectionString = "Data Source = 153.109.124.35; Initial Catalog = UberEat_Theo_Cristiana; Integrated Security = False; User Id = 6231db; Password = Pwd46231.; MultipleActiveResultSets = True";

@@ -18,6 +18,7 @@ namespace DAL
             Configuration = configuration;
         }
 
+        //To get all the orderDishes
         public List<OrderDishes> GetAllOrderDishes()
         {
             List<OrderDishes> results = null;
@@ -58,6 +59,7 @@ namespace DAL
             return results;
         }
 
+        //To get a list of orderDishes with its idOrder
         public List<OrderDishes> GetOrderDishes(int IdOrder)
         {
             List<OrderDishes> results = null;
@@ -99,6 +101,7 @@ namespace DAL
             return results;
         }
 
+        //To add a orderDishes
         public OrderDishes AddOrderDishes(OrderDishes orderDishes)
         {
             string connectionString = "Data Source = 153.109.124.35; Initial Catalog = UberEat_Theo_Cristiana; Integrated Security = False; User Id = 6231db; Password = Pwd46231.; MultipleActiveResultSets = True";
@@ -128,6 +131,7 @@ namespace DAL
             return orderDishes;
         }
 
+        //To remove a orderDishes with its idOrder and its idDish
         public void Remove(int idOrder, int idDish)
         {
             string connectionString = "Data Source = 153.109.124.35; Initial Catalog = UberEat_Theo_Cristiana; Integrated Security = False; User Id = 6231db; Password = Pwd46231.; MultipleActiveResultSets = True";

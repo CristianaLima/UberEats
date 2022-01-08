@@ -19,7 +19,6 @@ namespace BLL
         }
         public OrderDishes AddOrderDishes(OrderDishes orderDishes)
         {
-            Console.WriteLine("Hello");
             return OrderDishesDb.AddOrderDishes(orderDishes);
         }
         public List<OrderDishes> GetAllOrderDishes()

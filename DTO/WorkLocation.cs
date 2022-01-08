@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace DTO
 {
+    //To know where the DeliveryMan work
     public class WorkLocation
     {
         public int ID_workLocation { get; set; }
@@ -13,7 +14,7 @@ namespace DTO
         public string CityWork { get; set; }
         public string Canton { get; set; }
 
-
+        //To write the informations of the workLocation
         public override string ToString()
         {
             return " ID_workLocation " + ID_workLocation +

@@ -32,13 +32,17 @@ namespace WebApplication.Controllers
         // GET: StatusController
         public ActionResult Index()
         {
+            //verifie que la person est bien connecte
             if (HttpContext.Session.GetInt32("IdPerson") == null)
                 return RedirectToAction("Index", "Login");
 
+            //va chercher son id
             int idPerson = (int) HttpContext.Session.GetInt32("IdPerson");
+            //va chercher ses informations
             var listOrders = OrderManager.GetOrderIDPerson(idPerson);
             List<int> listNumStatut = new List<int>();
             StatusVM status = new StatusVM();
+            //verifie si la personne a deja commande quelque chose
             if (listOrders != null)
             {
                 foreach (var order in listOrders)
@@ -61,6 +65,7 @@ namespace WebApplication.Controllers
         {
             OrderVM order = new OrderVM();
             order.IdOrder = id;
+            //va chercher les orderDishes correspondants a l'id
             var orderDishes = OrderDishesManager.GetOrderDishes(id);
             List<string> DishesName = new List<string>();
             List<int> DishesId = new List<int>();
@@ -69,6 +74,7 @@ namespace WebApplication.Controllers
             List<int> Quantity = new List<int>();
             int TotalPrice = 0;
 
+            //Dish
             foreach (var orderDish in orderDishes)
             {
                 var dish = DishesManager.GetDishIP(orderDish.ID_Dishes);
@@ -91,11 +97,13 @@ namespace WebApplication.Controllers
             order.DishesTotalPrice = DishesTotalPrice;
             order.TotalPrice = TotalPrice;
 
+            //DeliveryMan
             var deliveryOrderList = DeliveryOrderListManager.GetDeliveryFromOrder(id);
             var deliveryMan = DeliveryManManager.GetDeliveryManID(deliveryOrderList.Id_Delivery);
             order.DeliveryManName = deliveryMan.NameDelivery;
             order.DeliveryManTel = deliveryMan.PhoneNumberDelivery;
 
+            //Order
             var ord = OrderManager.GetOrderIDOrder(id);
             order.DelaiLivraison = ord.DelaiLivraison;
 
@@ -104,7 +112,9 @@ namespace WebApplication.Controllers
 
         public ActionResult Remove(int id)
         {
+            //va chercher le deliveryOrderList
             var deliveryOrderList = DeliveryOrderListManager.GetDeliveryFromOrder(id);
+            //change le statut de la commande en annule
             deliveryOrderList.NumStatut = 0;
             DeliveryOrderListManager.ModifyStatut(deliveryOrderList);
 

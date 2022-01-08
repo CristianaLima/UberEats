@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace WebApplication.Models
 {
+    //To have all the informations for create or see an account
     public class AccountVM
     {
         [Required]

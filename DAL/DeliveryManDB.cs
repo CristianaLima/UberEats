@@ -18,6 +18,7 @@ namespace DAL
             Configuration = configuration;
         }
 
+        //To get all DeliveryMan
         public List<DeliveryMan> GetDeliveryMen()
         {
             List<DeliveryMan> results = null;
@@ -70,6 +71,7 @@ namespace DAL
 
         }
 
+        //To get a deliveryman with his/her email and his/her password
         public DeliveryMan GetDeliveryMan(string EmailDelivery, string password)
         {
             DeliveryMan deliveryMan = null;
@@ -120,6 +122,7 @@ namespace DAL
             return deliveryMan;
         }
 
+        //To get a deliveryman with his/her id
         public DeliveryMan GetDeliveryManID(int deliveryMamId)
         {
             DeliveryMan deliveryMan = null;
@@ -169,6 +172,7 @@ namespace DAL
             return deliveryMan;
         }
 
+        //To add a deliveryman to the database
         public DeliveryMan AddDeliveryMan(DeliveryMan delivery)
         {
             string connectionString = "Data Source = 153.109.124.35; Initial Catalog = UberEat_Theo_Cristiana; Integrated Security = False; User Id = 6231db; Password = Pwd46231.; MultipleActiveResultSets = True";
@@ -211,6 +215,9 @@ namespace DAL
 
         }
 
+        //To modify the working status of a deliveryman with his/her id and the new number of the working status
+        //If the working status is 0, he/she is not work
+        //If the working status is 1, he/she is work
         public DeliveryMan ChangeIsWorking(int IdDelivery, int IsWorking)
         {
             DeliveryMan deliveryMan = null;
@@ -239,6 +246,7 @@ namespace DAL
             return deliveryMan;
         }
 
+        //To modify a deliveryman
         public DeliveryMan ModifyAllDeliveryMan(DeliveryMan delivery)
         {
             string connectionString = "Data Source = 153.109.124.35; Initial Catalog = UberEat_Theo_Cristiana; Integrated Security = False; User Id = 6231db; Password = Pwd46231.; MultipleActiveResultSets = True";
@@ -275,6 +283,7 @@ namespace DAL
             return delivery;
         }
 
+        //To get a list of deliveryman with the idWorkLocation
         public List<DeliveryMan> GetDeliveryManIDLocation(int ID_workLocation)
         {
             List<DeliveryMan> results = null;
@@ -326,6 +335,7 @@ namespace DAL
             return results;
         }
 
+        //To modify the number of deliveries
         public void ChangeNbDeliveries(int n, int ID_DeliveryMan)
         {
             

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace DTO
 {
+    //To have all informations about a deliveryman
     public class DeliveryMan
     {
         public int Id_Delivery { get; set; }
@@ -26,6 +27,7 @@ namespace DTO
 
         public int nbDeliveries { get; set; }
 
+        //To write the informations of the deliveryman
         public override string ToString()
         {
             return " IdUser: " + Id_Delivery +
