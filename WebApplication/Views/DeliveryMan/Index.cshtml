@@ -8,6 +8,29 @@
 <h1>Commandes</h1>
 
 <dl class="row">
+    <dt class="col">Statut de travail : </dt>
+    <dt class="col">
+        @switch (Model.deliveryStatut)
+        {
+
+            case 0:
+                {
+                    <a class="btn btn-primary" asp-action="Active">Non-actif</a>
+                    break;
+                }
+            case 1:
+                {
+                    <a class="btn btn-primary" asp-action="Desactive">Actif</a>
+                    break;
+                }
+        }
+    </dt>
+    <dt class="col"></dt>
+    <dt class="col"></dt>
+    <dt class="col"></dt>
+</dl>
+
+<dl class="row">
     <dt class="col">N° commande</dt>
     <dt class="col">Date Commande</dt>
     <dt class="col">Horaire livraison</dt>

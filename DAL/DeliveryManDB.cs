@@ -228,6 +228,7 @@ namespace DAL
                     cmd.Parameters.AddWithValue("@IsWorking", IsWorking);
 
                     cn.Open();
+                    cmd.ExecuteNonQuery();
 
                 }
             }

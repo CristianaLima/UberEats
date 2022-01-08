@@ -45,6 +45,7 @@ namespace WebApplication.Controllers
             var deliveryMan = DeliveryManManager.GetDeliveryManID(id);
 
             var statusVM = new StatusVM();
+            statusVM.deliveryStatut = deliveryMan.IsWorking;
             var deliveryOrders = DeliveryOrderListManager.GetDeliveryOrderList(id);
             if (deliveryOrders != null) {
             List<Order> orders = new List<Order>();
@@ -139,6 +140,20 @@ namespace WebApplication.Controllers
             var deliveryOrderList = DeliveryOrderListManager.GetDeliveryFromOrder(idOrder);
             deliveryOrderList.NumStatut = 3;
             DeliveryOrderListManager.ModifyStatut(deliveryOrderList);
+
+            return Index();
+        }
+        public ActionResult Active()
+        {
+            int id = (int)HttpContext.Session.GetInt32("IdDeliveryMan");
+            DeliveryManManager.ChangeIsWorking(id, 1);
+
+            return Index();
+        }
+        public ActionResult Desactive()
+        {
+            int id = (int)HttpContext.Session.GetInt32("IdDeliveryMan");
+            DeliveryManManager.ChangeIsWorking(id,0);
 
             return Index();
         }

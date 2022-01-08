@@ -11,5 +11,7 @@ namespace WebApplication.Models
         public List<Order> orders { get; set; }
         public List<int> status { get; set; }
 
+        public int deliveryStatut { get; set; }
+
     }
 }
