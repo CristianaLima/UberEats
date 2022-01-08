@@ -32,10 +32,5 @@
 </div>
 <div>
   
-    @Html.ActionLink("Ajouter au panier", "Choice", "Home", new { id = Model.ID_Dishes }, null) ||
-
-    <form method="post">
-        <input name="IdOrder" value=@Html.DisplayFor(model => model.ID_Dishes) />
-        <input type="submit" value="CANCELLED" />
-    </form>
+    @Html.ActionLink("Ajouter au panier", "Choice", "Home", new { id = Model.ID_Dishes }, null)
 </div>
