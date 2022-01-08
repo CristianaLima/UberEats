@@ -46,6 +46,7 @@ namespace WebApplication.Controllers
 
             var statusVM = new StatusVM();
             var deliveryOrders = DeliveryOrderListManager.GetDeliveryOrderList(id);
+            if (deliveryOrders != null) {
             List<Order> orders = new List<Order>();
             List<int> status = new List<int>();
             foreach (var deliveryOrder in deliveryOrders)
@@ -56,6 +57,7 @@ namespace WebApplication.Controllers
             }
             statusVM.orders = orders;
             statusVM.status = status;
+            }
 
             return View("Index",statusVM);
         }
