@@ -70,8 +70,8 @@ namespace BLL
             }
             foreach (var m in deliverymen)
             {
-                var deliveryOrder = DeliveryOrderListDB.GetDeliveryManFromOrderID(order.ID_Order);
-                if (m.IsWorking == 1 && deliveryOrder.NumStatut!=0)
+                
+                if (m.IsWorking == 1)
                 {
                     DateTime min = order.DelaiLivraison.AddMinutes(-15);
                     DateTime max = order.DelaiLivraison.AddMinutes(15);
@@ -150,10 +150,12 @@ namespace BLL
             int nbDeliveries = 0;
             foreach (var m in deliveriesOrderList)
             {
+                if(m.NumStatut!=0) {
                 Order order = OrderDB.GetOrderIDOrder(m.ID_Order);
                 if (order.DelaiLivraison > minimum && order.DelaiLivraison < maximum)
                 {
                     nbDeliveries++;
+                }
                 }
             }
             return nbDeliveries;

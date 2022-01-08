@@ -92,6 +92,9 @@ namespace WebApplication.Controllers
             order.DeliveryManName = deliveryMan.NameDelivery;
             order.DeliveryManTel = deliveryMan.PhoneNumberDelivery;
 
+            var ord = OrderManager.GetOrderIDOrder(id);
+            order.DelaiLivraison = ord.DelaiLivraison;
+
             return View(order);
         }
 
