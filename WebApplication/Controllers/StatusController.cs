@@ -46,10 +46,10 @@ namespace WebApplication.Controllers
             StatusVM status = new StatusVM();
             status.orders = listOrders;
             status.status = listNumStatut;
-            
 
 
-            return View(status);
+
+            return View("Index",status) ;
         }
 
         // GET: StatusController/Details/5
@@ -101,7 +101,7 @@ namespace WebApplication.Controllers
             deliveryOrderList.NumStatut = 0;
             DeliveryOrderListManager.ModifyStatut(deliveryOrderList);
 
-            return RedirectToAction("Index");
+            return Index();
         }
 
         
