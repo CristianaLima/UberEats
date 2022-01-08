@@ -38,15 +38,18 @@ namespace WebApplication.Controllers
             int idPerson = (int) HttpContext.Session.GetInt32("IdPerson");
             var listOrders = OrderManager.GetOrderIDPerson(idPerson);
             List<int> listNumStatut = new List<int>();
-            foreach(var order in listOrders)
+            if (listOrders != null)
             {
-                var deliveryOrderList = DeliveryOrderListManager.GetDeliveryFromOrder(order.ID_Order);
-                listNumStatut.Add( deliveryOrderList.NumStatut);
+                foreach (var order in listOrders)
+                {
+                    var deliveryOrderList = DeliveryOrderListManager.GetDeliveryFromOrder(order.ID_Order);
+                    listNumStatut.Add(deliveryOrderList.NumStatut);
+                }
+                StatusVM status = new StatusVM();
+                status.orders = listOrders;
+                status.status = listNumStatut;
             }
-            StatusVM status = new StatusVM();
-            status.orders = listOrders;
-            status.status = listNumStatut;
-
+            
 
 
             return View("Index",status) ;

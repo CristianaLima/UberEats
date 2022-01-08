@@ -14,48 +14,85 @@
     <dt class="col"></dt>
 </dl>
 
-
-@for (int i = 0; i < Model.orders.Count; i++)
+@if (Model.orders != null)
 {
-<dl class="row">
-    <dt class="col">
-        @Html.DisplayFor(model => model.orders[i].ID_Order)
-    </dt>
-    <dt class="col">
-        @Html.DisplayFor(model => model.orders[i].OrderDate)
-    </dt>
-    <dt class="col">
-        @Html.DisplayFor(model => model.orders[i].DelaiLivraison)
-    </dt>
-    <dt class="col">
-        @switch (Model.status[i])
+    @for (int i = 0; i < Model.orders.Count; i++)
+    {
+        @if (Model.status[i] == 1 || Model.status[i] == 2)
         {
-            case 0:
-                {
-                    <label>Annuler</label>
-                    break;
-                }
-            case 1:
-                {
-                    <label>En cours de traitement</label>
-                    break;
-                }
-            case 2:
-                {
-                    <label>En cours de livraison</label>
-                    break;
-                }
-            case 3:
-                {
-                    <label>Livré</label>
-                    break;
-                }
+            <dl class="row">
+                <dt class="col">
+                    @Html.DisplayFor(model => model.orders[i].ID_Order)
+                </dt>
+                <dt class="col">
+                    @Html.DisplayFor(model => model.orders[i].OrderDate)
+                </dt>
+                <dt class="col">
+                    @Html.DisplayFor(model => model.orders[i].DelaiLivraison)
+                </dt>
+                <dt class="col">
+                    @switch (Model.status[i])
+                    {
+                        
+                        case 1:
+                            {
+                                <label>En cours de traitement</label>
+                                break;
+                            }
+                        case 2:
+                            {
+                                <label>En cours de livraison</label>
+                                break;
+                            }
 
+                    }
+
+                </dt>
+                <dt class="col">
+                    @Html.ActionLink("voir détails", "Detail", "Status", new { id = Model.orders[i].ID_Order }, null)
+                </dt>
+            </dl>
         }
+    }
+    @for (int i = 0; i < Model.orders.Count; i++)
+    {
+        @if (Model.status[i] == 0 || Model.status[i] == 3)
+        {
+            <dl class="row">
+                <dt class="col">
+                    @Html.DisplayFor(model => model.orders[i].ID_Order)
+                </dt>
+                <dt class="col">
+                    @Html.DisplayFor(model => model.orders[i].OrderDate)
+                </dt>
+                <dt class="col">
+                    @Html.DisplayFor(model => model.orders[i].DelaiLivraison)
+                </dt>
+                <dt class="col">
+                    @switch (Model.status[i])
+                    {
+                        case 0:
+                            {
+                                <label>Annuler</label>
+                                break;
+                            }
+                        case 3:
+                            {
+                                <label>Livré</label>
+                                break;
+                            }
 
-    </dt>
-    <dt class="col">
-        @Html.ActionLink("voir détails", "Detail", "Status", new { id = Model.orders[i].ID_Order }, null)
-    </dt>
-</dl>
+                    }
+
+                </dt>
+                <dt class="col">
+                    @Html.ActionLink("voir détails", "Detail", "Status", new { id = Model.orders[i].ID_Order }, null)
+                </dt>
+            </dl>
+        }
+    }
+}
+else
+{
+    <h5>Vous n'avez pas encore de commandes</h5>
 }
