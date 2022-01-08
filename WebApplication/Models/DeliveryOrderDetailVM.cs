@@ -22,6 +22,7 @@ namespace WebApplication.Models
         public string clientAdress { get; set; }
         public int clientNPA { get; set; }
         public string clientCity { get; set; }
+        public string clientTel { get; set; }
         public int clientPrixTotal { get; set; }
 
 

@@ -16,6 +16,8 @@
 </dl>
 
 
+@if (Model.orders != null) { 
+
 @for (int i = 0; i < Model.orders.Count; i++)
 {
     @if (Model.status[i] == 1 || Model.status[i] == 2)
@@ -94,6 +96,7 @@
             </dl>
         </div>
     }
+}
 }
 
 

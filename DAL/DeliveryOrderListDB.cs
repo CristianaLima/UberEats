@@ -141,8 +141,8 @@ namespace DAL
                     cmd.Parameters.AddWithValue("@newStatut", deliveryOrderList.NumStatut);
 
                     cn.Open();
+                    cmd.ExecuteNonQuery();
 
-                    
 
                 }
             }

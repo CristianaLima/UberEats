@@ -14,3 +14,88 @@
     <dt class="col">NPA et ville</dt>
 </dl>
 
+@for(int i=0; i<Model.DishesName.Count; i++) {
+<dl class="row">
+    <dt class="col">
+        @Html.DisplayFor(model => model.DishesName[i])
+    </dt>
+    <dt class="col">
+        @Html.DisplayFor(model => model.Quantity[i])
+    </dt>
+    <dt class="col">
+        @Html.DisplayFor(model => model.RestaurantName[i])
+    </dt>
+    <dt class="col">
+        @Html.DisplayFor(model => model.RestaurantAddress[i])
+    </dt>
+    <dt class="col">
+        @Html.DisplayFor(model => model.RestaurantNPA[i]) @Html.DisplayFor(model => model.RestaurantsCity[i])
+    </dt>
+</dl>
+}
+<br />
+<br />
+<h4>Les informations du client</h4>
+<dl class="row">
+    <dt class="col">Nom Prénom :</dt>
+    <dt class="col">
+        @Html.DisplayFor(model => model.clientName) @Html.DisplayFor(model => model.clientFirstName)
+    </dt>
+    <dt class="col"></dt>
+    <dt class="col"></dt>
+    <dt class="col"></dt>
+</dl>
+<dl class="row">
+    <dt class="col">Adresse :</dt>
+    <dt class="col">
+        @Html.DisplayFor(model => model.clientAdress)
+    </dt>
+    <dt class="col"></dt>
+    <dt class="col"></dt>
+    <dt class="col"></dt>
+</dl>
+<dl class="row">
+    <dt class="col">NPA et ville :</dt>
+    <dt class="col">
+        @Html.DisplayFor(model => model.clientNPA) @Html.DisplayFor(model => model.clientCity)
+    </dt>
+    <dt class="col"></dt>
+    <dt class="col"></dt>
+    <dt class="col"></dt>
+</dl>
+<dl class="row">
+    <dt class="col">N° téléphone :</dt>
+    <dt class="col">
+        @Html.DisplayFor(model => model.clientTel)
+    </dt>
+    <dt class="col"></dt>
+    <dt class="col"></dt>
+    <dt class="col"></dt>
+</dl>
+<dl class="row">
+    <dt class="col">Montant de la commande :</dt>
+    <dt class="col">
+        @Html.DisplayFor(model => model.clientPrixTotal)
+    </dt>
+    <dt class="col"></dt>
+    <dt class="col"></dt>
+    <dt class="col"></dt>
+</dl>
+<dl class="row">
+    <dt class="col"></dt>
+    <dt class="col"></dt>
+    <dt class="col"></dt>
+    <dt class="col"></dt>
+    <dt class="col">
+        @switch (Model.NumStatut)
+        {
+            case 1:
+                <a class="btn btn-primary" asp-action="Begin">Commencer</a>
+                break;
+            case 2:
+                <a class="btn btn-primary" asp-action="Finish">Terminé</a>
+                break;
+        }
+    </dt>
+</dl>
+

@@ -57,7 +57,7 @@ namespace WebApplication.Controllers
             statusVM.orders = orders;
             statusVM.status = status;
 
-            return View(statusVM);
+            return View("Index",statusVM);
         }
 
         // GET: DeliveryManController/Details/5
@@ -98,6 +98,7 @@ namespace WebApplication.Controllers
             final.clientCity = locationPerson.City;
             final.clientFirstName = person.FirstName;
             final.clientName = person.Name;
+            final.clientTel = person.PhoneNumber;
             final.clientNPA = locationPerson.NPA;
             final.DishesName = DishesName;
             final.NumStatut = deliveryOrder.NumStatut;
@@ -114,70 +115,32 @@ namespace WebApplication.Controllers
             }
             final.clientPrixTotal = total;
 
-            return View(final);
+            if (HttpContext.Session.GetInt32("IdOrder") != null)
+                HttpContext.Session.Remove("IdOrder");
+
+            HttpContext.Session.SetInt32("IdOrder", id);
+
+            return View("Detail",final);
+        }
+        public ActionResult Begin()
+        {
+            int idOrder = (int)HttpContext.Session.GetInt32("IdOrder");
+            var deliveryOrderList = DeliveryOrderListManager.GetDeliveryFromOrder(idOrder);
+            deliveryOrderList.NumStatut = 2;
+            DeliveryOrderListManager.ModifyStatut(deliveryOrderList);
+
+            return Detail(idOrder);
+        }
+        public ActionResult Finish()
+        {
+            int idOrder = (int)HttpContext.Session.GetInt32("IdOrder");
+            var deliveryOrderList = DeliveryOrderListManager.GetDeliveryFromOrder(idOrder);
+            deliveryOrderList.NumStatut = 3;
+            DeliveryOrderListManager.ModifyStatut(deliveryOrderList);
+
+            return Index();
         }
 
-        // GET: DeliveryManController/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
 
-        // POST: DeliveryManController/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: DeliveryManController/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: DeliveryManController/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: DeliveryManController/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: DeliveryManController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
     }
 }
