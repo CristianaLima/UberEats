@@ -4,9 +4,12 @@
     ViewData["Title"] = "Welcome";
     Layout = "~/Views/Shared/_DeliveryManLayout.cshtml";
 }
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
 
 <h1>Commandes</h1>
+<hr />
+<br />
 
 <dl class="row">
     <dt class="col">Statut de travail : </dt>
@@ -16,12 +19,12 @@
 
             case 0:
                 {
-                    <a class="btn btn-primary" asp-action="Active">Non-actif</a>
+                    <a class="w3-button w3-blue" asp-action="Active">Non-actif</a>
                     break;
                 }
             case 1:
                 {
-                    <a class="btn btn-primary" asp-action="Desactive">Actif</a>
+                    <a class="w3-button w3-green" asp-action="Desactive">Actif</a>
                     break;
                 }
         }
@@ -30,6 +33,8 @@
     <dt class="col"></dt>
     <dt class="col"></dt>
 </dl>
+
+<br />
 
 <dl class="row">
     <dt class="col">N° commande</dt>
@@ -49,16 +54,16 @@
         {
             <div>
                 <dl class="row">
-                    <dt class="col">
+                    <dt class="col" style="font-weight:normal">
                         @Html.DisplayFor(model => model.orders[i].ID_Order)
                     </dt>
-                    <dt class="col">
+                    <dt class="col" style="font-weight:normal">
                         @Html.DisplayFor(model => model.orders[i].OrderDate)
                     </dt>
-                    <dt class="col">
+                    <dt class="col" style="font-weight:normal">
                         @Html.DisplayFor(model => model.orders[i].DelaiLivraison)
                     </dt>
-                    <dt class="col">
+                    <dt class="col" style="font-weight:normal">
                         @switch (Model.status[i])
                         {
 
@@ -75,7 +80,7 @@
                         }
 
                     </dt>
-                    <dt class="col">
+                    <dt class="col" style="color:green">
                         @Html.ActionLink("voir détails", "Detail", "DeliveryMan", new { id = Model.orders[i].ID_Order }, null)
                     </dt>
                 </dl>
@@ -89,21 +94,21 @@
         {
             <div>
                 <dl class="row">
-                    <dt class="col">
+                    <dt class="col" style="font-weight:normal">
                         @Html.DisplayFor(model => model.orders[i].ID_Order)
                     </dt>
-                    <dt class="col">
+                    <dt class="col" style="font-weight:normal">
                         @Html.DisplayFor(model => model.orders[i].OrderDate)
                     </dt>
-                    <dt class="col">
+                    <dt class="col" style="font-weight:normal">
                         @Html.DisplayFor(model => model.orders[i].DelaiLivraison)
                     </dt>
-                    <dt class="col">
+                    <dt class="col" style="font-weight:normal">
                         @switch (Model.status[i])
                         {
                             case 0:
                                 {
-                                    <label>Annuler</label>
+                                    <label>Annulé</label>
                                     break;
                                 }
                             case 3:
