@@ -4,33 +4,30 @@
     ViewData["Title"] = Model.DishesName;
 }
 
-<h1></h1>
+<h1>@Html.DisplayFor(model => model.DishesName)</h1>
+<hr />
+<br />
 
-<div>
-    <h4>@Html.DisplayFor(model => model.DishesName) </h4>
-    <hr />
+<div>    
     <dl class="row">
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.DishesDescription)
+            Description du plat : 
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.DishesDescription)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.DishesPrice)
+            Prix :
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.DishesPrice).00 CHF
         </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.DishImage)
-        </dt>
         <dd class="col-sm-10">
+            <br />
             <img src="~/Images/Dishes/@Html.DisplayFor(model => model.DishImage)" alt="@Html.DisplayFor(model => model.DishesName)" width="400" height="400" />
         </dd>
     </dl>
 </div>
-<div>
-  
-    @Html.ActionLink("Ajouter au panier", "Choice", "Home", new { id = Model.ID_Dishes }, null)
+<div style="font-weight:bold">
+    <a>@Html.ActionLink("Ajouter au panier", "Choice", "Home", new { id = Model.ID_Dishes }, null)</a>
 </div>
