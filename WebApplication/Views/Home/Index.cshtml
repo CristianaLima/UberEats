@@ -14,29 +14,54 @@
 
 </head>
 <body>
-    <h1>Welcome</h1>
+    <h1>Bienvenu sur VS Eat</h1>
 
     @foreach (var item in Model)
     {
         <div>
-            <h2 style="color:limegreen">
+            <h3>
                 @Html.DisplayFor(modelItem => item.RestaurantName)
-            </h2>
+            </h3>
             <p>
                 <b>Addresse : </b>@Html.DisplayFor(modelItem => item.RestaurantAddress)
             </p>
-            @for (int i = 0; i < item.DishesName.Count; i++)
-            {
+            @{ 
+                var nbDishes = item.DishesName.Count;
+                //pour savoir le nombre de lignes il y aura
+                var nbLignes = (nbDishes % 4) + 1;
+                var rest = nbDishes;
+            }
 
-            <p>
-                <img src="~/Images/Dishes/@Html.DisplayFor(modelItem => item.DishImage[i])" alt="@Html.DisplayFor(modelItem => item.DishesName[i])" width="400" height="400" />
-            </p>
-            <p>
-                @Html.ActionLink(item.DishesName[i], "Dishes", "Home", new { id = item.DishesId[i] }, null)
-            </p>
-            <p>
-                <b>Prix: </b>@Html.DisplayFor(modelItem => item.DishesPrice[i]).00 CHF
-            </p>
+
+
+            @for (int i = 0; i < nbLignes; i++)
+            {
+                <dl class="row">
+                    @for (int j = i * 4; j < i * 4 + 4; j++)
+                    {
+                    <dt class="col">
+
+                        @if (rest > 0)
+                        {
+
+                            <p>
+                                <img src="~/Images/Dishes/@Html.DisplayFor(modelItem => item.DishImage[j])" alt="@Html.DisplayFor(modelItem => item.DishesName[j])" width="400" height="400" />
+                            </p>
+                            <p>
+                                @Html.ActionLink(item.DishesName[j], "Dishes", "Home", new { id = item.DishesId[j] }, null)
+                            </p>
+                            <p>
+                                <b>Prix: </b>@Html.DisplayFor(modelItem => item.DishesPrice[j]).00 CHF
+                            </p>
+                        }
+                        @{
+                            rest--;
+                        }
+                    </dt>
+                    }
+                </dl>
+
+            
             <br />
             }
         </div>
