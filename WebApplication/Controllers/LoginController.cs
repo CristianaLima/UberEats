@@ -41,6 +41,12 @@ namespace WebApplication.Controllers
         }
         public IActionResult AccountDeliveryMan()
         {
+            //verifie que le livreur est bien connecte
+            if (HttpContext.Session.GetInt32("IdDeliveryMan") == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+
             // get des informations de la session actuelle
             // informations sur le compte 
             int accountID = (int)HttpContext.Session.GetInt32("IdDeliveryMan");
@@ -67,6 +73,10 @@ namespace WebApplication.Controllers
 
         public IActionResult Account()
         {
+            //verifie que la person est bien connecte
+            if (HttpContext.Session.GetInt32("IdPerson") == null)
+                return RedirectToAction("Index", "Login");
+
             // get des informations de la session actuelle
             // informations sur le compte 
             int accountID = (int)HttpContext.Session.GetInt32("IdPerson");

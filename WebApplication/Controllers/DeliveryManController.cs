@@ -72,6 +72,12 @@ namespace WebApplication.Controllers
         // GET: DeliveryManController/Details/5
         public ActionResult Detail(int id)
         {
+            //verifie que le livreur est bien connecte
+            if (HttpContext.Session.GetInt32("IdDeliveryMan") == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+
             DeliveryOrderDetailVM final = new DeliveryOrderDetailVM();
             List<string> DishesName = new List<string>();
             List<int> Quantity = new List<int>();
