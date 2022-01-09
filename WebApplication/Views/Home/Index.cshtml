@@ -28,7 +28,7 @@
             @{ 
                 var nbDishes = item.DishesName.Count;
                 //pour savoir le nombre de lignes il y aura
-                var nbLignes = (nbDishes % 4) + 1;
+                int nbLignes = (nbDishes / 4) + 1;
                 var rest = nbDishes;
             }
 
@@ -44,15 +44,13 @@
                         @if (rest > 0)
                         {
 
-                            <p>
-                                <img src="~/Images/Dishes/@Html.DisplayFor(modelItem => item.DishImage[j])" alt="@Html.DisplayFor(modelItem => item.DishesName[j])" width="400" height="400" />
-                            </p>
-                            <p>
-                                @Html.ActionLink(item.DishesName[j], "Dishes", "Home", new { id = item.DishesId[j] }, null)
-                            </p>
-                            <p>
-                                <b>Prix: </b>@Html.DisplayFor(modelItem => item.DishesPrice[j]).00 CHF
-                            </p>
+                            
+                            <img src="~/Images/Dishes/@Html.DisplayFor(modelItem => item.DishImage[j])" alt="@Html.DisplayFor(modelItem => item.DishesName[j])" width="250" height="200" />
+                                                        
+                            @Html.ActionLink(item.DishesName[j], "Dishes", "Home", new { id = item.DishesId[j] }, null)<br />
+                                                        
+                            <b>Prix: </b>@Html.DisplayFor(modelItem => item.DishesPrice[j])<label>.00 CHF</label>
+                            
                         }
                         @{
                             rest--;
@@ -62,7 +60,7 @@
                 </dl>
 
             
-            <br />
+            
             }
         </div>
 
