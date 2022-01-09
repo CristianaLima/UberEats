@@ -6,10 +6,12 @@
 }
 
 <h4>Heure de livraison</h4>
+<hr />
+
 <form asp-action="Index">
     <dl class="row">
         <dt class="col">
-            <label class="control-label">Horaire</label>
+            <label class="control-label">Horaire :</label>
         </dt>
         <dt class="col">
             @Html.DropDownListFor(model => model.DelaiLivraison,
@@ -21,20 +23,20 @@
         <dt class="col"></dt>
     </dl>
 
-
     <h4>Informations de Livraison</h4>
+    <hr />
 
     <dl class="row">
         <dt class="col">Informations Personnelles :</dt>
-        <dt class="col">@Html.DisplayFor(model => model.Name)</dt>
-        <dt class="col">@Html.DisplayFor(model => model.FirstName)</dt>
-        <dt class="col">@Html.DisplayFor(model => model.PhoneNumber)</dt>
+        <dt class="col" style="font-weight:normal">@Html.DisplayFor(model => model.Name) @Html.DisplayFor(model => model.FirstName)</dt>
+        <dt class="col" style="font-weight:normal">@Html.DisplayFor(model => model.PhoneNumber)</dt>
+        <dt class="col" style="font-weight:normal"></dt>
     </dl>
 
 
     <dl class="row">
         <dt class="col">
-            <label asp-for="Address" class="control-label"></label>
+            <label asp-for="Address" class="control-label">Addresse : </label>
         </dt>
         <dt class="col">
             <input asp-for="Address" class="form-control" />
@@ -45,7 +47,7 @@
     </dl>
     <dl class="row">
         <dt class="col">
-            <label asp-for="NPA" class="control-label"></label>
+            <label asp-for="NPA" class="control-label">NPA :</label>
         </dt>
         <dt class="col">
             <input asp-for="NPA" class="form-control" />
@@ -56,7 +58,7 @@
     </dl>
     <dl class="row">
         <dt class="col">
-            <label asp-for="City" class="control-label"></label>
+            <label asp-for="City" class="control-label">Ville : </label>
         </dt>
         <dt class="col">
             <input asp-for="City" class="form-control" />
@@ -80,16 +82,16 @@
     @for (int i = 0; i < Model.DishesName.Count; i++)
     {
         <dl class="row">
-            <dt class="col">
+            <dt class="col" style="font-weight:normal">
                 @Html.DisplayFor(model => model.DishesName[i])
             </dt>
-            <dt class="col">
+            <dt class="col" style="font-weight:normal">
                 @Html.DisplayFor(model => model.DishesUnitePrice[i]).00 CHF
             </dt>
-            <dt class="col">
+            <dt class="col" style="font-weight:normal">
                 @Html.DisplayFor(model => model.Quantity[i])
             </dt>
-            <dt class="col">
+            <dt class="col" style="font-weight:normal">
                 @Html.DisplayFor(model => model.DishesTotalPrice[i]).00 CHF
             </dt>
         </dl>
@@ -106,7 +108,7 @@
             <dt class="col">
             </dt>
             <dt class="col">
-                @Html.DisplayFor(model => model.TotalPrice)
+                @Html.DisplayFor(model => model.TotalPrice).00 CHF
             </dt>
         </dl>
         <dl class="row">
