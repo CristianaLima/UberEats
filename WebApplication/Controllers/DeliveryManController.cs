@@ -104,8 +104,8 @@ namespace WebApplication.Controllers
                 var location = LocationManager.GetLocationID(restaurant.ID_location);
                 RestaurantNPA.Add(location.NPA);
                 RestaurantsCity.Add(location.City);
-
             }
+
             //va chercher la person
             var person = PersonManager.GetPersonID(order.ID_person);
             var locationPerson = LocationManager.GetLocationID(person.ID_location);

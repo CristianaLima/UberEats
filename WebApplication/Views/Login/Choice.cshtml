@@ -1,12 +1,21 @@
 ﻿
 @{
     ViewData["Title"] = "Choisissez une option";
+    Layout = "~/Views/Shared/_IndexLayout.cshtml";
 }
 
-<h1>Choisissez une option :</h1>
+
 
 <div>
-    <a class="btn" asp-action="AddPerson">Nouveau Client</a>
-    <br />
-    <a class="btn" asp-action="AddDeliveryMan">Nouveau Livreur</a>
+    <h1>Choisissez une option :</h1>
+    <dl class="row">
+        <dt class="col">
+            <a class="w3-button w3-green" asp-action="AddPerson">Nouveau Client</a>
+        </dt>
+        <dt class="col">
+            <a class="w3-button w3-green" asp-action="AddDeliveryMan">Nouveau Livreur</a>
+        </dt>
+        <dt class="col"></dt>
+        <dt class="col"></dt>
+    </dl>
 </div>

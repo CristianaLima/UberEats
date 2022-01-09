@@ -3,10 +3,24 @@
     ViewData["Title"] = "Que voulez-vous faire maintenant ?";
 }
 
-<h1>Que voulez-vous faire maintenant ?</h1>
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+<h3>Choisissez une option :</h3>
+<br />
 
 <div>
-    <a class ="btn" asp-action="Index">Continuer</a>
-    <br />
-    <a class ="btn" asp-controller="Cart" asp-action="Index">Passer commande</a>
+    <dl class="row">
+        <dt class="col">
+            <a class="w3-button w3-green" asp-action="Index">Continuer</a>
+        </dt>
+        <dt class="col">
+            <a class="w3-button w3-green" asp-controller="Cart" asp-action="Index">Passer commande</a>
+        </dt>
+        <dt class="col"></dt>
+        <dt class="col"></dt>
+    </dl>
 </div>
+
+
+
+
