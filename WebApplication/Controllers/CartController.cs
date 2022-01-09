@@ -35,7 +35,7 @@ namespace WebApplication.Controllers
             //si la personne n'a rien pris comme plat
             if (IdDishesList == null)
             {
-                return View();
+                return View(Cart);
             }
 
             //Plats
