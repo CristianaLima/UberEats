@@ -4,27 +4,17 @@
     ViewData["Title"] = "Home Page";
 }
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" />
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
-</head>
 <body>
-    <h1>Bienvenu sur VS Eat</h1>
+    <h1 class="w3-border-bottom w3-border-light-grey w3-padding-16">Bienvenu sur VS Eat</h1>
 
     @foreach (var item in Model)
     {
         <div>
-            <h3>
+            <h3 class="w3-border-bottom w3-border-green w3-padding-16">
                 @Html.DisplayFor(modelItem => item.RestaurantName)
             </h3>
-            <p>
-                <b>Addresse : </b>@Html.DisplayFor(modelItem => item.RestaurantAddress)
-            </p>
             @{ 
                 var nbDishes = item.DishesName.Count;
                 //pour savoir le nombre de lignes il y aura
@@ -36,28 +26,33 @@
 
             @for (int i = 0; i < nbLignes; i++)
             {
-                <dl class="row">
+                <div class="w3-row-padding">
                     @for (int j = i * 4; j < i * 4 + 4; j++)
                     {
-                    <dt class="col">
+                    <div class="w3-col l3 m6 w3-margin-bottom">
 
                         @if (rest > 0)
                         {
+                        <div class="w3-display-container">
 
-                            
-                            <img src="~/Images/Dishes/@Html.DisplayFor(modelItem => item.DishImage[j])" alt="@Html.DisplayFor(modelItem => item.DishesName[j])" width="250" height="200" />
-                                                        
-                            @Html.ActionLink(item.DishesName[j], "Dishes", "Home", new { id = item.DishesId[j] }, null)<br />
-                                                        
-                            <b>Prix: </b>@Html.DisplayFor(modelItem => item.DishesPrice[j])<label>.00 CHF</label>
-                            
+                            <img src="~/Images/Dishes/@Html.DisplayFor(modelItem => item.DishImage[j])" alt="@Html.DisplayFor(modelItem => item.DishesName[j])" width="257" height="200" />
+
+                            <div class="w3-display-topleft w3-green w3-padding">
+                                @Html.ActionLink(item.DishesName[j], "Dishes", "Home", new { id = item.DishesId[j] }, null)
+                            </div>
+                            <div class="w3-display-bottomright w3-light-grey w3-padding">
+                                @Html.DisplayFor(modelItem => item.DishesPrice[j])<label>.00 CHF</label>
+                            </div>
+
+                        </div>
                         }
+
                         @{
                             rest--;
                         }
-                    </dt>
+                    </div>
                     }
-                </dl>
+                </div>
 
             
             
@@ -66,4 +61,4 @@
 
     }
 </body>
-</html>
+
