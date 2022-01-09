@@ -39,6 +39,54 @@ namespace WebApplication.Controllers
         {
             return View();
         }
+        public IActionResult AccountDeliveryMan()
+        {
+            // get des informations de la session actuelle
+            // informations sur le compte 
+            int accountID = (int)HttpContext.Session.GetInt32("IdDeliveryMan");
+            DeliveryMan deliveryMan = DeliveryManManager.GetDeliveryManID(accountID);
+            AccountVM accountVM = new AccountVM();
+            accountVM.Address = deliveryMan.AddressDelivery;
+            accountVM.BirthDate = deliveryMan.BirthDateDelivery;
+            accountVM.Email = deliveryMan.EmailDelivery;
+            accountVM.FirstName = deliveryMan.FirstNameDelivery;
+            accountVM.Name = deliveryMan.NameDelivery;
+            accountVM.Password = deliveryMan.PasswordDelivery;
+            accountVM.PhoneNumber = deliveryMan.PhoneNumberDelivery;
+
+            // informations sur la location
+            Location location = LocationManager.GetLocationID(deliveryMan.ID_Location);
+            accountVM.City = location.City;
+            accountVM.NPA = location.NPA;
+            Location workLocation = LocationManager.GetLocationID(deliveryMan.ID_workLocation);
+            accountVM.WorkCity = workLocation.City;
+            accountVM.WorkNPA = workLocation.NPA;
+
+            return View(accountVM);
+        }
+
+        public IActionResult Account()
+        {
+            // get des informations de la session actuelle
+            // informations sur le compte 
+            int accountID = (int)HttpContext.Session.GetInt32("IdPerson");
+            Person person = PersonManager.GetPersonID(accountID);
+            AccountVM accountVM = new AccountVM();
+            accountVM.Address = person.Address;
+            accountVM.BirthDate = person.BirthDate;
+            accountVM.Email = person.MailAddress;
+            accountVM.FirstName = person.FirstName;
+            accountVM.Name = person.Name;
+            accountVM.Password = person.PasswordLogin;
+            accountVM.PhoneNumber = person.PhoneNumber;
+
+            // informations sur la location
+            Location location = LocationManager.GetLocationID(person.ID_location);
+            accountVM.City = location.City;
+            accountVM.NPA = location.NPA;
+           
+            return View(accountVM);
+        }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -153,6 +201,103 @@ namespace WebApplication.Controllers
             return View();
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Account(AccountVM accountVM)
+        {
+            
+            //voit si toutes les informations son bien mises
+            if (ModelState.IsValid)
+            {
+                //verifie que la Location soit correcte
+                var idLocation = LocationManager.GetLocationNPACity(accountVM.NPA, accountVM.City);
+                if (idLocation == 0)
+                {
+                    ModelState.AddModelError("NPA", "le NPA ou la ville est incorrect");
+                    return View();
+                }
+                var location = LocationManager.GetLocationID(idLocation);
+                
+                // modification des informations du compte
+                int accountID = (int)HttpContext.Session.GetInt32("IdPerson");
+                Person person = new Person();
+                person.ID_person = accountID;
+                person.Address = accountVM.Address;
+                person.BirthDate = accountVM.BirthDate;
+                person.MailAddress = accountVM.Email;
+                person.FirstName = accountVM.FirstName;
+                person.Name = accountVM.Name;
+                person.PhoneNumber = accountVM.PhoneNumber;
+                person.PasswordLogin = accountVM.Password;
+                person.isRestaurant = 0;
+                person.ID_location = location.ID_location;
+                person.PersonImage = "limagedelapersonne";
+                PersonManager.ModifyAllPerson(person);
+
+
+                return View("Account");
+            }
+
+            return View("Account");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult AccountDeliveryMan(AccountVM accountVM)
+        {
+
+            //voit si toutes les informations son bien mises
+            if (ModelState.IsValid)
+            {
+                //verifie que la Location soit correcte
+                var idLocation = LocationManager.GetLocationNPACity(accountVM.NPA, accountVM.City);
+                if (idLocation == 0)
+                {
+                    ModelState.AddModelError("NPA", "le NPA ou la ville est incorrect");
+                    return View();
+                }
+                var location = LocationManager.GetLocationID(idLocation);
+
+                //verifie que la Location du lieu de travâil soit correcte
+                var idWorkLocation = LocationManager.GetLocationNPACity(accountVM.WorkNPA, accountVM.WorkCity);
+                if (idWorkLocation == 0)
+                {
+                    ModelState.AddModelError("NPA", "le NPA ou la ville du lieu de travail est incorrect");
+                    return View();
+                }
+                var workLocation = LocationManager.GetLocationID(idWorkLocation);
+
+                // modification des informations du compte
+                // récupérer les informations qui ne changeront pas              
+                int accountID = (int)HttpContext.Session.GetInt32("IdDeliveryMan");
+                DeliveryMan noChangeDeliveryMan = DeliveryManManager.GetDeliveryManID(accountID);
+
+                // récupérer et ajouter les modifications pouvant être changées
+                DeliveryMan deliveryMan = new DeliveryMan();
+                deliveryMan.AddressDelivery = accountVM.Address;
+                deliveryMan.BirthDateDelivery = accountVM.BirthDate;
+                deliveryMan.EmailDelivery = accountVM.Email;
+                deliveryMan.FirstNameDelivery = accountVM.FirstName;
+                deliveryMan.NameDelivery = accountVM.Name;
+                deliveryMan.PhoneNumberDelivery = accountVM.PhoneNumber;
+                deliveryMan.PasswordDelivery = accountVM.Password;
+                deliveryMan.ID_Location = location.ID_location;
+                deliveryMan.ImageDelivery = "limagedelapersonne";
+
+                // ajouter les modifications ne pouvant pas être changées
+                deliveryMan.ID_workLocation = workLocation.ID_location;
+                deliveryMan.Id_Delivery = accountID;
+                deliveryMan.IsWorking = noChangeDeliveryMan.IsWorking;
+                deliveryMan.nbDeliveries = noChangeDeliveryMan.nbDeliveries;
+
+
+                DeliveryManManager.ModifyAllDeliveryMan(deliveryMan);
+                return View("AccountDeliveryMan");
+            }
+
+            return View("AccountDeliveryMan");
+        }
+
         public IActionResult Logout()
         {
             //supprime l'id de la personne et du livreur
@@ -160,5 +305,7 @@ namespace WebApplication.Controllers
             HttpContext.Session.Remove("IdPerson");
             return View("Index");
         }
+
+        
     }
 }

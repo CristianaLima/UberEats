@@ -256,24 +256,24 @@ namespace DAL
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
                     
-                    string query = "UPDATE DeliveryMan SET IsWorking = @IsWorking and ID_Location=@ID_Location and ID_workLocation=@ID_workLocation and NameDelivery=@NameDelivery and FirstNameDelivery=@FirstNameDelivery and AddressDelivery=@AddressDelivery and BirthDateDelivery=@BirthDateDelivery and PhoneNumberDelivery=@PhoneNumberDelivery and EmailDelivery=@EmailDelivery and PasswordDelivery=@PasswordDelivery and ImageDelivery=@ImageDelivery and nbDeliveries=@nbDeliveries Where Id_Delivery = @Id_Delivery ";
+                    string query = "UPDATE DeliveryMan SET IsWorking=@IsWorking, ID_Location=@ID_Location, ID_workLocation=@ID_workLocation, NameDelivery=@NameDelivery, FirstNameDelivery=@FirstNameDelivery, AddressDelivery=@AddressDelivery, BirthDateDelivery=@BirthDateDelivery, PhoneNumberDelivery=@PhoneNumberDelivery, EmailDelivery=@EmailDelivery, PasswordDelivery=@PasswordDelivery, ImageDelivery=@ImageDelivery, nbDeliveries=@nbDeliveries WHERE Id_Delivery=@Id_Delivery";
                     SqlCommand cmd = new SqlCommand(query, cn);
                     cmd.Parameters.AddWithValue("@Id_Delivery", delivery.Id_Delivery);
-                    cmd.Parameters.AddWithValue("@locationId", delivery.ID_Location);
-                    cmd.Parameters.AddWithValue("@workLocationId", delivery.ID_workLocation);
-                    cmd.Parameters.AddWithValue("@lastName", delivery.NameDelivery);
-                    cmd.Parameters.AddWithValue("@firstName", delivery.FirstNameDelivery);
-                    cmd.Parameters.AddWithValue("@address", delivery.AddressDelivery);
-                    cmd.Parameters.AddWithValue("@birthDate", delivery.BirthDateDelivery);
-                    cmd.Parameters.AddWithValue("@phoneNumber", delivery.PhoneNumberDelivery);
-                    cmd.Parameters.AddWithValue("@email", delivery.EmailDelivery);
-                    cmd.Parameters.AddWithValue("@password", delivery.PasswordDelivery);
-                    cmd.Parameters.AddWithValue("@image", delivery.ImageDelivery);
+                    cmd.Parameters.AddWithValue("@ID_Location", delivery.ID_Location);
+                    cmd.Parameters.AddWithValue("@ID_workLocation", delivery.ID_workLocation);
+                    cmd.Parameters.AddWithValue("@NameDelivery", delivery.NameDelivery);
+                    cmd.Parameters.AddWithValue("@FirstNameDelivery", delivery.FirstNameDelivery);
+                    cmd.Parameters.AddWithValue("@AddressDelivery", delivery.AddressDelivery);
+                    cmd.Parameters.AddWithValue("@BirthDateDelivery", delivery.BirthDateDelivery);
+                    cmd.Parameters.AddWithValue("@PhoneNumberDelivery", delivery.PhoneNumberDelivery);
+                    cmd.Parameters.AddWithValue("@EmailDelivery", delivery.EmailDelivery);
+                    cmd.Parameters.AddWithValue("@PasswordDelivery", delivery.PasswordDelivery);
+                    cmd.Parameters.AddWithValue("@ImageDelivery", delivery.ImageDelivery);
                     cmd.Parameters.AddWithValue("@IsWorking", delivery.IsWorking);
                     cmd.Parameters.AddWithValue("@nbDeliveries", delivery.nbDeliveries);
 
                     cn.Open();
-
+                    cmd.ExecuteNonQuery();
                 }
             }
             catch (Exception e)

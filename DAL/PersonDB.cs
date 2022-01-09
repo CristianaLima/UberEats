@@ -259,7 +259,7 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "Update Person set ID_location = @ID_location and Address=@Address and Name=@Name and FirstName=@FirstName and MailAddress=@MailAddress and BirthDate=@BirthDate and PhoneNumber=@PhoneNumber and isRestaurant=@isRestaurant and PasswordLogin=@PasswordLogin and PersonImage=@PersonImage where ID_person=@ID_person ";
+                    string query = "UPDATE Person SET ID_location=@ID_location, Address=@Address, Name=@Name, FirstName=@FirstName, MailAddress=@MailAddress, BirthDate=@BirthDate, PhoneNumber=@PhoneNumber, isRestaurant=@isRestaurant, PasswordLogin=@PasswordLogin, PersonImage=@PersonImage WHERE ID_person=@ID_person";
                     SqlCommand cmd = new SqlCommand(query, cn);
                     cmd.Parameters.AddWithValue("@ID_location", person.ID_location);
                     cmd.Parameters.AddWithValue("@ID_person", person.ID_person);
@@ -274,7 +274,7 @@ namespace DAL
                     cmd.Parameters.AddWithValue("@PersonImage", person.PersonImage);
 
                     cn.Open();
-
+                    cmd.ExecuteNonQuery();
                 }
             }
             catch (Exception e)
