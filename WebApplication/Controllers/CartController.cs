@@ -136,9 +136,18 @@ namespace WebApplication.Controllers
         }
         public ActionResult Remove(int id)
         {
-            //var chercher le panier
+            //va chercher le panier
             CartVM newCart = HttpContext.Session.Get<CartVM>("Cart");
             HttpContext.Session.Remove("Cart");
+
+            //va chercher la listIdDishes
+            var listIdDishes = HttpContext.Session.Get<List<int>>("listIdDishes");
+            HttpContext.Session.Remove("listIdDishes");
+            //enlève le plat de la liste
+            listIdDishes.Remove(id);
+            //remet la list dans les sessions
+            HttpContext.Session.Set<List<int>>("listIdDishes",listIdDishes);
+
             //va chercher ou se trouve le plat a modifie dans la liste
             int index = newCart.DishesId.IndexOf(id);
             //le supprime du panier

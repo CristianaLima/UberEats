@@ -55,7 +55,9 @@
             <dt class="col">
             </dt>
             <dt class="col">
-                @Html.ActionLink("Continuer", "Index", "Order")
+                @if (Model.TotalPrice != 0) { 
+                    @Html.ActionLink("Continuer", "Index", "Order")
+                }
             </dt>
         </dl>
     </div>

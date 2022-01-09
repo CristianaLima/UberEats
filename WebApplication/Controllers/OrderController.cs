@@ -96,6 +96,12 @@ namespace WebApplication.Controllers
             if (ModelState.IsValid)
             {
                 //verifie que la Location soit correcte
+                if(orderVM.NPA==0 || orderVM.City == null)
+                {
+                    ModelState.AddModelError("NPA", "le NPA ou la ville est incorrect");
+                    HttpContext.Session.Set<OrderVM>("Order", oldOrder);
+                    return View(oldOrder);
+                }
                 var idLocation = LocationManager.GetLocationNPACity(orderVM.NPA, orderVM.City);
                 if (idLocation == 0)
                 {
